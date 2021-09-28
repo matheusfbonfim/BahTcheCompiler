@@ -1,0 +1,17 @@
+BAHTCHE{
+    GURI x1 = 1
+    #
+        COMENTARIO É AQUI E LÊ LÊ LÊ
+        COMENTARIO É AQUI E LÊ LÊ LÊ
+        COMENTARIO É AQUI E LÊ LÊ LÊ
+        "Coloco o que eu quiser"
+    #
+    GURIZAO matheus
+    FANDANGO texto1 = "eduarda" $ String da eduarda
+    FANDANGO texto2 = "matheus" $ String do matheus
+    FANDANGO texto3 = "huber" $ String do huber
+
+    # Agora é o ultimo comentario
+    Beleza?
+    #
+}
