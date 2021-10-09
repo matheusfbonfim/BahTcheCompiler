@@ -13,8 +13,8 @@ def main():
     #####################################################
 
     # Construindo o Automato
-    AF = Automaton()
-    AF.create_automato()
+    AF = Automaton()            # Instancia o automato
+    AF.create_automato()        # Chamada da funcao
 
     # ====================
     # MOSTRANDO O AUTOMATO

@@ -1,5 +1,6 @@
 from Automato import Automaton
 import os
+import sys
 
 class Scanner:
     def __init__(self, automato: Automaton):
@@ -33,7 +34,7 @@ class Scanner:
     # LENDO E VALIDANDO O ARQUIVO
     def read_file(self):
         file_name = input("Digite o nome do arquivo (sem extensao): ")
-        file_name = f"{os.path.dirname(os.path.realpath(__file__))}/{file_name}.bt"
+        file_name = f"{sys.path[0]}/{file_name}.bt"
 
         # O bloco with - Forma flexível de manipular arquivos (abertura e fechamento automático)
         try:
@@ -48,7 +49,8 @@ class Scanner:
     def analise_lexica(self):
 
         # Criando arquivo para os erros
-        output_errors = open(os.path.dirname(os.path.realpath(__file__)) + '/' + 'output_errors.txt', 'w')
+        path_file_error = f"{sys.path[0]}/output_errors.txt"
+        output_errors = open(path_file_error, 'w')
         string_erro = ''    # Variavel para armazenar os erros a ser gravado em arquivo
 
         # Lendo e validando o arquivo
@@ -60,7 +62,8 @@ class Scanner:
             self._text = valid_text     # Ex: ['BAHTCHE\n', 'BAhTCHE']
 
             # Criando registro (arquivo) para os tokens
-            output_tokens = open(os.path.dirname(os.path.realpath(__file__)) + '/' + 'output_tokens.txt', 'w')
+            path_file_tokens = f"{sys.path[0]}/output_tokens.txt"
+            output_tokens = open(path_file_tokens, 'w')
 
             num_linha = 1   # Numero da linha atual do arquivo
 
