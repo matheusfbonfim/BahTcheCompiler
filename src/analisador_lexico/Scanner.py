@@ -1,4 +1,4 @@
-from Automato import Automaton
+from analisador_lexico.Automato import Automaton
 import os
 import sys
 

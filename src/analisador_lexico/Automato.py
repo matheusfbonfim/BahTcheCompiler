@@ -1,4 +1,4 @@
-from State import State  # Importando a class state - objeto estado
+from analisador_lexico.State import State  # Importando a class state - objeto estado
 import string
 
 class Automaton:

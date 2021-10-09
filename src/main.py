@@ -1,9 +1,7 @@
 # IMPORTS
-import sys
-sys.path.insert(1, './analisador-lexico')
-
-from Automato import Automaton  # Importando a class automato - objeto automato
-from Scanner import Scanner     # Importando a class Scanner - Varredor Lexico
+import sys 
+from analisador_lexico.Automato import Automaton  # Importando a class automato - objeto automato
+from analisador_lexico.Scanner import Scanner     # Importando a class Scanner - Varredor Lexico
 
 
 # FUNÇÃO PRINCIPAL
