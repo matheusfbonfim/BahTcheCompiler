@@ -221,6 +221,11 @@ class Scanner:
             else:
                 # Valida se o estado atual é final (Manteve no estado anterior)
                 if self._AF.automato[estado_atual].is_end:
+                    if (cadeia in ['GURI', 'GURIZAO', 'FANDANGO'] ) and (caractere != ' '):
+                        erro = f"\t Mas BAH.. Acho que quis dizer '{cadeia}' né? | Coluna: {position + 1}\n"
+                        erros_lexicos.append(erro)
+                        return erros_lexicos
+
                     token = self._AF.automato[estado_atual].token   # Captura o atributo token do estado
 
                     self._tokens.append(token)      # Adiciona na lista[i] o token
