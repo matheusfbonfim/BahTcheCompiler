@@ -27,8 +27,11 @@ def main():
     sc = Scanner(AF)
     sc.analise_lexica()
 
+    print(sc.getTable())
 
-    # print(sc.getTable())
+    #####################################################
+    ############### PARSER ##############################
+    #####################################################
 
 
 # Executando a função principal

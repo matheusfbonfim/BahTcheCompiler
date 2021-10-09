@@ -1,11 +1,21 @@
-from analisador_lexico.State import State  # Importando a class state - objeto estado
-import string
+from .State import State    # Importando a class state - objeto estado
+import string               # Importando funcoes para loops de caracteres
+
+"""
+CLASS AUTOMATO
+    # Classe para representar um automato deterministico, tendo por atributos:
+         - automato: Dicionario contendo cada estado com suas devidas transicoes 
+                     Ex: {0: class State 0, 1: class State 1 ....}
+                     
+    # Classe apresenta métodos getters e setters para manipulações dos atributos descritos
+    # Utiliza metodos da classe State para inserir estados ao automato
+"""
+
 
 class Automaton:
 
     def __init__(self):
-        self.__automato = {}        # Dicionario de estados {}
-                                    # {0: class State 0, 1: class State 1 ....}
+        self.__automato = {}  # Dicionario de estados {}
 
     # ====================
     # GETTERS
@@ -15,30 +25,30 @@ class Automaton:
 
     # ====================
     # INSERINDO ESTADO COM SUAS TRANSICOES NO AUTOMATO
-    def add_state(self, number, name, initial = False, end = False, transicoes = None):
-        estado = State(name, initial, end)
+    def add_state(self, number, name, initial=False, end=False, transicoes=None):
+        estado = State(name, initial, end)  # Cria um estado
 
         # Regras de produção - Ex: {'U': 1, 'T': 2}
         for i in transicoes:
             estado.insere_transicao(i, transicoes[i])
-        
+
         # Adiciona um elemento no dicionario(map), correspondente ao numero de cada estado
-            # Cada estado é um class state
-        self.__automato[number] = estado
-    
+        # Cada estado é um class state
+        self.__automato[number] = estado  # {1: class State 1, 2: class State 2}
+
     # ====================
     # MOSTRA OS ESTADOS E SUAS TRANSICOES
     def show_automaton(self):
-      for i in self.__automato.values():
-          print(i.__dict__)
-      #print(self.__automato)
+        for i in self.__automato.values():
+            print(i.__dict__)
+        # print(self.__automato)
 
     # ====================
     # DICIONARIO DE A..Z PARA UM MESMO ESTADO (LOOP)
     @staticmethod
     def loop_AZ(number_estado):
         dict = {}
-        alfabeto_maisculo = list(string.ascii_uppercase)    # ['A', 'B', 'C', 'D', ...
+        alfabeto_maisculo = list(string.ascii_uppercase)  # ['A', 'B', 'C', 'D', ...
 
         for i in alfabeto_maisculo:
             dict[i] = number_estado
@@ -307,13 +317,13 @@ class Automaton:
         self.automato[89].token = 'TK_NUMBER'  # Define Token
 
         # --------
-        # DOUBLE
+        # REAL
         loop_09_state90 = self.loop_0_to_9(number_estado=91)  # 0..9
         self.add_state(90, 'q90', initial=False, end=False, transicoes=loop_09_state90)
         loop_09_state91 = self.loop_0_to_9(number_estado=91)  # 0..9
         self.add_state(91, 'q91', initial=False, end=True, transicoes=loop_09_state91)
 
-        self.automato[91].token = 'TK_DOUBLE'  # Define Token
+        self.automato[91].token = 'TK_REAL'  # Define Token
 
         # --------
         # TEXT
@@ -400,8 +410,3 @@ class Automaton:
         self.automato[109].token = 'TK_END'  # Define Token
 
         # ==================================================
-        # ==================================================
-
-
-
-

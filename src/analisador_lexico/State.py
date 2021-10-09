@@ -6,9 +6,11 @@ CLASS STATE
          - end: indica se é um estado final da máquina
          - transições: um dicionário com as possíveis transições a partir do objeto atual
          - token: caso seja final, é atribuido com um token
+         - mensagemDeErro: Caso ocorra erro neste estado, lança uma determinada mensagem
 
     # Classe apresenta métodos getters e setters para manipulações dos atributos descritos
 """
+
 
 class State:
 
@@ -19,7 +21,7 @@ class State:
         self.__end = end            # Indica se o estado é final
         self.__transicoes = {}      # Transições
         self.__token = None         # Caso seja final, definir token
-        self.__mensagemDeErro = ''   # Colocar mensagem de erro
+        self.__mensagemDeErro = ''  # Colocar mensagem de erro
 
     # GETTERS
     @property
@@ -68,5 +70,8 @@ class State:
         self.__mensagemDeErro = mensagem
 
     # MÉTODOS PÚBLICOS
+
+    # ====================
+    # Insere transicao ao dicionario do estado
     def insere_transicao(self, aresta, prox_estado):
         self.__transicoes[aresta] = prox_estado
