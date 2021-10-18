@@ -387,12 +387,12 @@ class Automaton:
         # --------
         # !, <, >
         self.add_state(105, 'q105', initial=False, end=True, transicoes={'=': 106})
-        self.automato[105].token = 'TK_OPERATOR'  # Define Token
+        self.automato[105].token = 'TK_LOGIC_OP'  # Define Token
 
         # --------
         # !=, <=, >=
         self.add_state(106, 'q106', initial=False, end=True, transicoes={})
-        self.automato[106].token = 'TK_OPERATOR'  # Define Token
+        self.automato[106].token = 'TK_LOGIC_OP'  # Define Token
 
         # --------
         # ==
@@ -402,7 +402,7 @@ class Automaton:
         # --------
         # ==
         self.add_state(108, 'q108', initial=False, end=True, transicoes={})
-        self.automato[108].token = 'TK_OPERATOR'  # Define Token
+        self.automato[108].token = 'TK_LOGIC_OP'  # Define Token
 
         # --------
         # ;
