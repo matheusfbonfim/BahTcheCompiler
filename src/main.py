@@ -11,8 +11,8 @@ def main():
     #####################################################
 
     # Construindo o Automato
-    AF = Automaton()            # Instancia o automato
-    AF.create_automato()        # Chamada da funcao
+    AF = Automaton()            # Instancia o automato AF
+    AF.create_automato()        # Instancia o diagrama de estados
 
     # ====================
     # MOSTRANDO O AUTOMATO
@@ -24,13 +24,18 @@ def main():
     ############### SCANNER #############################
     #####################################################
 
-    sc = Scanner(AF)
-    sc.analise_lexica()
+    # Cria o scanner
+    sc = Scanner(AF)        # Parametro sendo o Automato
+    sc.analise_lexica()     # Realiza a análise léxica
 
-    print(sc.getTable())
+    print(sc.getTableTokens())
 
     #####################################################
     ############### PARSER ##############################
+    #####################################################
+
+    #####################################################
+    ############### SEMANTICO ###########################
     #####################################################
 
 

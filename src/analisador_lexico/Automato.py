@@ -105,8 +105,8 @@ class Automaton:
         # --------------
         # INICIO - Estado q0
         transitions_state0 = {'B': 1, 'E': 31, 'F': 43, 'G': 51, 'I': 58, 'L': 66, 'P': 76, 'T': 84, '"': 92,
-                              '(': 95, ')': 96, '{': 97, '}': 98, ',': 99, '+': 100, '-': 100, '*': 100, '/': 100,
-                              '|': 101, '&': 103, '!': 105, '<': 105, '>': 105, '=': 107, ';': 109}
+                              '(': 95, ')': 96, '{': 97, '}': 98, ',': 99, '+': 100, '-': 101, '*': 102, '/': 103,
+                              '|': 104, '&': 106, '!': 108, '<': 109, '>': 109, '=': 111, ';': 114}
         alphabet_az_state88 = self.loop_az(number_estado=88)  # {'a': 94, 'b': 94 ...}
         loop_09_state89 = self.loop_0_to_9(number_estado=89)
 
@@ -325,6 +325,9 @@ class Automaton:
 
         self.automato[91].token = 'TK_REAL'  # Define Token
 
+        for i in range(89, 91):
+            self.automato[i].mensagemDeErro = "Mas BAH.. Acho que esse numero ta errado né?"
+
         # --------
         # TEXT
         dict_ascii = self.all_ascii(number_estado=93)
@@ -368,45 +371,71 @@ class Automaton:
         self.automato[99].token = 'TK_COMMA'  # Define Token
 
         # --------
-        # +,-,*,/
+        # +
         self.add_state(100, 'q100', initial=False, end=True, transicoes={})
-        self.automato[100].token = 'TK_MATH_OP'  # Define Token
+        self.automato[100].token = 'TK_MATH_ADD'  # Define Token
+
+        # --------
+        # -
+        self.add_state(101, 'q101', initial=False, end=True, transicoes={})
+        self.automato[101].token = 'TK_MATH_SUB'  # Define Token
+
+        # --------
+        # *
+        self.add_state(102, 'q102', initial=False, end=True, transicoes={})
+        self.automato[102].token = 'TK_MATH_MUL'  # Define Token
+
+        # --------
+        # /
+        self.add_state(103, 'q103', initial=False, end=True, transicoes={})
+        self.automato[103].token = 'TK_MATH_DIV'  # Define Token
 
         # --------
         # OR
-        self.add_state(101, 'q101', initial=False, end=False, transicoes={'|': 102})
-        self.add_state(102, 'q102', initial=False, end=True, transicoes={})
-        self.automato[102].token = 'TK_OR'  # Define Token
+        self.add_state(104, 'q104', initial=False, end=False, transicoes={'|': 105})
+        self.add_state(105, 'q105', initial=False, end=True, transicoes={})
+        self.automato[105].token = 'TK_LOGIC_OR'  # Define Token
+
+        for i in range(104, 105):
+            self.automato[i].mensagemDeErro = "Mas BAH.. Esse OR ta errado macho"
 
         # --------
         # AND
-        self.add_state(103, 'q103', initial=False, end=False, transicoes={'&': 104})
-        self.add_state(104, 'q104', initial=False, end=True, transicoes={})
-        self.automato[104].token = 'TK_AND'  # Define Token
+        self.add_state(106, 'q106', initial=False, end=False, transicoes={'&': 107})
+        self.add_state(107, 'q107', initial=False, end=True, transicoes={})
+        self.automato[107].token = 'TK_LOGIC_AND'  # Define Token
+
+        for i in range(106, 107):
+            self.automato[i].mensagemDeErro = "Mas BAH.. Esse AND ta errado macho"
 
         # --------
-        # !, <, >
-        self.add_state(105, 'q105', initial=False, end=True, transicoes={'=': 106})
-        self.automato[105].token = 'TK_LOGIC_OP'  # Define Token
-
-        # --------
-        # !=, <=, >=
-        self.add_state(106, 'q106', initial=False, end=True, transicoes={})
-        self.automato[106].token = 'TK_LOGIC_OP'  # Define Token
-
-        # --------
-        # ==
-        self.add_state(107, 'q107', initial=False, end=True, transicoes={'=': 108})
-        self.automato[107].token = 'TK_ASSIGN'  # Define Token
-
-        # --------
-        # ==
+        # !
         self.add_state(108, 'q108', initial=False, end=True, transicoes={})
-        self.automato[108].token = 'TK_LOGIC_OP'  # Define Token
+        self.automato[108].token = 'TK_LOGIC_NOT'  # Define Token
+
+        # --------
+        # <, >
+        self.add_state(109, 'q109', initial=False, end=True, transicoes={'=': 110})
+        self.automato[109].token = 'TK_LOGIC_LG'  # Define Token
+
+        # --------
+        # <=, >=
+        self.add_state(110, 'q110', initial=False, end=True, transicoes={})
+        self.automato[110].token = 'TK_LOGIC_LE_GE'  # Define Token
+
+        # --------
+        # =
+        self.add_state(111, 'q111', initial=False, end=True, transicoes={'=': 112})
+        self.automato[111].token = 'TK_ASSIGNMENT'  # Define Token
+
+        # --------
+        # ==
+        self.add_state(112, 'q112', initial=False, end=True, transicoes={})
+        self.automato[112].token = 'TK_LOGIC_EQ'  # Define Token
 
         # --------
         # ;
-        self.add_state(109, 'q109', initial=False, end=True, transicoes={})
-        self.automato[109].token = 'TK_END'  # Define Token
+        self.add_state(114, 'q114', initial=False, end=True, transicoes={})
+        self.automato[114].token = 'TK_END'  # Define Token
 
         # ==================================================

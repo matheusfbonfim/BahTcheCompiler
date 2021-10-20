@@ -45,7 +45,7 @@ class Scanner:
     def getTokens(self):
         return self._tokens
 
-    def getTable(self):
+    def getTableTokens(self):
         return self._table_tokens
 
     # ====================
@@ -90,7 +90,7 @@ class Scanner:
             # ---- Varrendo cada linha do arquivo - Scanner ----
             # --------------------------------------------------
             for linha_text in self._text:
-                # Atribui os tokens e cadeias, e retorna os erros lexicos (lista) se existir
+                # Atribui os tokens e cadeias, e retorna o primeiro erro lexico (lista) se existir
                 erros_lexicos = self.scanner(linha_text, num_linha)
 
                 # Armazenando os erros lexicos - lista
@@ -116,7 +116,7 @@ class Scanner:
             output_tokens.write(string_tokens)  # Gravando no arquivo
 
             # -----------------------
-            # Caso tenha erro lexicos (Talvez: Printar o primeiro erro de cada linha)
+            # Caso tenha erro lexicos
             if len(self._erro_lexico) > 0:
                 print("Análise Lexica: [Gerando Erro]\n", end='')
 
@@ -143,7 +143,6 @@ class Scanner:
             # Fechando os arquivos
             output_tokens.close()
             output_errors.close()
-
 
         else:
             print(f"!! ERRO - O arquivo \"{valid_text}\" não foi encontrado")
@@ -289,6 +288,7 @@ class Scanner:
             self._cadeias.append(cadeia)    # Adiciona na lista[i] a cadeia
             string_cadeia_token = f"{num_linha}:{cadeia}:{token}\n"  # String para armazenar como cadeia e token
             self._file_token.append(string_cadeia_token)
+
             print(string_cadeia_token, end='')
             self._table_tokens.append((cadeia, token, num_linha, position - len(cadeia) + 1))
 
