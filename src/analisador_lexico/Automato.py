@@ -410,28 +410,33 @@ class Automaton:
 
         # --------
         # !
-        self.add_state(108, 'q108', initial=False, end=True, transicoes={})
+        self.add_state(108, 'q108', initial=False, end=True, transicoes={'=': 109})
         self.automato[108].token = 'TK_LOGIC_NOT'  # Define Token
 
         # --------
+        # !=
+        self.add_state(109, 'q109', initial=False, end=True, transicoes={})
+        self.automato[109].token = 'TK_LOGIC_DIF'  # Define Token
+
+        # --------
         # <, >
-        self.add_state(109, 'q109', initial=False, end=True, transicoes={'=': 110})
-        self.automato[109].token = 'TK_LOGIC_LG'  # Define Token
+        self.add_state(110, 'q110', initial=False, end=True, transicoes={'=': 111})
+        self.automato[110].token = 'TK_LOGIC_LG'  # Define Token
 
         # --------
         # <=, >=
-        self.add_state(110, 'q110', initial=False, end=True, transicoes={})
-        self.automato[110].token = 'TK_LOGIC_LE_GE'  # Define Token
+        self.add_state(111, 'q111', initial=False, end=True, transicoes={})
+        self.automato[111].token = 'TK_LOGIC_LE_GE'  # Define Token
 
         # --------
         # =
-        self.add_state(111, 'q111', initial=False, end=True, transicoes={'=': 112})
-        self.automato[111].token = 'TK_ASSIGNMENT'  # Define Token
+        self.add_state(112, 'q112', initial=False, end=True, transicoes={'=': 113})
+        self.automato[112].token = 'TK_ASSIGNMENT'  # Define Token
 
         # --------
         # ==
-        self.add_state(112, 'q112', initial=False, end=True, transicoes={})
-        self.automato[112].token = 'TK_LOGIC_EQ'  # Define Token
+        self.add_state(113, 'q113', initial=False, end=True, transicoes={})
+        self.automato[113].token = 'TK_LOGIC_EQ'  # Define Token
 
         # --------
         # ;
