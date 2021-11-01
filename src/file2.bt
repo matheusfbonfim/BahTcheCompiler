@@ -1,22 +1,13 @@
-GURIa #
+BARBARIDADE GURI namefunction(GURI a, GURI b){
+  GURI a, GURI b;
 
-#
+  a = 12;
+  LARGUEIMAO a;
+}
 
+BAHTCHE {
 
-BAHTCHE{
-    #Aqui estamos fazendo um codigo
+  GURI a1, GURI b2;
+  PRINTCHE("OLA");
 
-    #
-    $ Aqui tem outro comentario
-
-    FANDANGO eduarda = "eduarda";
-    FANDANGO matheus = "matheus";
-    FANDANGO huber = "huber"
-
-    GURI a = 1;
-
-    #Outro Comentario
-    sdasdas
-    sadasdas
-    #
 }
