@@ -1,5 +1,6 @@
 from .State import State    # Importando a class state - objeto estado
 import string               # Importando funcoes para loops de caracteres
+from Token import Token     # Importando classe de tokens
 
 """
 CLASS AUTOMATO
@@ -104,7 +105,7 @@ class Automaton:
 
         # --------------
         # INICIO - Estado q0
-        transitions_state0 = {'B': 1, 'E': 31, 'F': 43, 'G': 51, 'I': 58, 'L': 66, 'P': 76, 'T': 84, '"': 92,
+        transitions_state0 = {'B': 1, 'E': 29, 'F': 43, 'G': 51, 'I': 58, 'L': 66, 'P': 76, 'T': 84, '"': 92,
                               '(': 95, ')': 96, '{': 97, '}': 98, ',': 99, '+': 100, '-': 101, '*': 102, '/': 103,
                               '|': 104, '&': 106, '!': 108, '<': 109, '>': 109, '=': 111, ';': 114}
         alphabet_az_state88 = self.loop_az(number_estado=88)  # {'a': 94, 'b': 94 ...}
