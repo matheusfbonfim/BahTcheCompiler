@@ -33,7 +33,7 @@ def main():
         return
 
     # Imprimindo para tabela de tokens gerada
-    # print(scanner.getTableTokens())
+    print(scanner.getTableTokens())
 
     #####################################################
     ############### PARSER ##############################

@@ -93,7 +93,6 @@ class Scanner:
                 # Atribui os tokens e cadeias, e retorna o primeiro erro lexico (lista) se existir
                 erros_lexicos = self.scanner(linha_text, num_linha)
 
-                print(erros_lexicos)
                 # Armazenando os erros lexicos - lista
                 if len(erros_lexicos) > 0:      # Ex: ["\t Referência indefinida .."]
                     # Insere na casa 0 do vetor de erros
