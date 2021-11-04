@@ -31,7 +31,7 @@ class Scanner:
         self._table_tokens = [] # Tabela de tokens com o respectivo linha e coluna do token (cadeia, token, lin, col)
 
         self._erro_lexico = []              # Lista - Erro Lexico
-        self._comment_mult_lines = False    # Flag para multiplas linhas
+        self._comment_mult_lines = False    # Flag para comentario de multiplas linhas
         self._text_string = False           # Flag para string " bahtche "
 
     # ====================
@@ -93,8 +93,9 @@ class Scanner:
                 # Atribui os tokens e cadeias, e retorna o primeiro erro lexico (lista) se existir
                 erros_lexicos = self.scanner(linha_text, num_linha)
 
+                print(erros_lexicos)
                 # Armazenando os erros lexicos - lista
-                if len(erros_lexicos) > 0:
+                if len(erros_lexicos) > 0:      # Ex: ["\t Referência indefinida .."]
                     # Insere na casa 0 do vetor de erros
                     erros_lexicos.insert(0, f"[Erro Léxico] | Linha {num_linha} | ->")
                     self._erro_lexico = erros_lexicos  # Atribuindo para variavel de erro da classe
@@ -129,6 +130,8 @@ class Scanner:
                 # Gravando no arquivo
                 output_errors.write(string_erro)
 
+                return False  # Retorna - Analise lexica falhou
+
             # Erro - Comentario multiplas linhas não terminado
             elif self._comment_mult_lines == True:
                 print("Análise Lexica: [Gerando Erro]\n", end='')
@@ -137,8 +140,10 @@ class Scanner:
                 # Gravando no arquivo
                 output_errors.write(string_erro)
 
+                return False    # Retorna - Analise lexica falhou
             else:
                 print("Análise Lexica: [Concluido]")
+                return True     # Retorna - Analise lexica sucesso
 
             # Fechando os arquivos
             output_tokens.close()
@@ -148,6 +153,7 @@ class Scanner:
             print(f"!! ERRO - O arquivo \"{valid_text}\" não foi encontrado")
             output_errors.write(f"!! ERRO - O arquivo \"{valid_text}\" não foi encontrado")
             output_errors.close()
+            return False    # Retorna - Analise lexica falhou
 
     # ====================
     # SCANNER
@@ -188,7 +194,9 @@ class Scanner:
                     self._cadeias.append(cadeia)    # Adiciona na lista[i] a cadeia
                     string_cadeia_token = f"{num_linha}:{cadeia}:{token}\n"  # String para armazenar como cadeia e token
                     self._file_token.append(string_cadeia_token)    # Adiciona na lista para o arquivo
-                    print(string_cadeia_token, end='')
+
+                    # print(string_cadeia_token, end='')
+
                     # Adiciona na tabela
                     self._table_tokens.append((cadeia, token, num_linha, position - len(cadeia) + 1))
 
@@ -251,11 +259,13 @@ class Scanner:
 
                     token = self._AF.automato[estado_atual].token  # Captura o atributo token do estado
 
-                    self._tokens.append(token)  # Adiciona na lista[i] o token
-                    self._cadeias.append(cadeia)  # Adiciona na lista[i] a cadeia
+                    self._tokens.append(token)      # Adiciona na lista[i] o token
+                    self._cadeias.append(cadeia)    # Adiciona na lista[i] a cadeia
                     string_cadeia_token = f"{num_linha}:{cadeia}:{token}\n"  # String para armazenar como cadeia e token
                     self._file_token.append(string_cadeia_token)  # "tabela"
-                    print(string_cadeia_token, end='')
+
+                    # print(string_cadeia_token, end='')
+
                     self._table_tokens.append((cadeia, token, num_linha, position - len(cadeia) + 1))
 
                     # Reinicia o AF
@@ -289,7 +299,7 @@ class Scanner:
             string_cadeia_token = f"{num_linha}:{cadeia}:{token}\n"  # String para armazenar como cadeia e token
             self._file_token.append(string_cadeia_token)
 
-            print(string_cadeia_token, end='')
+            # print(string_cadeia_token, end='')
             self._table_tokens.append((cadeia, token, num_linha, position - len(cadeia) + 1))
 
         elif cadeia != ' ' and len(cadeia) > 0:  # Ex: GUR$dsadasdas

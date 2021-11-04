@@ -1,13 +1,1 @@
-BARBARIDADE GURI namefunction(GURI a, GURI b){
-  GURI a, GURI b;
-
-  a = 12;
-  LARGUEIMAO a;
-}
-
-BAHTCHE {
-
-  GURI a1, GURI b2;
-  PRINTCHE("OLA");
-
-}
+Trif

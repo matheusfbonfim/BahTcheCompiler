@@ -21,19 +21,25 @@ def main():
 
 
     #####################################################
-    ############### SCANNER #############################
+    ############### SCANNER - LEX #######################
     #####################################################
 
     # Cria o scanner
-    sc = Scanner(AF)        # Parametro sendo o Automato
-    sc.analise_lexica()     # Realiza a análise léxica
+    scanner = Scanner(AF)               # Parametro sendo o Automato
+    lex = scanner.analise_lexica()      # Realiza a análise léxica (True: Sucesso/False: Falhou)
 
-    print(sc.getTableTokens())
+    # Caso o scanner falhe, stop programa
+    if not lex:
+        return
+
+    # Imprimindo para tabela de tokens gerada
+    # print(scanner.getTableTokens())
 
     #####################################################
     ############### PARSER ##############################
     #####################################################
-    
+    print("Analise Sintatica..proximos capitulos")
+
     
     #####################################################
     ############### SEMANTICO ###########################
