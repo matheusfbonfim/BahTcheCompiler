@@ -175,10 +175,6 @@ class Scanner:
 
             caractere = entrada_text[position]  # Caractere (Transicao do AF)
 
-            # Caso seja um string - ignora o elementos dentro da string
-            if caractere == '"':
-                self._text_string = not self._text_string
-
             # ------------------------------------------------------
             # ---- Verificando os casos de comentarios primeiro ----
             # ------------------------------------------------------
@@ -244,8 +240,14 @@ class Scanner:
                 estado_atual = estado_atual_transitions[caractere]  # Ex: 1
                 estado_atual_transitions = self._AF.get_transitions_state(estado_atual)  # Ex: {'A': 2, 'E': 19}
 
+                # Caso seja um string - ignora o elementos dentro da string
+                if caractere == '"':
+                    self._text_string = not self._text_string
+
                 cadeia = cadeia + entrada_text[position]  # Concatenando a palavra - Cadeia
                 position += 1
+
+
             # Caso não esteja na transição, verifica por exemplo se o proximo é espaço ou outro caractere
             else:
                 # Valida se o estado atual é final (Manteve no estado anterior)

@@ -16,8 +16,8 @@ def main():
 
     # ====================
     # MOSTRANDO O AUTOMATO
-    AF.show_automaton()
-    print("\n")
+    # AF.show_automaton()
+    # print("\n")
 
 
     #####################################################
@@ -33,12 +33,11 @@ def main():
         return
 
     # Imprimindo para tabela de tokens gerada
-    print(scanner.getTableTokens())
+    # print(scanner.getTableTokens())
 
     #####################################################
     ############### PARSER ##############################
     #####################################################
-    print("Analise Sintatica..proximos capitulos")
 
     
     #####################################################

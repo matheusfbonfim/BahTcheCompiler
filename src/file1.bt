@@ -1,11 +1,5 @@
-
-
-
 BAHTCHE{
-    GURI x1 = 1;
-   
-    GURIZAO matheus;
-    FANDANGO texto1 = "eduarda"; $ String da eduarda
-    FANDANGO texto2 = "matheus"; $ String do matheus
-    FANDANGO texto3 = "huber"; $ String do huber 
+    PRINTCHE("Hello World");    $ Print
+    GURI x1;                    $ Declaracao de variavel x1
+    x1 = 2.0;
 }

@@ -1,1 +1,23 @@
-Trif
+BARBARIDADE GURI multipli2Numbers(GURI a, GURI b)
+{
+	LARGUEIMAO a * b;
+}
+
+BAHTCHE{
+    GURI i;
+    GURI j;
+    GURI result;
+    i = 1;
+    j = 0;
+
+    EMCIMADOLACO(i <= 10){
+    	EMCIMADOLACO(j <= 10){
+    	    result = multipli2Numbers(i, j);
+    	    PRINTCHE(result);
+          j = j + 1;
+    	}
+      i = i + 1;
+      j = 0;
+    }
+
+}

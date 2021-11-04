@@ -272,7 +272,7 @@ class Automaton:
         self.automato[81].token = Token.TK_PRINT # Define Token
 
         for i in range(74, 81):
-            self.automato[i].mensagemDeErro = "Mas BAH.. Acho que quis dizer 'PRINTTCHE' né?"
+            self.automato[i].mensagemDeErro = "Mas BAH.. Acho que quis dizer 'PRINTCHE' né?"
 
         # --------
         # TRIF

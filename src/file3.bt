@@ -1,0 +1,6 @@
+# COMENTARIOS DE MULTIPLAS LINHAS #
+
+BAHTCHE{
+    PRINTcHE("Hello World");
+    x1 = 2.0;
+}
