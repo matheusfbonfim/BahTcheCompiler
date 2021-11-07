@@ -1,1 +1,1 @@
-	[Erro Léxico] | Linha 4 | ->	 Referência indefinida para PRINTc | Coluna: 10 | Mas BAH.. Acho que quis dizer 'PRINTCHE' né?
+	[Erro Léxico] | Linha 1 | ->	 Referência indefinida para BARBARId | Coluna: 8 | Mas BAH.. Acho que quis dizer 'BARBARIDADE' né?
