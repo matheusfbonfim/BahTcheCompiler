@@ -24,7 +24,7 @@ class Parser:
             return f'\033[1;31m \t Mas BAH, funcao com retorno incorreto ou sem retorno | line: {line} | column: {column}'
         elif self._error == 'retorno_vazio':
             return f'\033[1;31m \t Mas BAH, isso "{current_symbol}" nao eh um tipo de retorno | line: {line} column: {column}'
-        elif self._error == 'ponto_virgula':
+        elif self._error == 'pontuacao':
             return f'\033[1;31m \t Mas BAH, esperado "{expected_symbol}" antes do "{current_symbol}" | line: {line} column: {column}'
         else:
             return f'\033[1;31m \t Mas BAH, esse o simbolo "{current_symbol}" nao eh "{expected_symbol}" | line: {line} | column: {column}'
@@ -82,7 +82,7 @@ class Parser:
 
     def _ponto_virgula(self):
         if self._token[1] != Token.TK_END:
-            self._error = 'ponto_virgula'
+            self._error = 'pontuacao'
         self._terminal([Token.TK_END], ';')
 
 
@@ -105,9 +105,29 @@ class Parser:
         if self._token[1] != Token.TK_OP:
             self._error = 'error_ok_op'
         self._terminal([Token.TK_OP], '(')
+
+    def _declara_par(self):
+        self._tipo()
+        self._identificador()
+
+    def _virgula(self):
+        self._terminal([Token.TK_COMMA], ',')
     
+    def _parametro_seg(self):
+        if self._token[1] == Token.TK_COMMA:
+            self._virgula()
+            self._declara_par()
+            self._parametro_seg()
+        elif self._token[1] in self._tipos + [Token.TK_IDENT]:
+            self._error = 'pontuacao'
+            self._virgula()
+            
     def _parametros(self):
-        pass
+        # Verifica se o proximo caractere não é CP
+        if not(self._token[1] == Token.TK_CP):
+            self._declara_par()
+            self._parametro_seg()
+
 
     def _close_p(self):
         # Token corrente é diferente de TK_CP
@@ -127,7 +147,7 @@ class Parser:
             self._tipo()
             self._identificador()
             self._open_p()
-            #self._parametros()
+            self._parametros()
             self._close_p()
             self._openKey()
             #self._content()
