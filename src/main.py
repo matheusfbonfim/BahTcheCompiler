@@ -33,18 +33,18 @@ def main():
         return
 
     # Fluxo de tokens gerados
-    fluxo_tokens = scanner.getTableTokens()
+    fluxo_tokens = scanner.getTableTokens()  # [('BAHTCHE', 'TK_MAIN', 1, 1), ...]
 
     #####################################################
     ############### PARSER ##############################
     #####################################################
     parser = Parser(fluxo_tokens)
     parser.analise_sintatica()
-
+    
     #####################################################
     ############### SEMANTICO ###########################
     #####################################################
-
+    
 
 # Executando a função principal
 if __name__ == '__main__':
