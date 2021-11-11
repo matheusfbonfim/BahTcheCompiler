@@ -17,13 +17,16 @@ class Parser:
 
     def _mensagem(self, expected_symbol = None, current_symbol = None, line = None, column = None):
         if self._error == 'finish':
-            self._error = 'no error'
             return f'\033[1;31m \t Mas BAH, acho que faltou um pedaco do codigo'
         elif self._error == 'error_ok_op':
-            self._error = 'no error'
-            return f'\033[1;31m \t Mas BAH, acho que faltou um {expected_symbol} | line: {line} | column: {column}'
+            return f'\033[1;31m \t Mas BAH, acho que faltou um "{expected_symbol}" antes do "{current_symbol}" | line: {line} | column: {column}'
+        elif self._error == 'no return':
+            return f'\033[1;31m \t Mas BAH, funcao com retorno incorreto ou sem retorno | line: {line} | column: {column}'
+        elif self._error == 'retorno_vazio':
+            return f'\033[1;31m \t Mas BAH, isso "{current_symbol}" nao eh um tipo de retorno | line: {line} column: {column}'
+        elif self._error == 'ponto_virgula':
+            return f'\033[1;31m \t Mas BAH, esperado "{expected_symbol}" antes do "{current_symbol}" | line: {line} column: {column}'
         else:
-            self._error = 'no error'
             return f'\033[1;31m \t Mas BAH, esse o simbolo "{current_symbol}" nao eh "{expected_symbol}" | line: {line} | column: {column}'
             
 
@@ -36,18 +39,57 @@ class Parser:
             self._error = 'finish'
             raise Exception(self._mensagem())
         
+        if self._error != 'no error':
+            raise Exception(self._mensagem(description, current_token[0], current_token[2], current_token[3]))
+
         # Lanca erro - Verificando se o token atual não corresponde ao token lido
         if not (current_token[1] in token): 
             raise Exception(self._mensagem(description, current_token[0], current_token[2], current_token[3]))
         
-
-        # Limpa a variavel erro
-        self._error = 'no error'
         
         # Caso não haja erro de terminal
         print(f"Descrição: {description}, Current_Token: {current_token[0]}")
         self._token = self._proximo_tk()    # Proximo do token
 
+
+    def _retorno(self):
+        # Token corrente é diferente de TK_RETURN
+        if self._token[1] != Token.TK_RETURN:
+            self._error = 'no return'
+        self._terminal([Token.TK_RETURN], 'LARGUEIMAO')
+
+    def _real(self):
+        self._terminal([Token.TK_REAL], 'REAL')
+
+    def _number(self):
+        self._terminal([Token.TK_NUMBER], 'NUMBER')
+
+    def _texto(self):
+        self._terminal([Token.TK_TEXT], 'TEXT')
+
+    def _tipos_retorno(self):
+        if self._token[1] == Token.TK_IDENT:
+            self._identificador()
+        elif self._token[1] == Token.TK_REAL:
+            self._real()
+        elif self._token[1] == Token.TK_NUMBER:
+            self._number()
+        elif self._token[1] == Token.TK_TEXT:
+            self._texto()
+        else: 
+            self._error = 'retorno_vazio'
+            self._terminal()
+
+    def _ponto_virgula(self):
+        if self._token[1] != Token.TK_END:
+            self._error = 'ponto_virgula'
+        self._terminal([Token.TK_END], ';')
+
+
+    def _retorno_f(self):
+        self._retorno()
+        self._tipos_retorno()
+        self._ponto_virgula()
 
     def _id_funcao(self):
         self._terminal([Token.TK_FUNC], 'BARBARIDADE')
@@ -59,22 +101,25 @@ class Parser:
         self._terminal([Token.TK_IDENT], 'IDENTIFICADOR')
 
     def _open_p(self):
-        self._error = 'error_ok_op'
+        # Token corrente é diferente de TK_OP
+        if self._token[1] != Token.TK_OP:
+            self._error = 'error_ok_op'
         self._terminal([Token.TK_OP], '(')
     
     def _parametros(self):
         pass
 
     def _close_p(self):
-        self._error = 'error_ok_op'
+        # Token corrente é diferente de TK_CP
+        if self._token[1] != Token.TK_CP:
+            self._error = 'error_ok_op'
         self._terminal([Token.TK_CP], ')')
+
     
     def _content(self):
         pass
         
-    def _retorno_f(self):
-        pass
-        
+
     def _funcao(self):
         # ('BARBARIDADE', 'TK_FUNC', 1, 1)
         if self._token[1] != Token.TK_MAIN:
@@ -86,7 +131,7 @@ class Parser:
             self._close_p()
             self._openKey()
             #self._content()
-            #self._retorno_f()
+            self._retorno_f()
             self._closeKey()
 
             # Verifica se existem tokens para serem lidos
@@ -94,11 +139,15 @@ class Parser:
                 self._funcao()
 
     def _openKey(self):
-        self._error = 'error_ok_op'
+        # Token corrente é diferente de TK_OK
+        if self._token[1] != Token.TK_OK:
+            self._error = 'error_ok_op'
         self._terminal([Token.TK_OK], '{')
 
     def _closeKey(self):
-        self._error = 'error_ok_op'
+        # Token corrente é diferente de TK_CK
+        if self._token[1] != Token.TK_CK:
+            self._error = 'error_ok_op'
         self._terminal([Token.TK_CK], '}')
 
     def _main(self):
