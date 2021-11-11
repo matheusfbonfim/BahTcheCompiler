@@ -24,7 +24,7 @@ class Parser:
             return f'\033[1;31m \t Mas BAH, acho que faltou um {expected_symbol} | line: {line} | column: {column}'
         else:
             self._error = 'no error'
-            return f'\t"\033[1;31m \tMas BAH, esse o simbolo "{current_symbol}" nao eh "{expected_symbol}" | line: {line} | column: {column}'
+            return f'\033[1;31m \t Mas BAH, esse o simbolo "{current_symbol}" nao eh "{expected_symbol}" | line: {line} | column: {column}'
             
 
 
@@ -75,7 +75,6 @@ class Parser:
     def _retorno_f(self):
         pass
         
-
     def _funcao(self):
         # ('BARBARIDADE', 'TK_FUNC', 1, 1)
         if self._token[1] != Token.TK_MAIN:
@@ -111,7 +110,6 @@ class Parser:
         self._openKey()
         #self._content()
         self._closeKey()
-
 
     def analise_sintatica(self):
         # Tente começar a analise, mas caso haja erro, lance uma exceção
