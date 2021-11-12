@@ -21,7 +21,7 @@ class Parser:
         elif self._error == 'error_ok_op':
             return f'\033[1;31m \t Mas BAH, acho que faltou um "{expected_symbol}" antes do "{current_symbol}" | line: {line} | column: {column}'
         elif self._error == 'no return':
-            return f'\033[1;31m \t Mas BAH, funcao com retorno incorreto ou sem retorno | line: {line} | column: {column}'
+            return f'\033[1;31m \t Mas BAH, funcao sem retorno | line: {line} | column: {column}'
         elif self._error == 'retorno_vazio':
             return f'\033[1;31m \t Mas BAH, isso "{current_symbol}" nao eh um tipo de retorno | line: {line} column: {column}'
         elif self._error == 'pontuacao':
@@ -50,7 +50,11 @@ class Parser:
         # Caso não haja erro de terminal
         print(f"Descrição: {description}, Current_Token: {current_token[0]}")
         self._token = self._proximo_tk()    # Proximo do token
+    
 
+    def _declara_var(self):
+        self._parametros()
+        self._ponto_virgula()
 
     def _retorno(self):
         # Token corrente é diferente de TK_RETURN
@@ -67,6 +71,12 @@ class Parser:
     def _texto(self):
         self._terminal([Token.TK_TEXT], 'TEXT')
 
+
+    def _ponto_virgula(self):
+        if self._token[1] != Token.TK_END:
+            self._error = 'pontuacao'
+        self._terminal([Token.TK_END], ';')
+
     def _tipos_retorno(self):
         if self._token[1] == Token.TK_IDENT:
             self._identificador()
@@ -76,15 +86,9 @@ class Parser:
             self._number()
         elif self._token[1] == Token.TK_TEXT:
             self._texto()
-        else: 
+        else:
             self._error = 'retorno_vazio'
             self._terminal()
-
-    def _ponto_virgula(self):
-        if self._token[1] != Token.TK_END:
-            self._error = 'pontuacao'
-        self._terminal([Token.TK_END], ';')
-
 
     def _retorno_f(self):
         self._retorno()
@@ -137,7 +141,20 @@ class Parser:
 
     
     def _content(self):
-        pass
+        # Verifica se existe content no escopo
+        if self._token[1] != Token.TK_CK:
+            if self._token[1] in self._tipos:
+                self._declara_var()
+            elif self._token[1] == Token.TK_IDENT:
+                self._atribui_var()
+
+
+            if not self._token[1] in [Token.TK_CK, Token.TK_RETURN]:
+                self._content()
+
+            
+
+
         
 
     def _funcao(self):
@@ -150,7 +167,8 @@ class Parser:
             self._parametros()
             self._close_p()
             self._openKey()
-            #self._content()
+            if self._token[1] != Token.TK_RETURN:
+                self._content()
             self._retorno_f()
             self._closeKey()
 
@@ -177,7 +195,7 @@ class Parser:
         self._funcao()
         self._main()
         self._openKey()
-        #self._content()
+        self._content()
         self._closeKey()
 
     def analise_sintatica(self):
