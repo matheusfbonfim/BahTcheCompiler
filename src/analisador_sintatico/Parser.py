@@ -52,6 +52,8 @@ class Parser:
             return f'\033[1;31m \t Mas BAH, essa atribuicao eh invalida | line: {line} column: {column}'
         elif self._error == 'operacao_matematica_invalida':
             return f'\033[1;31m \t Mas BAH, operacao matematica invalida -> {current_symbol} | line: {line} column: {column}'
+        elif self._error == 'operacao_logica_invalida':
+            return f'\033[1;31m \t Mas BAH, operacao logica invalida -> {current_symbol} | line: {line} column: {column}'
         else:
             return f'\033[1;31m \t Mas BAH, esse o simbolo "{current_symbol}" nao eh "{expected_symbol}" | line: {line} | column: {column}'
             
@@ -150,6 +152,57 @@ class Parser:
          self._terminal([Token.TK_ASSIGNMENT], '=')
 
 
+    def _not(self):
+       self._terminal([Token.TK_LOGIC_NOT], '!')
+    
+    def _operador_l(self): # OR, AND, DIF, LG, LE_GE, EQ
+        if self._token[1] == Token.TK_LOGIC_OR:
+            self._terminal([Token.TK_LOGIC_OR], '||')
+        elif self._token[1] == Token.TK_LOGIC_AND:
+            self._terminal([Token.TK_LOGIC_AND], '&&')
+        elif self._token[1] == Token.TK_LOGIC_DIF:
+            self._terminal([Token.TK_LOGIC_DIF], '!=')
+        elif self._token[1] == Token.TK_LOGIC_LG:
+            self._terminal([Token.TK_LOGIC_LG], '> ou <')
+        elif self._token[1] == Token.TK_LOGIC_LE_GE:
+            self._terminal([Token.TK_LOGIC_LE_GE], '<= ou >=')
+        elif self._token[1] == Token.TK_LOGIC_EQ:
+            self._terminal([Token.TK_LOGIC_EQ], '==')
+        else:
+            self._error = 'operacao_logica_invalida'
+            self._terminal()
+
+
+    def _op_logic(self):
+        if self._token[1] == Token.TK_LOGIC_NOT:
+            self._not()
+        
+        if self._token[1] == Token.TK_IDENT:
+            self._identificador()
+        elif self._token[1] == Token.TK_NUMBER:
+            self._number()
+        elif self._token[1] == Token.TK_REAL:
+            self._real()
+        else:
+            self._error = 'operacao_logica_invalida'
+            self._terminal()
+        
+        self._operador_l()
+
+        if self._token[1] == Token.TK_LOGIC_NOT:
+            self._not()
+        
+        if self._token[1] == Token.TK_IDENT:
+            self._identificador()
+        elif self._token[1] == Token.TK_NUMBER:
+            self._number()
+        elif self._token[1] == Token.TK_REAL:
+            self._real()
+        else:
+            self._error = 'operacao_logica_invalida'
+            self._terminal()
+
+
     def _atribui_var(self):  # Exemplo -> a = b + 2  # self._token = b
         self._identificador() # a
         self._atribuicao()    # =
@@ -160,15 +213,13 @@ class Parser:
 
         # Verifica se o caractere é NOT
         if self._token[1] == Token.TK_LOGIC_NOT:
-            # self._op_logic()
-            pass
+            self._op_logic()
         # Valida se é operacao matematica
         elif token_aux[1] in self._operadores_matematicos:  
             self._op_math()
         # Valida se é operacao logica
         elif token_aux[1] in self._operadores_logicos:
-            # self._op_logic()
-            pass
+            self._op_logic()
         # Valida se é identificador/number/text/ident
         elif token_aux[1] == Token.TK_END:
             if self._token[1] == Token.TK_TEXT:
