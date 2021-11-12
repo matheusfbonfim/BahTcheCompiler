@@ -5,9 +5,15 @@ BARBARIDADE GURI a(GURI a, GURIZAO b){
 
 BAHTCHE{
     GURI a;
+    INPUTCHE(a);
+    $ INPUTCHE(dasdsad);
+    $ INPUTCHE("smdsa");
+    $INPUTCHE(12121);
+
+#
     PRINTCHE(+87);
     PRINTCHE();
     PRINTCHE(a);
     PRINTCHE(ewr);
-  
+ # 
 }

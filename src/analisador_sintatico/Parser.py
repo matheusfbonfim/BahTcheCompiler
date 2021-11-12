@@ -432,7 +432,16 @@ class Parser:
         
         self._close_p()
         self._ponto_virgula()
+
+    def _scanf(self):
+        self._terminal([Token.TK_SCANF], 'INPUTCHE')
     
+    def _declara_scanf(self):
+        self._scanf()
+        self._open_p()
+        self._identificador()
+        self._close_p()
+        self._ponto_virgula()
 
     def _content(self):
         # Verifica se existe content no escopo
@@ -448,8 +457,7 @@ class Parser:
             elif self._token[1] == Token.TK_PRINT:
                 self._declara_print()
             elif self._token[1] == Token.TK_SCANF:
-                # self._declara_scanf()
-                pass
+                self._declara_scanf()
             elif self._token == 'finish':
                 self._terminal()
             elif not self._token[1] in self._conjunto_tokens_content:
