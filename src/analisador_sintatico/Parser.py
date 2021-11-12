@@ -127,7 +127,6 @@ class Parser:
             self._closeKey()
 
 
-
     def _condicional(self):
         self._if()
         self._open_p()    # TRIF(){}
@@ -397,6 +396,22 @@ class Parser:
             self._error = 'error_ok_op'
         self._terminal([Token.TK_CP], ')')
 
+    def _while(self):
+        self._terminal([Token.TK_WHILE], 'EMCIMADOLACO')
+
+    def _laco(self):
+        self._while()
+        self._open_p()
+        if self._token[1] != Token.TK_CP:
+            self._op_logic()
+        else:
+            self._error = 'expressao_vazia'
+            self._terminal()
+
+        self._close_p()
+        self._openKey()
+        self._content()
+        self._closeKey()
     
     def _content(self):
         # Verifica se existe content no escopo
@@ -407,6 +422,8 @@ class Parser:
                 self._atribui_var() 
             elif self._token[1] == Token.TK_IF:
                 self._condicional()
+            elif self._token[1] == Token.TK_WHILE:
+                self._laco()
             elif self._token == 'finish':
                 self._terminal()
             elif not self._token[1] in self._conjunto_tokens_content:
