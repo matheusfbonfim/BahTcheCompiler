@@ -6,7 +6,5 @@ BARBARIDADE GURI funcao(GURI a, GURI b){
 }
 
 BAHTCHE{
-  a = 1;
-  a = 1.0;
-  a = "MATHEUS LINDAO";
+  a = BARBARIDADE namefunction();
 }

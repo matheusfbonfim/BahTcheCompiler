@@ -69,15 +69,33 @@ class Parser:
         print(f"Descrição: {description}, Current_Token: {current_token[0]}")
         self._token = self._proximo_tk()    # Proximo do token
     
+    def _chamada_seg(self):
+        if self._token[1] == Token.TK_COMMA:
+            self._virgula()
+            self._identificador()
+            self._chamada_seg()
+        elif self._token[1] in [Token.TK_IDENT]:
+            self._error = 'pontuacao'
+            self._virgula()
+
+    def _parametros_chamada_f(self):
+        self._identificador()
+        self._chamada_seg()
+
+    def _chama_funcao(self):
+        self._id_funcao()
+        self._identificador()
+        self._open_p()
+        if self._token[1] != Token.TK_CP:
+            self._parametros_chamada_f()
+        self._close_p()
 
     def _atribuicao(self):
          self._terminal([Token.TK_ASSIGNMENT], '=')
 
-    def _atribui_var(self):  # Exemplo -> a = b + 2
+    def _atribui_var(self):  # Exemplo -> a = b + 2  # self._token = b
         self._identificador() # a
         self._atribuicao()    # =
-
-        # self._token = b
 
         # Token que auxilia para qual metodo irá - Ve caractere futuro
         token_aux = self._proximo_tk()  # + 
@@ -109,8 +127,7 @@ class Parser:
                 self._error = "atribuicao_invalida"
                 self._terminal()
         elif self._token[1] == Token.TK_FUNC:
-            # self._chama_funcao()
-            pass
+            self._chama_funcao()
         else:
             self._error = "atribuicao_invalida"
             self._terminal()
