@@ -14,6 +14,22 @@ class Parser:
             Token.TK_FLOAT
         ]
 
+        self._operadores_matematicos = [
+            Token.TK_MATH_ADD,
+            Token.TK_MATH_SUB,
+            Token.TK_MATH_MUL,
+            Token.TK_MATH_DIV
+        ]
+
+        self._operadores_logicos = [
+            Token.TK_LOGIC_AND, # &&
+            Token.TK_LOGIC_OR,  # ||
+            Token.TK_LOGIC_DIF, # !=
+            Token.TK_LOGIC_LG,  # <,>
+            Token.TK_LOGIC_LE_GE, # <=, >=
+            Token.TK_LOGIC_EQ     # ==
+        ]
+
 
     def _mensagem(self, expected_symbol = None, current_symbol = None, line = None, column = None):
         if self._error == 'finish':
@@ -26,10 +42,12 @@ class Parser:
             return f'\033[1;31m \t Mas BAH, isso "{current_symbol}" nao eh um tipo de retorno | line: {line} column: {column}'
         elif self._error == 'pontuacao':
             return f'\033[1;31m \t Mas BAH, esperado "{expected_symbol}" antes do "{current_symbol}" | line: {line} column: {column}'
+        elif self._error == 'atribuicao_invalida':
+            return f'\033[1;31m \t Mas BAH, essa atribuicao eh invalida | line: {line} column: {column}'
         else:
             return f'\033[1;31m \t Mas BAH, esse o simbolo "{current_symbol}" nao eh "{expected_symbol}" | line: {line} | column: {column}'
             
-
+        
 
     def _terminal(self, token = None, description = None):
         # Token atual lido
@@ -52,6 +70,55 @@ class Parser:
         self._token = self._proximo_tk()    # Proximo do token
     
 
+    def _atribuicao(self):
+         self._terminal([Token.TK_ASSIGNMENT], '=')
+
+    def _atribui_var(self):  # Exemplo -> a = b + 2
+        self._identificador() # a
+        self._atribuicao()    # =
+
+        # self._token = b
+
+        # Token que auxilia para qual metodo irá - Ve caractere futuro
+        token_aux = self._proximo_tk()  # + 
+        self._count -= 1 # Decrementa para voltar no token atual
+
+        # Verifica se o caractere é NOT
+        if self._token[1] == Token.TK_LOGIC_NOT:
+            # self._op_logic()
+            pass
+        # Valida se é operacao matematica
+        elif token_aux[1] in self._operadores_matematicos:  
+            # self._op_math()
+            pass
+        # Valida se é operacao logica
+        elif token_aux[1] in self._operadores_logicos: 
+            # self._op_logic()
+            pass
+        # Valida se é identificador/number/text/ident
+        elif token_aux[1] == Token.TK_END:
+            if self._token[1] == Token.TK_TEXT:
+                self._texto()
+            elif self._token[1] == Token.TK_NUMBER:
+                self._number()
+            elif self._token[1] == Token.TK_REAL:
+                self._real()
+            elif self._token[1] == Token.TK_IDENT:
+                self._identificador()
+            else:
+                self._error = "atribuicao_invalida"
+                self._terminal()
+        elif self._token[1] == Token.TK_FUNC:
+            # self._chama_funcao()
+            pass
+        else:
+            self._error = "atribuicao_invalida"
+            self._terminal()
+        
+        
+        self._ponto_virgula()
+
+    
     def _declara_var(self):
         self._parametros()
         self._ponto_virgula()
@@ -146,11 +213,13 @@ class Parser:
             if self._token[1] in self._tipos:
                 self._declara_var()
             elif self._token[1] == Token.TK_IDENT:
-                self._atribui_var()
+                self._atribui_var() 
 
 
             if not self._token[1] in [Token.TK_CK, Token.TK_RETURN]:
                 self._content()
+            
+
 
             
 

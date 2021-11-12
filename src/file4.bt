@@ -1,21 +1,12 @@
 BARBARIDADE GURI funcao(GURI a, GURI b){
-  GURI a;
-  GURI A;
-  GURI a;
-  GURI a;
-  GURI a;
-  GURI a;
-  GURI a;
+  a = 1;
+  a = 1.0;
+  a = "MATHEUS LINDAO";
   LARGUEIMAO a;
 }
 
 BAHTCHE{
-  GURI a, FANDANGO c , GURIZAO f, GURI a, FANDANGO c , GURIZAO f;
-  GURI a;
-  GURI a;
-  GURI a;
-  FANDANGO c;
-  FANDANGO c;
-  GURIZAO f;
-
+  a = 1;
+  a = 1.0;
+  a = "MATHEUS LINDAO";
 }

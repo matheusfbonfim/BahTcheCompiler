@@ -1,1 +1,0 @@
-	[Erro Léxico] | Linha 3 | ->	 Referência indefinida para A | Coluna: 8 | 
