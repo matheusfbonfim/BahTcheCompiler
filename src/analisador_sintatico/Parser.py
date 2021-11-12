@@ -46,7 +46,8 @@ class Parser:
             Token.TK_RETURN
         ] + self._tipos
 
-
+    # ====================
+    # DEFINE A MENSAGEM DE ERRO
     def _mensagem(self, expected_symbol = None, current_symbol = None, line = None, column = None):
         if self._error == 'finish':
             return f'\033[1;31m \t Mas BAH, acho que faltou um pedaco do codigo'
@@ -73,27 +74,32 @@ class Parser:
         else:
             return f'\033[1;31m \t Mas BAH, esse o simbolo "{current_symbol}" nao eh "{expected_symbol}" | line: {line} | column: {column}'
             
-        
+    # ====================
+    # VERIFICA A CORRESPONDENCIA DO TOKEN LIDO COM O ESPERADO   
     def _terminal(self, token = None, description = None):
         # Token atual lido
         current_token = self._token     # ('BAHTCHE', 'TK_MAIN', 1, 1)
 
+        # Caso terminou de ler a lista de tokens, mas a gramatica não finalizou
         if current_token == 'finish':
             self._error = 'finish'
             raise Exception(self._mensagem())
         
+        # Caso tenha sido lancado na flag self._error algum erro
         if self._error != 'no error':
             raise Exception(self._mensagem(description, current_token[0], current_token[2], current_token[3]))
 
         # Lanca erro - Verificando se o token atual não corresponde ao token lido
         if not (current_token[1] in token): 
             raise Exception(self._mensagem(description, current_token[0], current_token[2], current_token[3]))
-        
-        
-        # Caso não haja erro de terminal
+         
         print(f"Descrição: {description}, Current_Token: {current_token[0]}")
-        self._token = self._proximo_tk()    # Proximo do token
+        # Caso não haja erro de terminal - Proximo token
+        self._token = self._proximo_tk()    
 
+    #####################################################
+    ############### REGRAS SINTATICAS ###################
+    #####################################################
     
     def _if(self):
         self._terminal([Token.TK_IF], 'TRIF')
@@ -509,18 +515,26 @@ class Parser:
         self._content()
         self._closeKey()
 
+    #####################################################
+    ############### METODOS DA CLASSE ###################
+    #####################################################
+
+    # ====================
+    # INICIALIZACAO DA ANALISE SINTATICA
     def analise_sintatica(self):
         # Tente começar a analise, mas caso haja erro, lance uma exceção
         try:
-            self._code()
+            self._code()       # Inicia-se pelo code (raiz)
             print("Análise Sintatica: [Concluido]")
-            return True  # Retorna - Analise sintatica sucesso
+            return True     # Retorna True - Analise sintatica sucesso
         except Exception as error:
             print("Análise Sintatica: [Gerando Erro]\n", end='')
             print(error)
-            return False
-
-    # Atribui a self._token o proximo token
+            return False    # Retorna False - Analise sintatica falhou
+    
+    
+    # ====================
+    # ATRIBUI A SELF._TOKEN O PROXIMO TOKEN
     def _proximo_tk(self):
         temp = 'finish'  # De inicio é atribuido temp como 'finish'
 
@@ -529,5 +543,3 @@ class Parser:
             temp = self._table_tokens[self._count]
             self._count += 1  # O count ja fica posicionado para o proximo token
         return temp
-
-
