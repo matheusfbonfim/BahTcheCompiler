@@ -1,10 +1,3 @@
-BARBARIDADE GURI funcao(GURI a, GURI b){
-  a = 1;
-  a = 1.0;
-  a = "MATHEUS LINDAO";
-  LARGUEIMAO a;
-}
-
 BAHTCHE{
-  a = BARBARIDADE namefunction();
+  a = a + c / 2 - 9;
 }

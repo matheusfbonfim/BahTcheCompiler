@@ -30,6 +30,12 @@ class Parser:
             Token.TK_LOGIC_EQ     # ==
         ]
 
+        self._conjunto_operandos = [
+            Token.TK_IDENT,
+            Token.TK_NUMBER,
+            Token.TK_REAL
+        ]
+
 
     def _mensagem(self, expected_symbol = None, current_symbol = None, line = None, column = None):
         if self._error == 'finish':
@@ -44,6 +50,8 @@ class Parser:
             return f'\033[1;31m \t Mas BAH, esperado "{expected_symbol}" antes do "{current_symbol}" | line: {line} column: {column}'
         elif self._error == 'atribuicao_invalida':
             return f'\033[1;31m \t Mas BAH, essa atribuicao eh invalida | line: {line} column: {column}'
+        elif self._error == 'operacao_matematica_invalida':
+            return f'\033[1;31m \t Mas BAH, operacao matematica invalida -> {current_symbol} | line: {line} column: {column}'
         else:
             return f'\033[1;31m \t Mas BAH, esse o simbolo "{current_symbol}" nao eh "{expected_symbol}" | line: {line} | column: {column}'
             
@@ -69,6 +77,51 @@ class Parser:
         print(f"Descrição: {description}, Current_Token: {current_token[0]}")
         self._token = self._proximo_tk()    # Proximo do token
     
+    def _term(self):
+        if self._token[1] == Token.TK_IDENT:
+            self._identificador()
+        elif self._token[1] == Token.TK_NUMBER:
+            self._number()
+        elif self._token[1] == Token.TK_REAL:
+            self._real()
+        else:
+            self._error = 'operacao_matematica_invalida'
+            self._terminal()
+
+    def _mul_div_add_sub(self):
+        if self._token[1] == Token.TK_MATH_MUL:
+            self._terminal([Token.TK_MATH_MUL], '*')
+        elif self._token[1] == Token.TK_MATH_DIV:
+            self._terminal([Token.TK_MATH_DIV], '/')
+        elif self._token[1] == Token.TK_MATH_ADD:
+            self._terminal([Token.TK_MATH_ADD], '+')
+        elif self._token[1] == Token.TK_MATH_SUB:
+            self._terminal([Token.TK_MATH_SUB], '-')
+        else:
+            self._error = 'operacao_matematica_invalida'
+            self._terminal()
+
+
+    def _multiplication_seg(self):
+        if self._token[1] in [Token.TK_MATH_MUL, Token.TK_MATH_DIV]:
+            self._mul_div_add_sub()
+            self._term()
+            self._multiplication_seg()
+
+    def _multiplication(self):
+        self._term()
+        self._multiplication_seg()
+
+    def _add_sub_seg(self):
+        if self._token[1] in [Token.TK_MATH_ADD, Token.TK_MATH_SUB]:
+            self._mul_div_add_sub()
+            self._multiplication()
+            self._add_sub_seg()
+
+    def _op_math(self):
+        self._multiplication()
+        self._add_sub_seg()
+
     def _chamada_seg(self):
         if self._token[1] == Token.TK_COMMA:
             self._virgula()
@@ -78,9 +131,11 @@ class Parser:
             self._error = 'pontuacao'
             self._virgula()
 
+
     def _parametros_chamada_f(self):
         self._identificador()
         self._chamada_seg()
+
 
     def _chama_funcao(self):
         self._id_funcao()
@@ -90,8 +145,10 @@ class Parser:
             self._parametros_chamada_f()
         self._close_p()
 
+
     def _atribuicao(self):
          self._terminal([Token.TK_ASSIGNMENT], '=')
+
 
     def _atribui_var(self):  # Exemplo -> a = b + 2  # self._token = b
         self._identificador() # a
@@ -99,7 +156,7 @@ class Parser:
 
         # Token que auxilia para qual metodo irá - Ve caractere futuro
         token_aux = self._proximo_tk()  # + 
-        self._count -= 1 # Decrementa para voltar no token atual
+        self._count -= 1                # Decrementa para voltar no token atual
 
         # Verifica se o caractere é NOT
         if self._token[1] == Token.TK_LOGIC_NOT:
@@ -107,10 +164,9 @@ class Parser:
             pass
         # Valida se é operacao matematica
         elif token_aux[1] in self._operadores_matematicos:  
-            # self._op_math()
-            pass
+            self._op_math()
         # Valida se é operacao logica
-        elif token_aux[1] in self._operadores_logicos: 
+        elif token_aux[1] in self._operadores_logicos:
             # self._op_logic()
             pass
         # Valida se é identificador/number/text/ident
