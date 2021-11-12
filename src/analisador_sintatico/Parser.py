@@ -46,6 +46,7 @@ class Parser:
             Token.TK_RETURN
         ] + self._tipos
 
+    
     # ====================
     # DEFINE A MENSAGEM DE ERRO
     def _mensagem(self, expected_symbol = None, current_symbol = None, line = None, column = None):
@@ -74,6 +75,7 @@ class Parser:
         else:
             return f'\033[1;31m \t Mas BAH, esse o simbolo "{current_symbol}" nao eh "{expected_symbol}" | line: {line} | column: {column}'
             
+    
     # ====================
     # VERIFICA A CORRESPONDENCIA DO TOKEN LIDO COM O ESPERADO   
     def _terminal(self, token = None, description = None):
@@ -97,6 +99,7 @@ class Parser:
         # Caso não haja erro de terminal - Proximo token
         self._token = self._proximo_tk()    
 
+    
     #####################################################
     ############### REGRAS SINTATICAS ###################
     #####################################################
@@ -134,7 +137,6 @@ class Parser:
             self._content()
             self._closeKey()
 
-
     def _condicional(self):
         self._if()
         self._open_p()    # TRIF(){}
@@ -151,8 +153,6 @@ class Parser:
         self._closeKey()
         self._declara_elif()
         self._declara_else()
-
-
 
     def _term(self):
         if self._token[1] == Token.TK_IDENT:
@@ -177,7 +177,6 @@ class Parser:
         else:
             self._error = 'operacao_matematica_invalida'
             self._terminal()
-
 
     def _multiplication_seg(self):
         if self._token[1] in [Token.TK_MATH_MUL, Token.TK_MATH_DIV]:
@@ -208,11 +207,9 @@ class Parser:
             self._error = 'pontuacao'
             self._virgula()
 
-
     def _parametros_chamada_f(self):
         self._identificador()
         self._chamada_seg()
-
 
     def _chama_funcao(self):
         self._id_funcao()
@@ -222,10 +219,8 @@ class Parser:
             self._parametros_chamada_f()
         self._close_p()
 
-
     def _atribuicao(self):
          self._terminal([Token.TK_ASSIGNMENT], '=')
-
 
     def _not(self):
        self._terminal([Token.TK_LOGIC_NOT], '!')
@@ -246,7 +241,6 @@ class Parser:
         else:
             self._error = 'operacao_logica_invalida'
             self._terminal()
-
 
     def _op_logic(self):
         if self._token[1] == Token.TK_LOGIC_NOT:
@@ -532,7 +526,7 @@ class Parser:
             print(error)
             return False    # Retorna False - Analise sintatica falhou
     
-    
+
     # ====================
     # ATRIBUI A SELF._TOKEN O PROXIMO TOKEN
     def _proximo_tk(self):
