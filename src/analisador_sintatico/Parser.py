@@ -68,6 +68,8 @@ class Parser:
             return f'\033[1;31m \t Mas BAH, esperado uma expressao antes do {current_symbol} | line: {line} column: {column}'
         elif self._error == 'estado_invalido':
             return f'\033[1;31m \t Mas BAH, {current_symbol} eh uma declaracao invalida | line: {line} column: {column}'
+        elif self._error == 'print_invalido':
+            return f'\033[1;31m \t Mas BAH, expressao invalida no PRINTCHE | line: {line} column: {column}'
         else:
             return f'\033[1;31m \t Mas BAH, esse o simbolo "{current_symbol}" nao eh "{expected_symbol}" | line: {line} | column: {column}'
             
@@ -412,7 +414,26 @@ class Parser:
         self._openKey()
         self._content()
         self._closeKey()
+
+    def _print(self):
+        self._terminal([Token.TK_PRINT], 'PRINTCHE')
     
+    def _declara_print(self):
+        self._print()
+        self._open_p()
+
+        if self._token[1] == Token.TK_TEXT:
+            self._texto()
+        elif self._token[1] == Token.TK_IDENT:
+            self._identificador()
+        else:
+            self._error = 'print_invalido'
+            self._terminal()
+        
+        self._close_p()
+        self._ponto_virgula()
+    
+
     def _content(self):
         # Verifica se existe content no escopo
         if self._token[1] != Token.TK_CK:
@@ -424,6 +445,11 @@ class Parser:
                 self._condicional()
             elif self._token[1] == Token.TK_WHILE:
                 self._laco()
+            elif self._token[1] == Token.TK_PRINT:
+                self._declara_print()
+            elif self._token[1] == Token.TK_SCANF:
+                # self._declara_scanf()
+                pass
             elif self._token == 'finish':
                 self._terminal()
             elif not self._token[1] in self._conjunto_tokens_content:
@@ -433,7 +459,6 @@ class Parser:
             if not self._token[1] in [Token.TK_CK, Token.TK_RETURN]:
                 self._content()
             
-
 
     def _funcao(self):
         # ('BARBARIDADE', 'TK_FUNC', 1, 1)

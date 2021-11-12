@@ -5,6 +5,9 @@ BARBARIDADE GURI a(GURI a, GURIZAO b){
 
 BAHTCHE{
     GURI a;
-
+    PRINTCHE(+87);
+    PRINTCHE();
+    PRINTCHE(a);
+    PRINTCHE(ewr);
   
 }
