@@ -1,12 +1,20 @@
+BARBARIDADE GURI a(GURI a, GURIZAO b){
+
+  LARGUEIMAO a;
+}
+
 BAHTCHE{
-  a = !a && a;
-  a = 2 && 1;
-  a = a || 1;
-  a = 2 >= a;
-  a = 2 <= a;
-  a = 2 > 1;
-  a = a < 1;
-  a = 2 != 1;
-  a = 7 == 1;
-  variavel = wew || aasd >= dsa;
+    GURI a;
+
+    TRIF(!a && 8){
+
+    }
+
+    TRIF(bma < 2){
+
+    }BAGUAL{
+
+    }
+    
+    
 }

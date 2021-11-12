@@ -5,7 +5,7 @@ class Parser:
     def __init__(self, tokens):
         self._table_tokens = tokens     # Lista com todos os tokens [('BAHTCHE', 'TK_MAIN', 1, 1), ...]
         self._error = 'no error'        # Flag de erro
-        self._count = 0                 # Indica qual o token da lista está sendo lido
+        self._count = 0                   # Indica qual o token da lista está sendo lido
         self._token = self._proximo_tk()  # Variavel que indica o token atual que está sendo lido
         
         self._tipos = [
@@ -36,6 +36,16 @@ class Parser:
             Token.TK_REAL
         ]
 
+        self._conjunto_tokens_content = [
+            Token.TK_IDENT,
+            Token.TK_WHILE,
+            Token.TK_IF,
+            Token.TK_SCANF,
+            Token.TK_PRINT,
+            Token.TK_CK,
+            Token.TK_RETURN
+        ] + self._tipos
+
 
     def _mensagem(self, expected_symbol = None, current_symbol = None, line = None, column = None):
         if self._error == 'finish':
@@ -54,11 +64,14 @@ class Parser:
             return f'\033[1;31m \t Mas BAH, operacao matematica invalida -> {current_symbol} | line: {line} column: {column}'
         elif self._error == 'operacao_logica_invalida':
             return f'\033[1;31m \t Mas BAH, operacao logica invalida -> {current_symbol} | line: {line} column: {column}'
+        elif self._error == 'expressao_vazia':
+            return f'\033[1;31m \t Mas BAH, esperado uma expressao antes do {current_symbol} | line: {line} column: {column}'
+        elif self._error == 'estado_invalido':
+            return f'\033[1;31m \t Mas BAH, {current_symbol} eh uma declaracao invalida | line: {line} column: {column}'
         else:
             return f'\033[1;31m \t Mas BAH, esse o simbolo "{current_symbol}" nao eh "{expected_symbol}" | line: {line} | column: {column}'
             
         
-
     def _terminal(self, token = None, description = None):
         # Token atual lido
         current_token = self._token     # ('BAHTCHE', 'TK_MAIN', 1, 1)
@@ -78,7 +91,62 @@ class Parser:
         # Caso não haja erro de terminal
         print(f"Descrição: {description}, Current_Token: {current_token[0]}")
         self._token = self._proximo_tk()    # Proximo do token
+
     
+    def _if(self):
+        self._terminal([Token.TK_IF], 'TRIF')
+
+    def _elif(self):
+        self._terminal([Token.TK_ELIF], 'BEM_CAPAZ')
+
+    def _else(self):
+        self._terminal([Token.TK_ELSE], 'BAGUAL')
+    
+    def _declara_elif(self):
+        if self._token[1] == Token.TK_ELIF:
+            self._elif()
+            self._open_p()
+
+            if self._token[1] != Token.TK_CP:
+                self._op_logic()
+            else:
+                self._error = 'expressao_vazia'
+                self._terminal()
+            
+            self._close_p()
+            self._openKey()
+            self._content()
+            self._closeKey()
+            self._declara_elif()
+    
+    def _declara_else(self):
+        if self._token[1] == Token.TK_ELSE:
+            self._else()
+            self._openKey()
+            self._content()
+            self._closeKey()
+
+
+
+    def _condicional(self):
+        self._if()
+        self._open_p()    # TRIF(){}
+        
+        if self._token[1] != Token.TK_CP:
+            self._op_logic()
+        else:
+            self._error = 'expressao_vazia'
+            self._terminal()
+        
+        self._close_p()
+        self._openKey()
+        self._content()
+        self._closeKey()
+        self._declara_elif()
+        self._declara_else()
+
+
+
     def _term(self):
         if self._token[1] == Token.TK_IDENT:
             self._identificador()
@@ -233,16 +301,16 @@ class Parser:
             else:
                 self._error = "atribuicao_invalida"
                 self._terminal()
+        # Valida se é chamada de funcao
         elif self._token[1] == Token.TK_FUNC:
             self._chama_funcao()
         else:
             self._error = "atribuicao_invalida"
             self._terminal()
         
-        
         self._ponto_virgula()
 
-    
+
     def _declara_var(self):
         self._parametros()
         self._ponto_virgula()
@@ -261,7 +329,6 @@ class Parser:
 
     def _texto(self):
         self._terminal([Token.TK_TEXT], 'TEXT')
-
 
     def _ponto_virgula(self):
         if self._token[1] != Token.TK_END:
@@ -338,17 +405,18 @@ class Parser:
                 self._declara_var()
             elif self._token[1] == Token.TK_IDENT:
                 self._atribui_var() 
-
+            elif self._token[1] == Token.TK_IF:
+                self._condicional()
+            elif self._token == 'finish':
+                self._terminal()
+            elif not self._token[1] in self._conjunto_tokens_content:
+                self._error = 'estado_invalido'
+                self._terminal()
 
             if not self._token[1] in [Token.TK_CK, Token.TK_RETURN]:
                 self._content()
             
 
-
-            
-
-
-        
 
     def _funcao(self):
         # ('BARBARIDADE', 'TK_FUNC', 1, 1)
