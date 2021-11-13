@@ -1,5 +1,5 @@
 from Token import Token  # Importando classe de tokens
-
+from .Node import Node    # Importando classe Node
 
 class Parser:
     def __init__(self, tokens):
