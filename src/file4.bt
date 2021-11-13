@@ -4,16 +4,24 @@ BARBARIDADE GURI a(GURI a, GURIZAO b){
 }
 
 BAHTCHE{
-    GURI a;
-    INPUTCHE(a);
-    $ INPUTCHE(dasdsad);
-    $ INPUTCHE("smdsa");
-    $INPUTCHE(12121);
+    GURI a, GURIZAO b, FANDANGO c;
+  
+    PRINTCHE("hello world family"); $ Cade a familia?
 
-#
-    PRINTCHE(+87);
-    PRINTCHE();
-    PRINTCHE(a);
-    PRINTCHE(ewr);
- # 
+    INPUTCHE(a);
+
+    TRIF(1 >= <=){
+        PRINTCHE("PASSAMOS EM COMPILADORES");
+    }BAGUAL{
+        PRINTCHE("ELDER NOS LASCOU");
+    }
+
+    EMCIMADOLACO(a>2){
+        TRIF(1 && &&){
+          PRINTCHE("TO ANIMADO PROGRAMANDO EM BAHTCHE :)");
+        }BEM_CAPAZ(4 || a){
+
+        }
+    }
+
 }

@@ -8,7 +8,7 @@ BAHTCHE{
     GURI i;
     GURI j;
     GURI result;
-    i = 1;
+    GURIZAO a;
     j = 0;
 
     EMCIMADOLACO(i <= 10){
@@ -17,6 +17,7 @@ BAHTCHE{
     	    PRINTCHE(result);
           j = j + 1;
     	}
+
       i = i + 1;
       j = 0;
     }
