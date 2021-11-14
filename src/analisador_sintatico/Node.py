@@ -1,9 +1,9 @@
 class Node:
-    def __init__(self):
+    def __init__(self, name = None, terminal = False):
         self._children = []   
         self._level = None
         self._terminal = False
-        self._name = ''
+        self._name = name
     
     @property
     def name(self):
@@ -30,9 +30,9 @@ class Node:
         self._level = value
     
     @property
-    def children(self):
-        return self._level
-
+    def list_children(self):
+        return self._children
+    
     def children(self, child):
         self._children.append(child)
     

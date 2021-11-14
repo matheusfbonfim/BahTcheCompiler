@@ -4,6 +4,7 @@ from .Node import Node    # Importando classe Node
 class Parser:
     def __init__(self, tokens):
         self._table_tokens = tokens     # Lista com todos os tokens [('BAHTCHE', 'TK_MAIN', 1, 1), ...]
+        self._tree = None
         self._error = 'no error'        # Flag de erro
         self._count = 0                   # Indica qual o token da lista está sendo lido
         self._token = self._proximo_tk()  # Variavel que indica o token atual que está sendo lido
@@ -78,7 +79,7 @@ class Parser:
     
     # ====================
     # VERIFICA A CORRESPONDENCIA DO TOKEN LIDO COM O ESPERADO   
-    def _terminal(self, token = None, description = None):
+    def _terminal(self, token = None, description = None, node=None):
         # Token atual lido
         current_token = self._token     # ('BAHTCHE', 'TK_MAIN', 1, 1)
 
@@ -94,7 +95,12 @@ class Parser:
         # Lanca erro - Verificando se o token atual não corresponde ao token lido
         if not (current_token[1] in token): 
             raise Exception(self._mensagem(description, current_token[0], current_token[2], current_token[3]))
-         
+
+        # Node Tree
+        node_t = Node(name = self._token, terminal=True)
+        node.children(node_t)
+        
+
         print(f"Descrição: {description}, Current_Token: {current_token[0]}")
         # Caso não haja erro de terminal - Proximo token
         self._token = self._proximo_tk()    
@@ -316,58 +322,91 @@ class Parser:
         self._parametros()
         self._ponto_virgula()
 
-    def _retorno(self):
+    def _retorno(self, root):
         # Token corrente é diferente de TK_RETURN
         if self._token[1] != Token.TK_RETURN:
             self._error = 'no return'
-        self._terminal([Token.TK_RETURN], 'LARGUEIMAO')
+        
+        node = Node('retorno')
+        root.children(node)
 
-    def _real(self):
-        self._terminal([Token.TK_REAL], 'REAL')
+        self._terminal([Token.TK_RETURN], 'LARGUEIMAO', node=node)
 
-    def _number(self):
-        self._terminal([Token.TK_NUMBER], 'NUMBER')
+    def _real(self, root):
+        node = Node('real')
+        root.children(node)
+        
+        self._terminal([Token.TK_REAL], 'REAL', node=node)
 
-    def _texto(self):
-        self._terminal([Token.TK_TEXT], 'TEXT')
+    def _number(self, root):
+        node = Node('number')
+        root.children(node)
+        self._terminal([Token.TK_NUMBER], 'NUMBER', node=node)
 
-    def _ponto_virgula(self):
+    def _texto(self,  root):
+        node = Node('texto')
+        root.children(node)
+        self._terminal([Token.TK_TEXT], 'TEXT', node=node)
+
+    def _ponto_virgula(self, root):
         if self._token[1] != Token.TK_END:
             self._error = 'pontuacao'
-        self._terminal([Token.TK_END], ';')
 
-    def _tipos_retorno(self):
+        node = Node('ponto_virgula')
+        root.children(node)
+        self._terminal([Token.TK_END], ';', node=node)
+
+    def _tipos_retorno(self, root):
+        node = Node('tipos_retorno')
+        root.children(node)
+
         if self._token[1] == Token.TK_IDENT:
-            self._identificador()
+            self._identificador(node)
         elif self._token[1] == Token.TK_REAL:
-            self._real()
+            self._real(node)
         elif self._token[1] == Token.TK_NUMBER:
-            self._number()
+            self._number(node)
         elif self._token[1] == Token.TK_TEXT:
-            self._texto()
+            self._texto(node)
         else:
             self._error = 'retorno_vazio'
             self._terminal()
 
-    def _retorno_f(self):
-        self._retorno()
-        self._tipos_retorno()
-        self._ponto_virgula()
+    def _retorno_f(self, root):
+        node = Node('retorno_f')
+        root.children(node)
+        
+        self._retorno(node)
+        self._tipos_retorno(node)
+        self._ponto_virgula(node)
 
-    def _id_funcao(self):
-        self._terminal([Token.TK_FUNC], 'BARBARIDADE')
+    def _id_funcao(self, root):
+        node = Node('id_funcao')
+        root.children(node)
+
+        self._terminal([Token.TK_FUNC], 'BARBARIDADE', node = node)
     
-    def _tipo(self):
-        self._terminal(self._tipos, 'GURI ou GURIZAO ou FANDANGO')
+    def _tipo(self, root):
+        node = Node('tipo')
+        root.children(node)
 
-    def _identificador(self):
-        self._terminal([Token.TK_IDENT], 'IDENTIFICADOR')
+        self._terminal(self._tipos, 'GURI ou GURIZAO ou FANDANGO', node = node)
 
-    def _open_p(self):
+    def _identificador(self, root):
+        node = Node('identificador')
+        root.children(node)
+
+        self._terminal([Token.TK_IDENT], 'IDENTIFICADOR', node = node)
+
+    def _open_p(self, root):
         # Token corrente é diferente de TK_OP
         if self._token[1] != Token.TK_OP:
             self._error = 'error_ok_op'
-        self._terminal([Token.TK_OP], '(')
+        
+        node = Node('open_p')
+        root.children(node)
+
+        self._terminal([Token.TK_OP], '(', node = node)
 
     def _declara_par(self):
         self._tipo()
@@ -392,11 +431,15 @@ class Parser:
             self._parametro_seg()
 
 
-    def _close_p(self):
+    def _close_p(self, root):
         # Token corrente é diferente de TK_CP
         if self._token[1] != Token.TK_CP:
             self._error = 'error_ok_op'
-        self._terminal([Token.TK_CP], ')')
+        
+        node = Node('close_p')
+        root.children(node)
+
+        self._terminal([Token.TK_CP], ')', node=node)
 
     def _while(self):
         self._terminal([Token.TK_WHILE], 'EMCIMADOLACO')
@@ -467,47 +510,64 @@ class Parser:
             if not self._token[1] in [Token.TK_CK, Token.TK_RETURN]:
                 self._content()
             
-
-    def _funcao(self):
+    
+    def _funcao(self, root):
         # ('BARBARIDADE', 'TK_FUNC', 1, 1)
         if self._token[1] != Token.TK_MAIN:
-            self._id_funcao()
-            self._tipo()
-            self._identificador()
-            self._open_p()
+            node = Node('function')     # Criado nó function
+            root.children(node)         # Adicionado nó function ao pai
+
+            self._id_funcao(node)
+            self._tipo(node)
+            self._identificador(node)
+            self._open_p(node)
             self._parametros()
-            self._close_p()
-            self._openKey()
+            self._close_p(node)
+            self._openKey(node)
             if self._token[1] != Token.TK_RETURN:
                 self._content()
-            self._retorno_f()
-            self._closeKey()
+            self._retorno_f(node)
+            self._closeKey(node)
 
             # Verifica se existem tokens para serem lidos
             if self._token != 'finish':
-                self._funcao()
+                self._funcao(root)
 
-    def _openKey(self):
+    def _openKey(self, root):
         # Token corrente é diferente de TK_OK
         if self._token[1] != Token.TK_OK:
             self._error = 'error_ok_op'
-        self._terminal([Token.TK_OK], '{')
+        
+        node = Node('open_key')
+        root.children(node)
 
-    def _closeKey(self):
+        self._terminal([Token.TK_OK], '{', node=node)
+
+    def _closeKey(self, root):
         # Token corrente é diferente de TK_CK
         if self._token[1] != Token.TK_CK:
             self._error = 'error_ok_op'
-        self._terminal([Token.TK_CK], '}')
+
+        node = Node('close_key')
+        root.children(node)
+        
+        self._terminal([Token.TK_CK], '}', node=node)
 
     def _main(self):
         self._terminal([Token.TK_MAIN], 'BAHTCHE')
 
     def _code(self):
-        self._funcao()
-        self._main()
-        self._openKey()
-        self._content()
-        self._closeKey()
+        # root
+        root = Node('code')
+
+        self._funcao(root)
+        # self._main(root)
+        # self._openKey(root)
+        # self._content()
+        # self._closeKey(root)
+        
+        # Nó principal
+        self._tree = root
 
     #####################################################
     ############### METODOS DA CLASSE ###################
@@ -537,3 +597,17 @@ class Parser:
             temp = self._table_tokens[self._count]
             self._count += 1  # O count ja fica posicionado para o proximo token
         return temp
+    
+    #####################################################
+    ############### METODOS DA ARVORE ###################
+    #####################################################
+    def tree(self):
+        return self._tree
+    
+    @staticmethod
+    def show_tree(root):
+        stack = [root]
+        while stack:
+            node = stack.pop(0)
+            print(f'{node.level} {node.name}')
+            stack = node.children+stack

@@ -41,6 +41,24 @@ def main():
     parser = Parser(fluxo_tokens)
     parser.analise_sintatica()
     
+    # Retorno da tree
+    tree = parser.tree()
+    print(tree.name)
+    
+    for child in tree._children:
+        print(child.name)
+        for x in child._children:
+            print(x.name)
+            for y in x._children:
+                print(y.name)
+                for z in y._children:
+                    print(z.name)
+                    for w in z._children:
+                        print(w.name)
+
+
+
+
     #####################################################
     ############### SEMANTICO ###########################
     #####################################################
