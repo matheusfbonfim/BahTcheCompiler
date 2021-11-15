@@ -1,0 +1,24 @@
+Level: 0 | Name: code
+Level: 1 | Name: function
+Level: 2 | Name: id_funcao
+Level: 3 | Name: ('BARBARIDADE', 'TK_FUNC', 1, 1)
+Level: 2 | Name: tipo
+Level: 3 | Name: ('GURI', 'TK_INT', 1, 13)
+Level: 2 | Name: identificador
+Level: 3 | Name: ('namefunction', 'TK_IDENT', 1, 18)
+Level: 2 | Name: open_p
+Level: 3 | Name: ('(', 'TK_OP', 1, 30)
+Level: 2 | Name: close_p
+Level: 3 | Name: (')', 'TK_CP', 1, 31)
+Level: 2 | Name: open_key
+Level: 3 | Name: ('{', 'TK_OK', 1, 32)
+Level: 2 | Name: retorno_f
+Level: 3 | Name: retorno
+Level: 4 | Name: ('LARGUEIMAO', 'TK_RETURN', 3, 5)
+Level: 3 | Name: tipos_retorno
+Level: 4 | Name: identificador
+Level: 5 | Name: ('a', 'TK_IDENT', 3, 16)
+Level: 3 | Name: ponto_virgula
+Level: 4 | Name: (';', 'TK_END', 3, 17)
+Level: 2 | Name: close_key
+Level: 3 | Name: ('}', 'TK_CK', 4, 1)

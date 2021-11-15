@@ -96,7 +96,7 @@ class Scanner:
                 # Armazenando os erros lexicos - lista
                 if len(erros_lexicos) > 0:      # Ex: ["\t Referência indefinida .."]
                     # Insere na casa 0 do vetor de erros
-                    erros_lexicos.insert(0, f"[Erro Léxico] | Linha {num_linha} | ->")
+                    erros_lexicos.insert(0, f"[Erro Lexico] | Linha {num_linha} | ->")
                     self._erro_lexico = erros_lexicos  # Atribuindo para variavel de erro da classe
                     break  # Sai do for após encontrar o primeiro erro
 
@@ -134,7 +134,7 @@ class Scanner:
             # Erro - Comentario multiplas linhas não terminado
             elif self._comment_mult_lines == True:
                 print("Análise Lexica: [Gerando Erro]\n", end='')
-                string_erro = "\t[Erro Léxico] Mas BAH.. Tu abriu comentarios de multiplas linhas mas nao finalizou\n"
+                string_erro = "\t[Erro Lexico] Mas BAH.. Tu abriu comentarios de multiplas linhas mas nao finalizou\n"
                 print(string_erro, end='')
                 # Gravando no arquivo
                 output_errors.write(string_erro)
@@ -203,7 +203,7 @@ class Scanner:
                     # FAZER TRATAMENTO CASO NAO SEJA ' '
                     if cadeia != ' ' and len(cadeia) > 0:
                         mensagem_erro_sugestao = self._AF.automato[estado_atual].mensagemDeErro
-                        erro = f"\t Referência indefinida para {cadeia} | Coluna: {position} | {mensagem_erro_sugestao}\n"
+                        erro = f"\t Referencia indefinida para {cadeia} | Coluna: {position} | {mensagem_erro_sugestao}\n"
                         erros_lexicos.append(erro)
                         return erros_lexicos
 
@@ -281,7 +281,7 @@ class Scanner:
                     # FAZER TRATAMENTO CASO NAO SEJA ' '
                     if cadeia != ' ':
                         mensagem_erro_sugestao = self._AF.automato[estado_atual].mensagemDeErro
-                        erro = f"\t Referência indefinida para {cadeia} | Coluna: {position} | {mensagem_erro_sugestao}\n"
+                        erro = f"\t Referencia indefinida para {cadeia} | Coluna: {position} | {mensagem_erro_sugestao}\n"
                         erros_lexicos.append(erro)
                         return erros_lexicos
 
@@ -306,7 +306,7 @@ class Scanner:
         elif cadeia != ' ' and len(cadeia) > 0:  # Ex: GUR$dsadasdas
             # FAZER TRATAMENTO CASO NAO SEJA ' '
             mensagem_erro_sugestao = self._AF.automato[estado_atual].mensagemDeErro  # Mensagem de erro (estado atual)
-            erro = f"\t Referência indefinida para {cadeia} | Coluna: {position} | {mensagem_erro_sugestao}\n"
+            erro = f"\t Referencia indefinida para {cadeia} | Coluna: {position} | {mensagem_erro_sugestao}\n"
             erros_lexicos.append(erro)
 
             return erros_lexicos

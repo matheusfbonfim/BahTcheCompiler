@@ -1,9 +1,9 @@
 # IMPORTS
 import sys
-from analisador_lexico.Automato import Automaton  # Importando a class automato - objeto automato
-from analisador_lexico.Scanner import Scanner  # Importando a class Scanner - Varredor Lexico
-from analisador_sintatico.Parser import Parser  # Importando a class Scanner - Varredor Lexico
-from analisador_sintatico.PlotTree import plot
+from analisador_lexico.Automato import Automaton    # Importando a class automato - objeto automato
+from analisador_lexico.Scanner import Scanner       # Importando a class Scanner - Varredor Lexico
+from analisador_sintatico.Parser import Parser      # Importando a class Scanner - Varredor Lexico
+from analisador_sintatico.PlotTree import plot      # Importando a funcao para plot da Tree
 
 # FUNÇÃO PRINCIPAL
 def main():
@@ -40,18 +40,23 @@ def main():
     #####################################################
 
     # Cria o parser
-    parser = Parser(fluxo_tokens)   # Parametro sendo o fluxo_tokens
-    parser.analise_sintatica()      # Realiza a análise sintatica (True: Sucesso/False: Falhou)
+    parser = Parser(fluxo_tokens)          # Parametro sendo o fluxo_tokens
+    sint = parser.analise_sintatica()      # Realiza a análise sintatica (True: Sucesso/False: Falhou)
     
+    # Caso o parser falhe, stop programa
+    if not sint:
+        return
+
     # Retorno do node raiz da tree
     node_root_tree = parser.tree()
 
-    # Mostra a arvore em profundidade
-    parser.show_dfs_tree(node_root_tree)
-
-    # Plotando a arvore
+    # Plotando a arvore e atribui os niveis - PlotTree
     plot(node=node_root_tree, level=0, state=0)
-    
+
+    # Armazenar no arquivo em profundidade
+    parser.store_file_dfs_tree()
+
+
     #####################################################
     ############### SEMANTICO ###########################
     #####################################################

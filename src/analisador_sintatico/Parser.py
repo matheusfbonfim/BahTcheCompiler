@@ -1,3 +1,4 @@
+import sys
 from Token import Token  # Importando classe de tokens
 from .Node import Node    # Importando classe Node
 
@@ -52,29 +53,29 @@ class Parser:
     # DEFINE A MENSAGEM DE ERRO
     def _mensagem(self, expected_symbol = None, current_symbol = None, line = None, column = None):
         if self._error == 'finish':
-            return f'\033[1;31m \t Mas BAH, acho que faltou um pedaco do codigo'
+            return f'\t [Erro Sintatico] | Mas BAH, acho que faltou um pedaco do codigo'
         elif self._error == 'error_ok_op':
-            return f'\033[1;31m \t Mas BAH, acho que faltou um "{expected_symbol}" antes do "{current_symbol}" | line: {line} | column: {column}'
+            return f'\t [Erro Sintatico] | Mas BAH, acho que faltou um "{expected_symbol}" antes do "{current_symbol}" | line: {line} | column: {column}'
         elif self._error == 'no return':
-            return f'\033[1;31m \t Mas BAH, funcao sem retorno | line: {line} | column: {column}'
+            return f'\t [Erro Sintatico] | Mas BAH, funcao sem retorno | line: {line} | column: {column}'
         elif self._error == 'retorno_vazio':
-            return f'\033[1;31m \t Mas BAH, isso "{current_symbol}" nao eh um tipo de retorno | line: {line} column: {column}'
+            return f'\t [Erro Sintatico] | Mas BAH, isso "{current_symbol}" nao eh um tipo de retorno | line: {line} column: {column}'
         elif self._error == 'pontuacao':
-            return f'\033[1;31m \t Mas BAH, esperado "{expected_symbol}" antes do "{current_symbol}" | line: {line} column: {column}'
+            return f'\t [Erro Sintatico] | Mas BAH, esperado "{expected_symbol}" antes do "{current_symbol}" | line: {line} column: {column}'
         elif self._error == 'atribuicao_invalida':
-            return f'\033[1;31m \t Mas BAH, essa atribuicao eh invalida | line: {line} column: {column}'
+            return f'\t [Erro Sintatico] | Mas BAH, essa atribuicao eh invalida | line: {line} column: {column}'
         elif self._error == 'operacao_matematica_invalida':
-            return f'\033[1;31m \t Mas BAH, operacao matematica invalida -> {current_symbol} | line: {line} column: {column}'
+            return f'\t [Erro Sintatico] | Mas BAH, operacao matematica invalida -> {current_symbol} | line: {line} column: {column}'
         elif self._error == 'operacao_logica_invalida':
-            return f'\033[1;31m \t Mas BAH, operacao logica invalida -> {current_symbol} | line: {line} column: {column}'
+            return f'\t [Erro Sintatico] | Mas BAH, operacao logica invalida -> {current_symbol} | line: {line} column: {column}'
         elif self._error == 'expressao_vazia':
-            return f'\033[1;31m \t Mas BAH, esperado uma expressao antes do {current_symbol} | line: {line} column: {column}'
+            return f'\t [Erro Sintatico] | Mas BAH, esperado uma expressao antes do {current_symbol} | line: {line} column: {column}'
         elif self._error == 'estado_invalido':
-            return f'\033[1;31m \t Mas BAH, {current_symbol} eh uma declaracao invalida | line: {line} column: {column}'
+            return f'\t [Erro Sintatico] | Mas BAH, {current_symbol} eh uma declaracao invalida | line: {line} column: {column}'
         elif self._error == 'print_invalido':
-            return f'\033[1;31m \t Mas BAH, expressao invalida no PRINTCHE | line: {line} column: {column}'
+            return f'\t [Erro Sintatico] | Mas BAH, expressao invalida no PRINTCHE | line: {line} column: {column}'
         else:
-            return f'\033[1;31m \t Mas BAH, esse o simbolo "{current_symbol}" nao eh "{expected_symbol}" | line: {line} | column: {column}'
+            return f'\t [Erro Sintatico] | Mas BAH, esse o simbolo "{current_symbol}" nao eh "{expected_symbol}" | line: {line} | column: {column}'
 
     # ====================
     # VERIFICA A CORRESPONDENCIA DO TOKEN LIDO COM O ESPERADO   
@@ -99,7 +100,7 @@ class Parser:
         node_t = Node(name=self._token, terminal=True)
         node.children = node_t
 
-        print(f"Descrição: {description}, Current_Token: {current_token[0]}")
+        # print(f"Descrição: {description}, Current_Token: {current_token[0]}")
         # Caso não haja erro de terminal - Proximo token
         self._token = self._proximo_tk()
 
@@ -554,10 +555,10 @@ class Parser:
         root = Node('code')
 
         self._funcao(root)
-        # self._main(root)
-        # self._openKey(root)
+        # self._main()
+        # self._openKey()
         # self._content()
-        # self._closeKey(root)
+        # self._closeKey()
 
         # Nó principal
         self._tree = root
@@ -577,6 +578,14 @@ class Parser:
         except Exception as error:
             print("Análise Sintatica: [Gerando Erro]\n", end='')
             print(error)
+            
+            # Criando arquivo para os erros
+            path_file_error = f"{sys.path[0]}/output_errors.txt"   # Diretorio para os arquivos de erros
+            output_errors = open(path_file_error, 'w')
+            
+            # Gravando no arquivo
+            output_errors.write(f'{error}')
+
             return False        # Retorna False - Analise sintatica falhou
 
     # ====================
@@ -593,16 +602,38 @@ class Parser:
     #####################################################
     ############### METODOS DA ARVORE ###################
     #####################################################
+    
+    # ====================
+    # Retorna a tree
     def tree(self):
         return self._tree
 
     # ====================
     # Mostra a arvore em profundidade DFS
     @staticmethod
-    def show_dfs_tree(root):
+    def dfs_tree(root):
         stack = [root]
         while stack:
             node = stack.pop(0)
             print(f'{node.name}')
             # print(f'Level: {node.level} Name: {node.name}')
             stack = node.children+stack
+    
+    # ====================
+    # Armazendo no arquivo de saida - Busca em profundidade
+    def store_file_dfs_tree(self):
+        # Criando registro (arquivo) para tree
+        path_file_tokens = f"{sys.path[0]}/output_syntax_tree.txt"
+        output_tokens = open(path_file_tokens, 'w')
+        
+        # Variavel para armazenar o texto a ser escrito no arquivo
+        string_tree = ''
+
+        stack = [self._tree]
+        while stack:
+            node = stack.pop(0)
+            string_tree += f'Level: {node.level} | Name: {node.name}\n'
+            stack = node.children+stack
+
+        # Gravando no arquivo
+        output_tokens.write(string_tree)
