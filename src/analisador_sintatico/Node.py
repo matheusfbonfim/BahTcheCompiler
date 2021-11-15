@@ -1,10 +1,12 @@
 class Node:
-    def __init__(self, name = None, terminal = False):
-        self._children = []   
-        self._level = None
-        self._terminal = False
+    def __init__(self, name=None, terminal=False):
         self._name = name
-    
+        self._children = []
+        self._level = None
+        self._terminal = terminal
+
+    # ====================
+    # GETTERS E SETTERS
     @property
     def name(self):
         return self._name
@@ -30,9 +32,10 @@ class Node:
         self._level = value
     
     @property
-    def list_children(self):
+    def children(self):
         return self._children
-    
+
+    @children.setter
     def children(self, child):
         self._children.append(child)
     

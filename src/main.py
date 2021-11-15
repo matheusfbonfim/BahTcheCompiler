@@ -25,7 +25,7 @@ def main():
     #####################################################
 
     # Cria o scanner
-    scanner = Scanner(AF)  # Parametro sendo o Automato
+    scanner = Scanner(AF)           # Parametro sendo o Automato
     lex = scanner.analise_lexica()  # Realiza a análise léxica (True: Sucesso/False: Falhou)
 
     # Caso o scanner falhe, stop programa
@@ -38,31 +38,20 @@ def main():
     #####################################################
     ############### PARSER ##############################
     #####################################################
-    parser = Parser(fluxo_tokens)
-    parser.analise_sintatica()
+
+    # Cria o parser
+    parser = Parser(fluxo_tokens)   # Parametro sendo o fluxo_tokens
+    parser.analise_sintatica()      # Realiza a análise sintatica (True: Sucesso/False: Falhou)
     
-    # Retorno da tree
-    tree = parser.tree()
-    print(tree.name)
+    # Retorno do node raiz da tree
+    node_root_tree = parser.tree()
+
+    # Mostra a arvore em profundidade
+    parser.show_dfs_tree(node_root_tree)
     
-    for child in tree._children:
-        print(child.name)
-        for x in child._children:
-            print(x.name)
-            for y in x._children:
-                print(y.name)
-                for z in y._children:
-                    print(z.name)
-                    for w in z._children:
-                        print(w.name)
-
-
-
-
     #####################################################
     ############### SEMANTICO ###########################
     #####################################################
-    
 
 # Executando a função principal
 if __name__ == '__main__':
