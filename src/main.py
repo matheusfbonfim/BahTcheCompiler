@@ -3,7 +3,7 @@ import sys
 from analisador_lexico.Automato import Automaton  # Importando a class automato - objeto automato
 from analisador_lexico.Scanner import Scanner  # Importando a class Scanner - Varredor Lexico
 from analisador_sintatico.Parser import Parser  # Importando a class Scanner - Varredor Lexico
-
+from analisador_sintatico.PlotTree import plot
 
 # FUNÇÃO PRINCIPAL
 def main():
@@ -48,6 +48,9 @@ def main():
 
     # Mostra a arvore em profundidade
     parser.show_dfs_tree(node_root_tree)
+
+    # Plotando a arvore
+    plot(node=node_root_tree, level=0, state=0)
     
     #####################################################
     ############### SEMANTICO ###########################
