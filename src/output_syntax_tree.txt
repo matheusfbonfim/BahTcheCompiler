@@ -22,10 +22,18 @@ Level: 5 | Name: tipo
 Level: 6 | Name: ('FANDANGO', 'TK_STRING', 1, 39)
 Level: 5 | Name: identificador
 Level: 6 | Name: ('b', 'TK_IDENT', 1, 48)
+Level: 4 | Name: parametro_seg
+Level: 5 | Name: virgula
+Level: 6 | Name: (',', 'TK_COMMA', 1, 49)
+Level: 5 | Name: declara_par
+Level: 6 | Name: tipo
+Level: 7 | Name: ('GURIZAO', 'TK_FLOAT', 1, 51)
+Level: 6 | Name: identificador
+Level: 7 | Name: ('c', 'TK_IDENT', 1, 59)
 Level: 2 | Name: close_p
-Level: 3 | Name: (')', 'TK_CP', 1, 49)
+Level: 3 | Name: (')', 'TK_CP', 1, 60)
 Level: 2 | Name: open_key
-Level: 3 | Name: ('{', 'TK_OK', 1, 50)
+Level: 3 | Name: ('{', 'TK_OK', 1, 61)
 Level: 2 | Name: retorno_f
 Level: 3 | Name: retorno
 Level: 4 | Name: ('LARGUEIMAO', 'TK_RETURN', 3, 5)
@@ -36,3 +44,35 @@ Level: 3 | Name: ponto_virgula
 Level: 4 | Name: (';', 'TK_END', 3, 17)
 Level: 2 | Name: close_key
 Level: 3 | Name: ('}', 'TK_CK', 4, 1)
+Level: 1 | Name: main
+Level: 2 | Name: ('BAHTCHE', 'TK_MAIN', 6, 1)
+Level: 1 | Name: open_key
+Level: 2 | Name: ('{', 'TK_OK', 6, 8)
+Level: 1 | Name: content
+Level: 2 | Name: declara_var
+Level: 3 | Name: parametros
+Level: 4 | Name: declara_par
+Level: 5 | Name: tipo
+Level: 6 | Name: ('GURI', 'TK_INT', 7, 5)
+Level: 5 | Name: identificador
+Level: 6 | Name: ('a', 'TK_IDENT', 7, 10)
+Level: 4 | Name: parametro_seg
+Level: 5 | Name: virgula
+Level: 6 | Name: (',', 'TK_COMMA', 7, 11)
+Level: 5 | Name: declara_par
+Level: 6 | Name: tipo
+Level: 7 | Name: ('FANDANGO', 'TK_STRING', 7, 13)
+Level: 6 | Name: identificador
+Level: 7 | Name: ('b', 'TK_IDENT', 7, 22)
+Level: 5 | Name: parametro_seg
+Level: 6 | Name: virgula
+Level: 7 | Name: (',', 'TK_COMMA', 7, 23)
+Level: 6 | Name: declara_par
+Level: 7 | Name: tipo
+Level: 8 | Name: ('GURIZAO', 'TK_FLOAT', 7, 25)
+Level: 7 | Name: identificador
+Level: 8 | Name: ('c', 'TK_IDENT', 7, 33)
+Level: 3 | Name: ponto_virgula
+Level: 4 | Name: (';', 'TK_END', 7, 34)
+Level: 1 | Name: close_key
+Level: 2 | Name: ('}', 'TK_CK', 8, 1)

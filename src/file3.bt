@@ -1,4 +1,10 @@
-BARBARIDADE GURI namefunction(GURI a, FANDANGO b){
+BARBARIDADE GURI namefunction(GURI a, FANDANGO b, GURIZAO c){
     
     LARGUEIMAO c;
+}
+
+BAHTCHE{
+    GURI a, FANDANGO b, GURIZAO c;
+    FANDANGO e;
+    GURIZAO r;
 }

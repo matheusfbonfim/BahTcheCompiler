@@ -314,9 +314,12 @@ class Parser:
 
         self._ponto_virgula()
 
-    def _declara_var(self):
-        self._parametros()
-        self._ponto_virgula()
+    def _declara_var(self, root):
+        node = Node('declara_var')
+        root.children = node
+        
+        self._parametros(node)
+        self._ponto_virgula(node)
 
     def _retorno(self, root):
         # Token corrente é diferente de TK_RETURN
@@ -401,7 +404,7 @@ class Parser:
 
         node = Node('open_p')
         root.children = node
-
+        
         self._terminal([Token.TK_OP], '(', node = node)
 
     def _declara_par(self, root):
@@ -417,10 +420,6 @@ class Parser:
 
         self._terminal([Token.TK_COMMA], ',',  node=node)
 
-    def _vazio(self, root):
-        node = Node('ε')
-        root.children = node
-
     def _parametro_seg(self, root):
         if self._token[1] == Token.TK_COMMA:
             node = Node('parametro_seg')
@@ -431,11 +430,8 @@ class Parser:
             self._parametro_seg(node)
         elif self._token[1] in self._tipos + [Token.TK_IDENT]:
             self._error = 'pontuacao'
-            self._virgula()
+            self._virgula(node=None)
         
-        # self._vazio(root)
-        
-
     def _parametros(self, root):
         # Verifica se o proximo caractere não é CP
         if not(self._token[1] == Token.TK_CP):
@@ -500,11 +496,14 @@ class Parser:
         self._close_p()
         self._ponto_virgula()
 
-    def _content(self):
+    def _content(self, root):
         # Verifica se existe content no escopo
         if self._token[1] != Token.TK_CK:
+            node = Node('content')
+            root.children = node
+
             if self._token[1] in self._tipos:
-                self._declara_var()
+                self._declara_var(node)
             elif self._token[1] == Token.TK_IDENT:
                 self._atribui_var()
             elif self._token[1] == Token.TK_IF:
@@ -522,7 +521,7 @@ class Parser:
                 self._terminal()
 
             if not self._token[1] in [Token.TK_CK, Token.TK_RETURN]:
-                self._content()
+                self._content(node)
 
     def _funcao(self, root):
         # ('BARBARIDADE', 'TK_FUNC', 1, 1)
@@ -566,18 +565,21 @@ class Parser:
 
         self._terminal([Token.TK_CK], '}', node=node)
 
-    def _main(self):
-        self._terminal([Token.TK_MAIN], 'BAHTCHE')
+    def _main(self, root):
+        node = Node('main')
+        root.children = node
+
+        self._terminal([Token.TK_MAIN], 'BAHTCHE', node=node)
 
     def _code(self):
         # root
         root = Node('code')
 
         self._funcao(root)
-        # self._main()
-        # self._openKey()
-        # self._content()
-        # self._closeKey()
+        self._main(root)
+        self._openKey(root)
+        self._content(root)
+        self._closeKey(root)
 
         # Nó principal
         self._tree = root
