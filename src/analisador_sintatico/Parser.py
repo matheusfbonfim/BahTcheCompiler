@@ -404,7 +404,7 @@ class Parser:
 
         node = Node('open_p')
         root.children = node
-        
+
         self._terminal([Token.TK_OP], '(', node = node)
 
     def _declara_par(self, root):

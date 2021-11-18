@@ -74,5 +74,25 @@ Level: 7 | Name: identificador
 Level: 8 | Name: ('c', 'TK_IDENT', 7, 33)
 Level: 3 | Name: ponto_virgula
 Level: 4 | Name: (';', 'TK_END', 7, 34)
+Level: 2 | Name: content
+Level: 3 | Name: declara_var
+Level: 4 | Name: parametros
+Level: 5 | Name: declara_par
+Level: 6 | Name: tipo
+Level: 7 | Name: ('FANDANGO', 'TK_STRING', 8, 5)
+Level: 6 | Name: identificador
+Level: 7 | Name: ('e', 'TK_IDENT', 8, 14)
+Level: 4 | Name: ponto_virgula
+Level: 5 | Name: (';', 'TK_END', 8, 15)
+Level: 3 | Name: content
+Level: 4 | Name: declara_var
+Level: 5 | Name: parametros
+Level: 6 | Name: declara_par
+Level: 7 | Name: tipo
+Level: 8 | Name: ('GURIZAO', 'TK_FLOAT', 9, 5)
+Level: 7 | Name: identificador
+Level: 8 | Name: ('r', 'TK_IDENT', 9, 13)
+Level: 5 | Name: ponto_virgula
+Level: 6 | Name: (';', 'TK_END', 9, 14)
 Level: 1 | Name: close_key
-Level: 2 | Name: ('}', 'TK_CK', 8, 1)
+Level: 2 | Name: ('}', 'TK_CK', 10, 1)
