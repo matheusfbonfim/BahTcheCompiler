@@ -8,16 +8,30 @@ Level: 2 | Name: identificador
 Level: 3 | Name: ('namefunction', 'TK_IDENT', 1, 18)
 Level: 2 | Name: open_p
 Level: 3 | Name: ('(', 'TK_OP', 1, 30)
+Level: 2 | Name: parametros
+Level: 3 | Name: declara_par
+Level: 4 | Name: tipo
+Level: 5 | Name: ('GURI', 'TK_INT', 1, 31)
+Level: 4 | Name: identificador
+Level: 5 | Name: ('a', 'TK_IDENT', 1, 36)
+Level: 3 | Name: parametro_seg
+Level: 4 | Name: virgula
+Level: 5 | Name: (',', 'TK_COMMA', 1, 37)
+Level: 4 | Name: declara_par
+Level: 5 | Name: tipo
+Level: 6 | Name: ('FANDANGO', 'TK_STRING', 1, 39)
+Level: 5 | Name: identificador
+Level: 6 | Name: ('b', 'TK_IDENT', 1, 48)
 Level: 2 | Name: close_p
-Level: 3 | Name: (')', 'TK_CP', 1, 31)
+Level: 3 | Name: (')', 'TK_CP', 1, 49)
 Level: 2 | Name: open_key
-Level: 3 | Name: ('{', 'TK_OK', 1, 32)
+Level: 3 | Name: ('{', 'TK_OK', 1, 50)
 Level: 2 | Name: retorno_f
 Level: 3 | Name: retorno
 Level: 4 | Name: ('LARGUEIMAO', 'TK_RETURN', 3, 5)
 Level: 3 | Name: tipos_retorno
 Level: 4 | Name: identificador
-Level: 5 | Name: ('a', 'TK_IDENT', 3, 16)
+Level: 5 | Name: ('c', 'TK_IDENT', 3, 16)
 Level: 3 | Name: ponto_virgula
 Level: 4 | Name: (';', 'TK_END', 3, 17)
 Level: 2 | Name: close_key

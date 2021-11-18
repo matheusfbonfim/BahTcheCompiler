@@ -404,27 +404,46 @@ class Parser:
 
         self._terminal([Token.TK_OP], '(', node = node)
 
-    def _declara_par(self):
-        self._tipo()
-        self._identificador()
+    def _declara_par(self, root):
+        node = Node('declara_par')
+        root.children = node
 
-    def _virgula(self):
-        self._terminal([Token.TK_COMMA], ',')
+        self._tipo(node)
+        self._identificador(node)
 
-    def _parametro_seg(self):
+    def _virgula(self, root):
+        node = Node('virgula')
+        root.children = node
+
+        self._terminal([Token.TK_COMMA], ',',  node=node)
+
+    def _vazio(self, root):
+        node = Node('ε')
+        root.children = node
+
+    def _parametro_seg(self, root):
         if self._token[1] == Token.TK_COMMA:
-            self._virgula()
-            self._declara_par()
-            self._parametro_seg()
+            node = Node('parametro_seg')
+            root.children = node
+            
+            self._virgula(node)
+            self._declara_par(node)
+            self._parametro_seg(node)
         elif self._token[1] in self._tipos + [Token.TK_IDENT]:
             self._error = 'pontuacao'
             self._virgula()
+        
+        # self._vazio(root)
+        
 
-    def _parametros(self):
+    def _parametros(self, root):
         # Verifica se o proximo caractere não é CP
         if not(self._token[1] == Token.TK_CP):
-            self._declara_par()
-            self._parametro_seg()
+            node = Node('parametros')
+            root.children = node
+
+            self._declara_par(node)
+            self._parametro_seg(node)
 
     def _close_p(self, root):
         # Token corrente é diferente de TK_CP
@@ -508,14 +527,14 @@ class Parser:
     def _funcao(self, root):
         # ('BARBARIDADE', 'TK_FUNC', 1, 1)
         if self._token[1] != Token.TK_MAIN:
-            node = Node('function')     # Criado nó function
+            node = Node('function')      # Criado nó function
             root.children = node         # Adicionado nó function ao pai
 
             self._id_funcao(node)
             self._tipo(node)
             self._identificador(node)
             self._open_p(node)
-            self._parametros()
+            self._parametros(node)
             self._close_p(node)
             self._openKey(node)
             if self._token[1] != Token.TK_RETURN:
