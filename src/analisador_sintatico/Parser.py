@@ -637,3 +637,13 @@ class Parser:
 
         # Gravando no arquivo
         output_tokens.write(string_tree)
+    
+    # ====================
+    # Atribuindo niveis aos nodes da arvores
+    def _assign_levels(self,node,level):
+        node.level = level              # Armazena o nivel do nó da arvore
+        level += 1                      # Incrementa o nivel do estado
+
+        # Percorrendo cada filho do node e fazendo os links
+        for child in node.children:
+            self._assign_levels(child, level)
