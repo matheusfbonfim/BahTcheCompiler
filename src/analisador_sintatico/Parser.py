@@ -158,49 +158,72 @@ class Parser:
         self._declara_elif()
         self._declara_else()
 
-    def _term(self):
+    def _term(self, root):
+        node = Node('term')
+        root.children = node
+
         if self._token[1] == Token.TK_IDENT:
-            self._identificador()
+            self._identificador(node)
         elif self._token[1] == Token.TK_NUMBER:
-            self._number()
+            self._number(node)
         elif self._token[1] == Token.TK_REAL:
-            self._real()
+            self._real(node)
         else:
             self._error = 'operacao_matematica_invalida'
             self._terminal()
 
-    def _mul_div_add_sub(self):
+    def _mul_div_add_sub(self, root):
         if self._token[1] == Token.TK_MATH_MUL:
-            self._terminal([Token.TK_MATH_MUL], '*')
+            node = Node('mult')
+            root.children = node
+            self._terminal([Token.TK_MATH_MUL], '*',node=node)
         elif self._token[1] == Token.TK_MATH_DIV:
-            self._terminal([Token.TK_MATH_DIV], '/')
+            node = Node('div')
+            root.children = node
+            self._terminal([Token.TK_MATH_DIV], '/',node=node)
         elif self._token[1] == Token.TK_MATH_ADD:
-            self._terminal([Token.TK_MATH_ADD], '+')
+            node = Node('add')
+            root.children = node
+            self._terminal([Token.TK_MATH_ADD], '+',node=node)
         elif self._token[1] == Token.TK_MATH_SUB:
-            self._terminal([Token.TK_MATH_SUB], '-')
+            node = Node('sub')
+            root.children = node
+            self._terminal([Token.TK_MATH_SUB], '-', node=node)
         else:
             self._error = 'operacao_matematica_invalida'
             self._terminal()
 
-    def _multiplication_seg(self):
+    def _multiplication_seg(self, root):
         if self._token[1] in [Token.TK_MATH_MUL, Token.TK_MATH_DIV]:
-            self._mul_div_add_sub()
-            self._term()
-            self._multiplication_seg()
+            node = Node('multiplication_seg')
+            root.children = node
 
-    def _multiplication(self):
-        self._term()
-        self._multiplication_seg()
+            self._mul_div_add_sub(node)
+            self._term(node)
+            self._multiplication_seg(node)
 
-    def _add_sub_seg(self):
+    def _multiplication(self, root):
+        node = Node('multiplication')
+        root.children = node
+
+        self._term(node)
+        self._multiplication_seg(node)
+
+    def _add_sub_seg(self, root):
         if self._token[1] in [Token.TK_MATH_ADD, Token.TK_MATH_SUB]:
-            self._mul_div_add_sub()
-            self._multiplication()
-            self._add_sub_seg()
+            node = Node('add_sub_seg')
+            root.children = node
+            
+            self._mul_div_add_sub(node)
+            self._multiplication(node)
+            self._add_sub_seg(node)
 
-    def _op_math(self):
-        self._multiplication()
-        self._add_sub_seg()
+    def _op_math(self, root):
+        node = Node('op_math')
+        root.children = node
+
+        self._multiplication(node)
+        self._add_sub_seg(node)
 
     def _chamada_seg(self):
         if self._token[1] == Token.TK_COMMA:
@@ -303,7 +326,7 @@ class Parser:
             self._op_logic(node)
         # Valida se é operacao matematica
         elif token_aux[1] in self._operadores_matematicos:
-            self._op_math()
+            self._op_math(node)
         # Valida se é operacao logica
         elif token_aux[1] in self._operadores_logicos:
             self._op_logic(node)
