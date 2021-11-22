@@ -9,16 +9,39 @@ Level: 3 | Name: identificador
 Level: 4 | Name: ('a', 'TK_IDENT', 2, 5)
 Level: 3 | Name: atribuicao
 Level: 4 | Name: ('=', 'TK_ASSIGNMENT', 2, 7)
-Level: 3 | Name: chama_funcao
-Level: 4 | Name: id_funcao
-Level: 5 | Name: ('BARBARIDADE', 'TK_FUNC', 2, 9)
-Level: 4 | Name: identificador
-Level: 5 | Name: ('uber', 'TK_IDENT', 2, 21)
-Level: 4 | Name: open_p
-Level: 5 | Name: ('(', 'TK_OP', 2, 25)
-Level: 4 | Name: close_p
-Level: 5 | Name: (')', 'TK_CP', 2, 26)
+Level: 3 | Name: texto
+Level: 4 | Name: ('"matheus"', 'TK_TEXT', 2, 9)
 Level: 3 | Name: ponto_virgula
-Level: 4 | Name: (';', 'TK_END', 2, 27)
+Level: 4 | Name: (';', 'TK_END', 2, 18)
+Level: 2 | Name: content
+Level: 3 | Name: atribui_var
+Level: 4 | Name: identificador
+Level: 5 | Name: ('b', 'TK_IDENT', 3, 5)
+Level: 4 | Name: atribuicao
+Level: 5 | Name: ('=', 'TK_ASSIGNMENT', 3, 7)
+Level: 4 | Name: number
+Level: 5 | Name: ('1', 'TK_NUMBER', 3, 9)
+Level: 4 | Name: ponto_virgula
+Level: 5 | Name: (';', 'TK_END', 3, 10)
+Level: 3 | Name: content
+Level: 4 | Name: atribui_var
+Level: 5 | Name: identificador
+Level: 6 | Name: ('c', 'TK_IDENT', 4, 5)
+Level: 5 | Name: atribuicao
+Level: 6 | Name: ('=', 'TK_ASSIGNMENT', 4, 7)
+Level: 5 | Name: real
+Level: 6 | Name: ('1.0', 'TK_REAL', 4, 9)
+Level: 5 | Name: ponto_virgula
+Level: 6 | Name: (';', 'TK_END', 4, 12)
+Level: 4 | Name: content
+Level: 5 | Name: atribui_var
+Level: 6 | Name: identificador
+Level: 7 | Name: ('d', 'TK_IDENT', 5, 5)
+Level: 6 | Name: atribuicao
+Level: 7 | Name: ('=', 'TK_ASSIGNMENT', 5, 7)
+Level: 6 | Name: identificador
+Level: 7 | Name: ('uber', 'TK_IDENT', 5, 9)
+Level: 6 | Name: ponto_virgula
+Level: 7 | Name: (';', 'TK_END', 5, 13)
 Level: 1 | Name: close_key
-Level: 2 | Name: ('}', 'TK_CK', 3, 1)
+Level: 2 | Name: ('}', 'TK_CK', 6, 1)
