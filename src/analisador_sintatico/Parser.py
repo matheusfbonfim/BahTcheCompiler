@@ -535,33 +535,43 @@ class Parser:
         self._content(node)
         self._closeKey(node)
 
-    def _print(self):
-        self._terminal([Token.TK_PRINT], 'PRINTCHE')
+    def _print(self, root):
+        node = Node('print')
+        root.children = node
+        self._terminal([Token.TK_PRINT], 'PRINTCHE', node=node)
 
-    def _declara_print(self):
-        self._print()
-        self._open_p()
+    def _declara_print(self, root):
+        node = Node('declara_print')
+        root.children = node
+
+        self._print(node)
+        self._open_p(node)
 
         if self._token[1] == Token.TK_TEXT:
-            self._texto()
+            self._texto(node)
         elif self._token[1] == Token.TK_IDENT:
-            self._identificador()
+            self._identificador(node)
         else:
             self._error = 'print_invalido'
             self._terminal()
 
-        self._close_p()
-        self._ponto_virgula()
+        self._close_p(node)
+        self._ponto_virgula(node)
 
-    def _scanf(self):
-        self._terminal([Token.TK_SCANF], 'INPUTCHE')
+    def _scanf(self, root):
+        node = Node('scanf')
+        root.children = node
+        self._terminal([Token.TK_SCANF], 'INPUTCHE', node=node)
 
-    def _declara_scanf(self):
-        self._scanf()
-        self._open_p()
-        self._identificador()
-        self._close_p()
-        self._ponto_virgula()
+    def _declara_scanf(self, root):
+        node = Node('declara_scanf')
+        root.children = node
+
+        self._scanf(node)
+        self._open_p(node)
+        self._identificador(node)
+        self._close_p(node)
+        self._ponto_virgula(node)
 
     def _content(self, root):
         # Verifica se existe content no escopo
@@ -578,9 +588,9 @@ class Parser:
             elif self._token[1] == Token.TK_WHILE:
                 self._laco(node)
             elif self._token[1] == Token.TK_PRINT:
-                self._declara_print()
+                self._declara_print(node)
             elif self._token[1] == Token.TK_SCANF:
-                self._declara_scanf()
+                self._declara_scanf(node)
             elif self._token == 'finish':
                 self._terminal()
             elif not self._token[1] in self._conjunto_tokens_content:
