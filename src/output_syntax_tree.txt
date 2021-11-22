@@ -4,30 +4,21 @@ Level: 2 | Name: ('BAHTCHE', 'TK_MAIN', 1, 1)
 Level: 1 | Name: open_key
 Level: 2 | Name: ('{', 'TK_OK', 1, 8)
 Level: 1 | Name: content
-Level: 2 | Name: declara_var
-Level: 3 | Name: parametros
-Level: 4 | Name: declara_par
-Level: 5 | Name: tipo
-Level: 6 | Name: ('GURI', 'TK_INT', 2, 5)
-Level: 5 | Name: identificador
-Level: 6 | Name: ('a', 'TK_IDENT', 2, 10)
-Level: 4 | Name: parametro_seg
-Level: 5 | Name: virgula
-Level: 6 | Name: (',', 'TK_COMMA', 2, 11)
-Level: 5 | Name: declara_par
-Level: 6 | Name: tipo
-Level: 7 | Name: ('FANDANGO', 'TK_STRING', 2, 13)
-Level: 6 | Name: identificador
-Level: 7 | Name: ('b', 'TK_IDENT', 2, 22)
-Level: 5 | Name: parametro_seg
-Level: 6 | Name: virgula
-Level: 7 | Name: (',', 'TK_COMMA', 2, 23)
-Level: 6 | Name: declara_par
-Level: 7 | Name: tipo
-Level: 8 | Name: ('GURIZAO', 'TK_FLOAT', 2, 25)
-Level: 7 | Name: identificador
-Level: 8 | Name: ('c', 'TK_IDENT', 2, 33)
+Level: 2 | Name: atribui_var
+Level: 3 | Name: identificador
+Level: 4 | Name: ('a', 'TK_IDENT', 2, 5)
+Level: 3 | Name: atribuicao
+Level: 4 | Name: ('=', 'TK_ASSIGNMENT', 2, 7)
+Level: 3 | Name: op_logic
+Level: 4 | Name: not
+Level: 5 | Name: ('!', 'TK_LOGIC_NOT', 2, 9)
+Level: 4 | Name: identificador
+Level: 5 | Name: ('b', 'TK_IDENT', 2, 10)
+Level: 4 | Name: operador_l
+Level: 5 | Name: ('!=', 'TK_LOGIC_DIF', 2, 12)
+Level: 4 | Name: identificador
+Level: 5 | Name: ('d', 'TK_IDENT', 2, 15)
 Level: 3 | Name: ponto_virgula
-Level: 4 | Name: (';', 'TK_END', 2, 34)
+Level: 4 | Name: (';', 'TK_END', 2, 16)
 Level: 1 | Name: close_key
-Level: 2 | Name: ('}', 'TK_CK', 5, 1)
+Level: 2 | Name: ('}', 'TK_CK', 3, 1)
