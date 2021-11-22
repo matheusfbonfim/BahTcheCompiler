@@ -513,22 +513,27 @@ class Parser:
 
         self._terminal([Token.TK_CP], ')', node=node)
 
-    def _while(self):
-        self._terminal([Token.TK_WHILE], 'EMCIMADOLACO')
+    def _while(self, root):
+        node = Node('while')
+        root.children = node
+        self._terminal([Token.TK_WHILE], 'EMCIMADOLACO', node=node)
 
-    def _laco(self):
-        self._while()
-        self._open_p()
+    def _laco(self, root):
+        node = Node('laco')
+        root.children = node
+
+        self._while(node)
+        self._open_p(node)
         if self._token[1] != Token.TK_CP:
-            self._op_logic()
+            self._op_logic(node)
         else:
             self._error = 'expressao_vazia'
             self._terminal()
 
-        self._close_p()
-        self._openKey()
-        self._content()
-        self._closeKey()
+        self._close_p(node)
+        self._openKey(node)
+        self._content(node)
+        self._closeKey(node)
 
     def _print(self):
         self._terminal([Token.TK_PRINT], 'PRINTCHE')
@@ -571,7 +576,7 @@ class Parser:
             elif self._token[1] == Token.TK_IF:
                 self._condicional(node)
             elif self._token[1] == Token.TK_WHILE:
-                self._laco()
+                self._laco(node)
             elif self._token[1] == Token.TK_PRINT:
                 self._declara_print()
             elif self._token[1] == Token.TK_SCANF:

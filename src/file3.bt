@@ -1,10 +1,5 @@
 BAHTCHE{
-    TRIF(a!=2){
-        a = 2;
-    }BEM_CAPAZ(1>=2){
-        texto = 1;   
-    }
-    BAGUAL{
-        variavel = "texto";
+    EMCIMADOLACO(a<2){
+        
     }
 }
