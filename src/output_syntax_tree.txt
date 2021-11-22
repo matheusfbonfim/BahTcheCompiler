@@ -9,16 +9,31 @@ Level: 3 | Name: identificador
 Level: 4 | Name: ('a', 'TK_IDENT', 2, 5)
 Level: 3 | Name: atribuicao
 Level: 4 | Name: ('=', 'TK_ASSIGNMENT', 2, 7)
-Level: 3 | Name: op_logic
-Level: 4 | Name: not
-Level: 5 | Name: ('!', 'TK_LOGIC_NOT', 2, 9)
-Level: 4 | Name: identificador
-Level: 5 | Name: ('b', 'TK_IDENT', 2, 10)
-Level: 4 | Name: operador_l
-Level: 5 | Name: ('!=', 'TK_LOGIC_DIF', 2, 12)
-Level: 4 | Name: identificador
-Level: 5 | Name: ('d', 'TK_IDENT', 2, 15)
+Level: 3 | Name: op_math
+Level: 4 | Name: multiplication
+Level: 5 | Name: term
+Level: 6 | Name: identificador
+Level: 7 | Name: ('a', 'TK_IDENT', 2, 9)
+Level: 4 | Name: add_sub_seg
+Level: 5 | Name: add
+Level: 6 | Name: ('+', 'TK_MATH_ADD', 2, 11)
+Level: 5 | Name: multiplication
+Level: 6 | Name: term
+Level: 7 | Name: identificador
+Level: 8 | Name: ('b', 'TK_IDENT', 2, 13)
+Level: 6 | Name: multiplication_seg
+Level: 7 | Name: mult
+Level: 8 | Name: ('*', 'TK_MATH_MUL', 2, 15)
+Level: 7 | Name: term
+Level: 8 | Name: identificador
+Level: 9 | Name: ('c', 'TK_IDENT', 2, 17)
+Level: 7 | Name: multiplication_seg
+Level: 8 | Name: div
+Level: 9 | Name: ('/', 'TK_MATH_DIV', 2, 19)
+Level: 8 | Name: term
+Level: 9 | Name: number
+Level: 10 | Name: ('2', 'TK_NUMBER', 2, 21)
 Level: 3 | Name: ponto_virgula
-Level: 4 | Name: (';', 'TK_END', 2, 16)
+Level: 4 | Name: (';', 'TK_END', 2, 22)
 Level: 1 | Name: close_key
 Level: 2 | Name: ('}', 'TK_CK', 3, 1)
