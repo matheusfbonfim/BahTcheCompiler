@@ -108,55 +108,70 @@ class Parser:
     ############### REGRAS SINTATICAS ###################
     #####################################################
 
-    def _if(self):
-        self._terminal([Token.TK_IF], 'TRIF')
+    def _if(self, root):
+        node = Node('if')
+        root.children = node
+        self._terminal([Token.TK_IF], 'TRIF', node=node)
 
-    def _elif(self):
-        self._terminal([Token.TK_ELIF], 'BEM_CAPAZ')
+    def _elif(self, root):
+        node = Node('elif')
+        root.children = node
+        self._terminal([Token.TK_ELIF], 'BEM_CAPAZ', node=node)
 
-    def _else(self):
-        self._terminal([Token.TK_ELSE], 'BAGUAL')
+    def _else(self, root):
+        node = Node('else')
+        root.children = node
+        self._terminal([Token.TK_ELSE], 'BAGUAL', node=node)
 
-    def _declara_elif(self):
+    def _declara_elif(self, root):
         if self._token[1] == Token.TK_ELIF:
-            self._elif()
-            self._open_p()
+            node = Node('declara_elif')
+            root.children = node
+            
+            self._elif(node)
+            self._open_p(node)
 
             if self._token[1] != Token.TK_CP:
-                self._op_logic()
+                self._op_logic(node)
             else:
                 self._error = 'expressao_vazia'
                 self._terminal()
 
-            self._close_p()
-            self._openKey()
-            self._content()
-            self._closeKey()
-            self._declara_elif()
+            self._close_p(node)
+            self._openKey(node)
+            self._content(node)
+            self._closeKey(node)
+            self._declara_elif(node)
 
-    def _declara_else(self):
+    def _declara_else(self, root):
         if self._token[1] == Token.TK_ELSE:
-            self._else()
-            self._openKey()
-            self._content()
-            self._closeKey()
+            node = Node('declara_else')
+            root.children = node
+            
+            self._else(node)
+            self._openKey(node)
+            self._content(node)
+            self._closeKey(node)
 
-    def _condicional(self):
-        self._if()
-        self._open_p()
+    def _condicional(self, root):
+        node = Node('condicional')
+        root.children = node
+
+        self._if(node)
+        self._open_p(node)
 
         if self._token[1] != Token.TK_CP:
-            self._op_logic()
+            self._op_logic(node)
         else:
             self._error = 'expressao_vazia'
             self._terminal()
 
-        self._close_p()
-        self._openKey()
-        self._content()
-        self._closeKey()
-        self._declara_elif()
-        self._declara_else()
+        self._close_p(node)
+        self._openKey(node)
+        self._content(node)
+        self._closeKey(node)
+        self._declara_elif(node)
+        self._declara_else(node)
 
     def _term(self, root):
         node = Node('term')
@@ -554,7 +569,7 @@ class Parser:
             elif self._token[1] == Token.TK_IDENT:
                 self._atribui_var(node)
             elif self._token[1] == Token.TK_IF:
-                self._condicional()
+                self._condicional(node)
             elif self._token[1] == Token.TK_WHILE:
                 self._laco()
             elif self._token[1] == Token.TK_PRINT:

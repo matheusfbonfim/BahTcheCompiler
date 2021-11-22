@@ -1,6 +1,5 @@
 BAHTCHE{
-    a = "matheus";
-    b = 1;
-    c = 1.0;
-    d = uber;
+    TRIF(a!=2){
+        a = 2;
+    }
 }
