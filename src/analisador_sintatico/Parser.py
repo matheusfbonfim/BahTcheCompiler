@@ -225,26 +225,35 @@ class Parser:
         self._multiplication(node)
         self._add_sub_seg(node)
 
-    def _chamada_seg(self):
+    def _chamada_seg(self, root):
         if self._token[1] == Token.TK_COMMA:
-            self._virgula()
-            self._identificador()
-            self._chamada_seg()
+            node = Node('chamada_seg')
+            root.children = node
+
+            self._virgula(node)
+            self._identificador(node)
+            self._chamada_seg(node)
         elif self._token[1] in [Token.TK_IDENT]:
             self._error = 'pontuacao'
             self._virgula()
 
-    def _parametros_chamada_f(self):
-        self._identificador()
-        self._chamada_seg()
+    def _parametros_chamada_f(self, root):
+        node = Node('parametros_chamada_f')
+        root.children = node
 
-    def _chama_funcao(self):
-        self._id_funcao()
-        self._identificador()
-        self._open_p()
+        self._identificador(node)
+        self._chamada_seg(node)
+
+    def _chama_funcao(self, root):
+        node = Node('chama_funcao')
+        root.children = node
+        
+        self._id_funcao(node)
+        self._identificador(node)
+        self._open_p(node)
         if self._token[1] != Token.TK_CP:
-            self._parametros_chamada_f()
-        self._close_p()
+            self._parametros_chamada_f(node)
+        self._close_p(node)
 
     def _atribuicao(self, root):
         node = Node('atribuicao')
@@ -345,7 +354,7 @@ class Parser:
                 self._terminal()
         # Valida se é chamada de funcao
         elif self._token[1] == Token.TK_FUNC:
-            self._chama_funcao()
+            self._chama_funcao(node)
         else:
             self._error = "atribuicao_invalida"
             self._terminal()
