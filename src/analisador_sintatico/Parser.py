@@ -223,61 +223,76 @@ class Parser:
             self._parametros_chamada_f()
         self._close_p()
 
-    def _atribuicao(self):
-        self._terminal([Token.TK_ASSIGNMENT], '=')
+    def _atribuicao(self, root):
+        node = Node('atribuicao')
+        root.children = node
 
-    def _not(self):
-        self._terminal([Token.TK_LOGIC_NOT], '!')
+        self._terminal([Token.TK_ASSIGNMENT], '=', node=node)
 
-    def _operador_l(self):  # OR, AND, DIF, LG, LE_GE, EQ
+    def _not(self, root):
+        node = Node('not')
+        root.children = node
+
+        self._terminal([Token.TK_LOGIC_NOT], '!', node=node)
+
+    def _operador_l(self, root):  # OR, AND, DIF, LG, LE_GE, EQ
+        node = Node('operador_l')
+        root.children = node
+
         if self._token[1] == Token.TK_LOGIC_OR:
-            self._terminal([Token.TK_LOGIC_OR], '||')
+            self._terminal([Token.TK_LOGIC_OR], '||', node=node)
         elif self._token[1] == Token.TK_LOGIC_AND:
-            self._terminal([Token.TK_LOGIC_AND], '&&')
+            self._terminal([Token.TK_LOGIC_AND], '&&',node=node)
         elif self._token[1] == Token.TK_LOGIC_DIF:
-            self._terminal([Token.TK_LOGIC_DIF], '!=')
+            self._terminal([Token.TK_LOGIC_DIF], '!=', node=node)
         elif self._token[1] == Token.TK_LOGIC_LG:
-            self._terminal([Token.TK_LOGIC_LG], '> ou <')
+            self._terminal([Token.TK_LOGIC_LG], '> ou <', node=node)
         elif self._token[1] == Token.TK_LOGIC_LE_GE:
-            self._terminal([Token.TK_LOGIC_LE_GE], '<= ou >=')
+            self._terminal([Token.TK_LOGIC_LE_GE], '<= ou >=', node=node)
         elif self._token[1] == Token.TK_LOGIC_EQ:
-            self._terminal([Token.TK_LOGIC_EQ], '==')
+            self._terminal([Token.TK_LOGIC_EQ], '==',node=node)
         else:
             self._error = 'operacao_logica_invalida'
             self._terminal()
 
-    def _op_logic(self):
-        if self._token[1] == Token.TK_LOGIC_NOT:
-            self._not()
-
-        if self._token[1] == Token.TK_IDENT:
-            self._identificador()
-        elif self._token[1] == Token.TK_NUMBER:
-            self._number()
-        elif self._token[1] == Token.TK_REAL:
-            self._real()
-        else:
-            self._error = 'operacao_logica_invalida'
-            self._terminal()
-
-        self._operador_l()
+    def _op_logic(self, root):
+        node = Node('op_logic')
+        root.children = node
 
         if self._token[1] == Token.TK_LOGIC_NOT:
-            self._not()
+            self._not(node)
 
         if self._token[1] == Token.TK_IDENT:
-            self._identificador()
+            self._identificador(node)
         elif self._token[1] == Token.TK_NUMBER:
-            self._number()
+            self._number(node)
         elif self._token[1] == Token.TK_REAL:
-            self._real()
+            self._real(node)
         else:
             self._error = 'operacao_logica_invalida'
             self._terminal()
 
-    def _atribui_var(self):  # Exemplo -> a = b + 2  # self._token = b
-        self._identificador()   # a
-        self._atribuicao()      # =
+        self._operador_l(node)
+
+        if self._token[1] == Token.TK_LOGIC_NOT:
+            self._not(node)
+
+        if self._token[1] == Token.TK_IDENT:
+            self._identificador(node)
+        elif self._token[1] == Token.TK_NUMBER:
+            self._number(node)
+        elif self._token[1] == Token.TK_REAL:
+            self._real(node)
+        else:
+            self._error = 'operacao_logica_invalida'
+            self._terminal()
+
+    def _atribui_var(self, root):  # Exemplo -> a = b + 2  # self._token = b
+        node = Node('atribui_var')
+        root.children = node
+        
+        self._identificador(node)   # a
+        self._atribuicao(node)      # =
 
         # Token que auxilia para qual metodo irá - Ve caractere futuro
         token_aux = self._proximo_tk()  # + 
@@ -285,13 +300,13 @@ class Parser:
 
         # Verifica se o caractere é NOT
         if self._token[1] == Token.TK_LOGIC_NOT:
-            self._op_logic()
+            self._op_logic(node)
         # Valida se é operacao matematica
         elif token_aux[1] in self._operadores_matematicos:
             self._op_math()
         # Valida se é operacao logica
         elif token_aux[1] in self._operadores_logicos:
-            self._op_logic()
+            self._op_logic(node)
         # Valida se é identificador/number/text/ident
         elif token_aux[1] == Token.TK_END:
             if self._token[1] == Token.TK_TEXT:
@@ -312,7 +327,7 @@ class Parser:
             self._error = "atribuicao_invalida"
             self._terminal()
 
-        self._ponto_virgula()
+        self._ponto_virgula(node)
 
     def _declara_var(self, root):
         node = Node('declara_var')
@@ -505,7 +520,7 @@ class Parser:
             if self._token[1] in self._tipos:
                 self._declara_var(node)
             elif self._token[1] == Token.TK_IDENT:
-                self._atribui_var()
+                self._atribui_var(node)
             elif self._token[1] == Token.TK_IF:
                 self._condicional()
             elif self._token[1] == Token.TK_WHILE:
