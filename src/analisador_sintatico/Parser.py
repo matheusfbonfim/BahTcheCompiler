@@ -614,7 +614,7 @@ class Parser:
             self._close_p(node)
             self._openKey(node)
             if self._token[1] != Token.TK_RETURN:
-                self._content()
+                self._content(node)
             self._retorno_f(node)
             self._closeKey(node)
 
