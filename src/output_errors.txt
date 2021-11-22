@@ -1,0 +1,1 @@
+	 [Erro Sintatico] | Mas BAH, operacao logica invalida -> <= | line: 13 column: 15
