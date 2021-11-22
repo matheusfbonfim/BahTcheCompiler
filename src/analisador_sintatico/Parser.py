@@ -342,13 +342,13 @@ class Parser:
         # Valida se é identificador/number/text/ident
         elif token_aux[1] == Token.TK_END:
             if self._token[1] == Token.TK_TEXT:
-                self._texto()
+                self._texto(node)
             elif self._token[1] == Token.TK_NUMBER:
-                self._number()
+                self._number(node)
             elif self._token[1] == Token.TK_REAL:
-                self._real()
+                self._real(node)
             elif self._token[1] == Token.TK_IDENT:
-                self._identificador()
+                self._identificador(node)
             else:
                 self._error = "atribuicao_invalida"
                 self._terminal()

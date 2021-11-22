@@ -1,3 +1,6 @@
 BAHTCHE{
-    a = BARBARIDADE uber();
+    a = "matheus";
+    b = 1;
+    c = 1.0;
+    d = uber;
 }
