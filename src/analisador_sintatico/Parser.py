@@ -5,9 +5,9 @@ from .Node import Node    # Importando classe Node
 
 class Parser:
     def __init__(self, tokens):
-        self._table_tokens = tokens     # Lista com todos os tokens [('BAHTCHE', 'TK_MAIN', 1, 1), ...]
-        self._tree = None
-        self._error = 'no error'        # Flag de erro
+        self._table_tokens = tokens       # Lista com todos os tokens [('BAHTCHE', 'TK_MAIN', 1, 1), ...]
+        self._tree = None                 # Armazena Node raiz da arvore armazenada
+        self._error = 'no error'          # Flag de erro
         self._count = 0                   # Indica qual o token da lista está sendo lido
         self._token = self._proximo_tk()  # Variavel que indica o token atual que está sendo lido
 
@@ -100,9 +100,9 @@ class Parser:
         node_t = Node(name=self._token, terminal=True)
         node.children = node_t
 
-        # print(f"Descrição: {description}, Current_Token: {current_token[0]}")
         # Caso não haja erro de terminal - Proximo token
         self._token = self._proximo_tk()
+
 
     #####################################################
     ############### REGRAS SINTATICAS ###################
@@ -648,6 +648,8 @@ class Parser:
 
         self._terminal([Token.TK_MAIN], 'BAHTCHE', node=node)
 
+    # ====================
+    # MÉTODO PRINCIPAL - INICIO DA RECURSSÃO
     def _code(self):
         # root
         root = Node('code')
