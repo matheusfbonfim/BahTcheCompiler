@@ -63,9 +63,12 @@ def main():
     #####################################################
     ########### TABELA DE SIMBOLOS ######################
     #####################################################
-    symbol_table = Table(fluxo_tokens)
-    symbol_table.create()
 
+    # Cria a instancia da tabela de simbolos
+    symbol_table = Table(fluxo_tokens)
+
+    # Executa a criacao da tabela com base no fluxo de tokens
+    symbol_table.create()
 
     #####################################################
     ############### SEMANTICO ###########################

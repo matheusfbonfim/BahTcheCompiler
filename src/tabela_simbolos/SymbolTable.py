@@ -10,10 +10,6 @@ class Table:
             Token.TK_STRING,
             Token.TK_FLOAT
         ]
-
-
-
-    # [('BAHTCHE', 'TK_MAIN', 1, 1), ...]
     
     # ====================
     # CRIA A TABELA DE SIMBOLOS
@@ -29,20 +25,18 @@ class Table:
                 
                 retorno = token             # Tipo da funcao - Retorno 
                 token = self._proximo_tk()  # Ex: ('uberfuncao', 'TK_IDENT', 1, 18)
-                escopo = token      # Escopo do token
+                escopo = token              # Escopo do token
 
                 # Adicionando info inicial da funcao
-                self._table[escopo] = []  # Ex: table: {('uberfuncao', 'TK_IDENT', 1, 18): []}
+                self._table[escopo] = []             # Ex: table: {('uberfuncao', 'TK_IDENT', 1, 18): []}
                 self._table[escopo].append(retorno)  # Ex: table: {('uberfuncao', 'TK_IDENT', 1, 18): [('GURI', 'TK_INT', 1, 13),]}
 
-                token = self._proximo_tk()  # Ex: ('(', 'TK_OP', 1, 28)
+                token = self._proximo_tk()           # Ex: ('(', 'TK_OP', 1, 28)
                 
                 tipo = None
                 identificador = None
                 
-                print(f"ANTES: {token}")
-                
-                # Varrendo para encontrar tipo identificador
+                # Varrendo para encontrar tipo e identificador
                 while not token[1] in [Token.TK_FUNC, Token.TK_MAIN]:
                     # Verifica se terminou os tokens
                     if token == 'finish':
@@ -71,8 +65,6 @@ class Table:
         token = self._proximo_tk()
 
 
-        # print(self._table)
-    
     
     # ====================
     # AVANÇA PARA O PROXIMO TOKEN DA LISTA
