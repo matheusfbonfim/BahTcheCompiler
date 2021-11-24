@@ -1,9 +1,10 @@
 # IMPORTS
 import sys
-from analisador_lexico.Automato import Automaton    # Importando a class automato - objeto automato
-from analisador_lexico.Scanner import Scanner       # Importando a class Scanner - Varredor Lexico
-from analisador_sintatico.Parser import Parser      # Importando a class Scanner - Varredor Lexico
+from analisador_lexico.Automato import Automaton       # Importando a class automato - objeto automato
+from analisador_lexico.Scanner import Scanner          # Importando a class Scanner - Varredor Lexico
+from analisador_sintatico.Parser import Parser         # Importando a class Scanner - Varredor Lexico
 from analisador_sintatico.PlotTree import plot, State  # Importando a funcao para plot da Tree
+from tabela_simbolos.SymbolTable import Table          # Importando class TableSymbol - Tabela de simbolos
 
 # FUNÇÃO PRINCIPAL
 def main():
@@ -54,10 +55,16 @@ def main():
     parser._assign_levels(node=node_root_tree, level=0)
 
     # Plotando a arvore e atribui os niveis - PlotTree
-    plot(node=node_root_tree, stt=State())
+    # plot(node=node_root_tree, stt=State())
 
     # Armazenar no arquivo em profundidade
     parser.store_file_dfs_tree()
+
+    #####################################################
+    ########### TABELA DE SIMBOLOS ######################
+    #####################################################
+    symbol_table = Table(fluxo_tokens)
+    symbol_table.create()
 
 
     #####################################################

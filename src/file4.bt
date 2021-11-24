@@ -1,27 +1,13 @@
-BARBARIDADE GURI a(GURI a, GURIZAO b){
+BARBARIDADE GURI uberfuncao(GURI a, GURI b){
+  GURI variavel;
+	LARGUEIMAO a;
+}
 
-  LARGUEIMAO a;
+BARBARIDADE FANDANGO eduardafuncao(GURI a, FANDANGO b){
+  GURIZAO variavel1;
+	LARGUEIMAO a;
 }
 
 BAHTCHE{
-    GURI a, GURIZAO b, FANDANGO c;
-  
-    PRINTCHE("hello world family"); $ Cade a familia?
-
-    INPUTCHE(a);
-
-    TRIF(1 >= <=){
-        PRINTCHE("PASSAMOS EM COMPILADORES");
-    }BAGUAL{
-        PRINTCHE("ELDER NOS LASCOU");
-    }
-
-    EMCIMADOLACO(a>2){
-        TRIF(1 && &&){
-          PRINTCHE("TO ANIMADO PROGRAMANDO EM BAHTCHE :)");
-        }BEM_CAPAZ(4 || a){
-
-        }
-    }
 
 }
