@@ -1,4 +1,4 @@
-BARBARIDADE GURI multipli2Numbers(GURI a GURI b)
+BARBARIDADE GURI multipli2Numbers(GURI a, GURI b)
 {
   a = a * b;
 	LARGUEIMAO a;
