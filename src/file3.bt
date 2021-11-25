@@ -1,5 +1,16 @@
+BARBARIDADE GURI sum(GURI a, GURI b)
+{
+    GURI sum;
+    sum = a + b;
+	LARGUEIMAO sum;
+}
+
 BAHTCHE{
-    PRINTCHE(a);
-    PRINTCHE("MATHEUS");
+    GURI a, GURI b, GURI result;
     INPUTCHE(a);
+    INPUTCHE(b);
+
+    result = BARBARIDADE sum(a,b);
+    PRINTCHE(result);
+
 }

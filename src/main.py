@@ -56,7 +56,7 @@ def main():
     parser._assign_levels(node=node_root_tree, level=0)
 
     # Plotando a arvore e atribui os niveis - PlotTree
-    # plot(node=node_root_tree, stt=State())
+    plot(node=node_root_tree, stt=State())
 
     # Armazenar a arvore em profundidade no arquivo
     parser.store_file_dfs_tree()
