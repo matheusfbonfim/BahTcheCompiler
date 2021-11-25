@@ -249,7 +249,7 @@ class Parser:
             self._chamada_seg(node)
         elif self._token[1] in [Token.TK_IDENT]:
             self._error = 'pontuacao'
-            self._virgula()
+            self._terminal(token=[Token.TK_COMMA], description=',')
 
     def _parametros_chamada_f(self, root):
         node = Node('parametros_chamada_f')
@@ -491,7 +491,7 @@ class Parser:
             self._parametro_seg(node)
         elif self._token[1] in self._tipos + [Token.TK_IDENT]:
             self._error = 'pontuacao'
-            self._virgula(node=None)
+            self._terminal(token=[Token.TK_COMMA], description=',')
         
     def _parametros(self, root):
         # Verifica se o proximo caractere não é CP
