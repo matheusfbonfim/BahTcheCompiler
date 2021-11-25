@@ -57,7 +57,7 @@ def main():
     # Plotando a arvore e atribui os niveis - PlotTree
     # plot(node=node_root_tree, stt=State())
 
-    # Armazenar no arquivo em profundidade
+    # Armazenar a arvore em profundidade no arquivo
     parser.store_file_dfs_tree()
 
     #####################################################
@@ -70,7 +70,9 @@ def main():
     # Executa a criacao da tabela com base no fluxo de tokens
     symbol_table.create()
 
-    print(symbol_table.table)
+    #print(symbol_table.table)
+
+    symbol_table.store_file_symbol_table()
 
     #####################################################
     ############### SEMANTICO ###########################
