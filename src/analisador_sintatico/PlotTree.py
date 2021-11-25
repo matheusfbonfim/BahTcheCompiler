@@ -24,7 +24,7 @@ def plot(node, stt):
 
     # Percorrendo cada filho do node e fazendo os links
     for child in node.children:
-        stt.state = 1                      # Incrementando o estado 
+        stt.state = 1                  # Incrementando o estado
         tree.edge(name, f'{stt.state} {child.name}', constraint='true')
         plot(child, stt)
 
