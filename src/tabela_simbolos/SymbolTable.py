@@ -58,8 +58,7 @@ class Table:
                             self._table[escopo].append([tipo, identificador])
                             
                     token = self._proximo_tk()   
-                
-            
+
                 # Verifica se o proximo é um TK_FUNC -> Recursao da table
                 if token[1] == Token.TK_FUNC:
                     self._count -= 1
@@ -83,7 +82,7 @@ class Table:
                     while token != 'finish':
                         # Verifica se terminou os tokens
                         if token == 'finish':
-                                    break
+                            break
                             
                         if token[1] in self._tipos:
                             tipo = token           # Atribui tipo
@@ -128,8 +127,7 @@ class Table:
                         self._table[main].append([tipo, identificador])
                         
                 token = self._proximo_tk()
-        
-        
+
     # ====================
     # ARMAZENANDO A TABELA DE SIMBOLOS EM ARQUIVO
     def store_file_symbol_table(self):

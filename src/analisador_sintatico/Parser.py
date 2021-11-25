@@ -103,7 +103,6 @@ class Parser:
         # Caso não haja erro de terminal - Proximo token
         self._token = self._proximo_tk()
 
-
     #####################################################
     ############### REGRAS SINTATICAS ###################
     #####################################################

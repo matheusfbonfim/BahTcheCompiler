@@ -1,21 +1,5 @@
-******* FUNCTION *******
-GURI uberfuncao
-		 Tipo: GURI | Nome: a
-		 Tipo: GURI | Nome: b
-		 Tipo: GURI | Nome: variavel
-
-----------------------------------------
-******* FUNCTION *******
-FANDANGO eduardafuncao
-		 Tipo: GURI | Nome: a
-		 Tipo: FANDANGO | Nome: b
-		 Tipo: GURIZAO | Nome: variavel1
-
-----------------------------------------
 ******** MAIN ********
 BAHTCHE
-		 Tipo: GURI | Nome: x
-		 Tipo: GURI | Nome: y
-		 Tipo: FANDANGO | Nome: zezao
+		 Tipo: GURI | Nome: x1
 
 ----------------------------------------

@@ -6,6 +6,7 @@ from analisador_sintatico.Parser import Parser         # Importando a class Scan
 from analisador_sintatico.PlotTree import plot, State  # Importando a funcao para plot da Tree
 from tabela_simbolos.SymbolTable import Table          # Importando class TableSymbol - Tabela de simbolos
 
+
 # FUNÇÃO PRINCIPAL
 def main():
     #####################################################
