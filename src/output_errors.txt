@@ -1,1 +1,0 @@
-	 [Erro Sintatico] | Mas BAH, esperado "," antes do "GURI" | line: 1 column: 42

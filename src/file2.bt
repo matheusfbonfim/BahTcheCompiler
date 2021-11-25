@@ -1,14 +1,12 @@
 BARBARIDADE GURI multipli2Numbers(GURI a, GURI b)
 {
-  a = a * b;
-	LARGUEIMAO a;
+    GURI result;
+    result = a * b;
+	LARGUEIMAO result;
 }
 
 BAHTCHE{
-    GURI i;
-    GURI j;
-    GURI result;
-    GURIZAO a;
+    GURI i, GURI j, GURI result, GURIZAO a;
     j = 0;
 
     EMCIMADOLACO(i <= 10){
