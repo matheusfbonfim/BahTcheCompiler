@@ -1,14 +1,15 @@
 ******* FUNCTION *******
-GURI sum
+GURI multipli2Numbers
 		 Tipo: GURI | Nome: a
 		 Tipo: GURI | Nome: b
-		 Tipo: GURI | Nome: sum
+		 Tipo: GURI | Nome: result
 
 ----------------------------------------
 ******** MAIN ********
 BAHTCHE
-		 Tipo: GURI | Nome: a
-		 Tipo: GURI | Nome: b
+		 Tipo: GURI | Nome: i
+		 Tipo: GURI | Nome: j
 		 Tipo: GURI | Nome: result
+		 Tipo: GURIZAO | Nome: a
 
 ----------------------------------------
