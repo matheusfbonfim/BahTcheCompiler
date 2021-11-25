@@ -51,7 +51,7 @@ class Parser:
 
     # ====================
     # DEFINE A MENSAGEM DE ERRO
-    def _mensagem(self, expected_symbol = None, current_symbol = None, line = None, column = None):
+    def _mensagem(self, expected_symbol=None, current_symbol=None, line=None, column=None):
         if self._error == 'finish':
             return f'\t [Erro Sintatico] | Mas BAH, acho que faltou um pedaco do codigo'
         elif self._error == 'error_ok_op':
@@ -79,7 +79,7 @@ class Parser:
 
     # ====================
     # VERIFICA A CORRESPONDENCIA DO TOKEN LIDO COM O ESPERADO   
-    def _terminal(self, token = None, description = None, node=None):
+    def _terminal(self, token=None, description=None, node=None):
         # Token atual lido
         current_token = self._token     # ('BAHTCHE', 'TK_MAIN', 1, 1)
 

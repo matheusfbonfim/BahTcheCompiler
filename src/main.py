@@ -1,10 +1,10 @@
 # IMPORTS
 import sys
-from analisador_lexico.Automato import Automaton       # Importando a class automato - objeto automato
-from analisador_lexico.Scanner import Scanner          # Importando a class Scanner - Varredor Lexico
-from analisador_sintatico.Parser import Parser         # Importando a class Scanner - Varredor Lexico
-from analisador_sintatico.PlotTree import plot, State  # Importando a funcao para plot da Tree
-from tabela_simbolos.SymbolTable import Table          # Importando class TableSymbol - Tabela de simbolos
+from analisador_lexico.Automato import Automaton        # Importando a class automato - objeto automato
+from analisador_lexico.Scanner import Scanner           # Importando a class Scanner - Varredor Lexico
+from analisador_sintatico.Parser import Parser          # Importando a class Scanner - Varredor Lexico
+from analisador_sintatico.PlotTree import plot, State   # Importando a funcao para plot da Tree
+from tabela_simbolos.SymbolTable import Table           # Importando class TableSymbol - Tabela de simbolos
 
 
 # FUNÇÃO PRINCIPAL
@@ -14,8 +14,8 @@ def main():
     #####################################################
 
     # Construindo o Automato
-    AF = Automaton()  # Instancia o automato AF
-    AF.create_automato()  # Instancia o diagrama de estados
+    AF = Automaton()        # Instancia o automato AF
+    AF.create_automato()    # Instancia o diagrama de estados
 
     # ====================
     # MOSTRANDO O AUTOMATO
@@ -27,7 +27,7 @@ def main():
     #####################################################
 
     # Cria o scanner
-    scanner = Scanner(AF)           # Parametro sendo o Automato
+    scanner = Scanner(AF)  # Parametro sendo o Automato
     lex = scanner.analise_lexica()  # Realiza a análise léxica (True: Sucesso/False: Falhou)
 
     # Caso o scanner falhe, stop programa
@@ -42,9 +42,9 @@ def main():
     #####################################################
 
     # Cria o parser
-    parser = Parser(fluxo_tokens)          # Parametro sendo o fluxo_tokens
-    sint = parser.analise_sintatica()      # Realiza a análise sintatica (True: Sucesso/False: Falhou)
-    
+    parser = Parser(fluxo_tokens)       # Parametro sendo o fluxo_tokens
+    sint = parser.analise_sintatica()   # Realiza a análise sintatica (True: Sucesso/False: Falhou)
+
     # Caso o parser falhe, stop programa
     if not sint:
         return
@@ -71,13 +71,13 @@ def main():
     # Executa a criacao da tabela com base no fluxo de tokens
     symbol_table.create()
 
-    #print(symbol_table.table)
-
+    # Armazenar a tabela de simbolos em arquivo
     symbol_table.store_file_symbol_table()
 
     #####################################################
     ############### SEMANTICO ###########################
     #####################################################
+
 
 # Executando a função principal
 if __name__ == '__main__':
