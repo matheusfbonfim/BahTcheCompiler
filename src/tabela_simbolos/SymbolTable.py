@@ -12,6 +12,12 @@ class Table:
         ]
     
     # ====================
+    # GETTER
+    @property
+    def table(self):
+        return self._table
+
+    # ====================
     # CRIA A TABELA DE SIMBOLOS
     def create(self):
         token = self._proximo_tk()      # Ex: ('BAHTCHE', 'TK_MAIN', 1, 1)
@@ -62,7 +68,42 @@ class Table:
                     return 
         
         self._count -= 1
-        token = self._proximo_tk()
+        token = self._proximo_tk()  
+
+        # ====================
+        # ADICIONANDO VARIAVEIS DA MAIN 
+        main = token
+        self._table[main] = []
+        self._table[main].append(main)
+
+        token = token = self._proximo_tk()  
+
+        tipo = None
+        identificador = None
+                
+        # Varrendo para encontrar tipo e identificador
+        while token != 'finish':
+            # Verifica se terminou os tokens
+            if token == 'finish':
+                        break
+                
+            if token[1] in self._tipos:
+                tipo = token           # Atribui tipo
+                token = self._proximo_tk() 
+                
+                # Verifica se o token é identificador
+                if token[1] == Token.TK_IDENT:
+                    identificador = token # Atribui identificador
+                     # Adiciona na tabela
+                    self._table[main].append([tipo, identificador])
+                    
+            token = self._proximo_tk()  
+
+
+        
+
+
+
 
 
     

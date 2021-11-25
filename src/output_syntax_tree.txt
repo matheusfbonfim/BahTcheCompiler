@@ -97,5 +97,31 @@ Level: 1 | Name: main
 Level: 2 | Name: ('BAHTCHE', 'TK_MAIN', 11, 1)
 Level: 1 | Name: open_key
 Level: 2 | Name: ('{', 'TK_OK', 11, 8)
+Level: 1 | Name: content
+Level: 2 | Name: declara_var
+Level: 3 | Name: parametros
+Level: 4 | Name: declara_par
+Level: 5 | Name: tipo
+Level: 6 | Name: ('GURI', 'TK_INT', 12, 5)
+Level: 5 | Name: identificador
+Level: 6 | Name: ('x', 'TK_IDENT', 12, 10)
+Level: 4 | Name: parametro_seg
+Level: 5 | Name: virgula
+Level: 6 | Name: (',', 'TK_COMMA', 12, 11)
+Level: 5 | Name: declara_par
+Level: 6 | Name: tipo
+Level: 7 | Name: ('GURI', 'TK_INT', 12, 13)
+Level: 6 | Name: identificador
+Level: 7 | Name: ('y', 'TK_IDENT', 12, 18)
+Level: 5 | Name: parametro_seg
+Level: 6 | Name: virgula
+Level: 7 | Name: (',', 'TK_COMMA', 12, 19)
+Level: 6 | Name: declara_par
+Level: 7 | Name: tipo
+Level: 8 | Name: ('FANDANGO', 'TK_STRING', 12, 21)
+Level: 7 | Name: identificador
+Level: 8 | Name: ('zezao', 'TK_IDENT', 12, 30)
+Level: 3 | Name: ponto_virgula
+Level: 4 | Name: (';', 'TK_END', 12, 35)
 Level: 1 | Name: close_key
 Level: 2 | Name: ('}', 'TK_CK', 13, 1)

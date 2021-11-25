@@ -70,6 +70,8 @@ def main():
     # Executa a criacao da tabela com base no fluxo de tokens
     symbol_table.create()
 
+    print(symbol_table.table)
+
     #####################################################
     ############### SEMANTICO ###########################
     #####################################################
