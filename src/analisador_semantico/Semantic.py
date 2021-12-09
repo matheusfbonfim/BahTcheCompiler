@@ -1,18 +1,26 @@
 import sys
 from Token import Token  # Importando classe de tokens
-from tabela_simbolos.SymbolTable import SymbolTable
+from tabela_simbolos.SymbolTables import SymbolTable, FunctionSymbolTable
 from tabela_simbolos.Variable import Variable
 
 class Semantic:
     def __init__(self, tokens):
-        self.__tipo = None
-        self.__varName = None
-        self.__varValue = None
+        # ====================
+        # TABELA DE SIMBOLOS - VARIAVEIS
+        self.__tipo = None                      # Tipo da variavel a ser armazenada
+        self.__varName = None                   # Nome da variavel a ser armazenada
+        self.__varValue = None                  # Valor da variavel a ser armazenada
         self.__symbolTable = SymbolTable()
         self.__symbol = None
         
+        # ====================
+        # TABELA DE SIMBOLOS - FUNÇÃO
+        self.__escopo = None
+        self.__retorno_func = None
+        self.__num_parametros = 0
+        self.__functionSymbolTable = FunctionSymbolTable()
+        
         # ======================================       
-
         self._table_tokens = tokens       # Lista com todos os tokens [('BAHTCHE', 'TK_MAIN', 1, 1), ...]
         self._tree = None                 # Armazena Node raiz da arvore armazenada
         self._error = 'no error'          # Flag de erro
@@ -349,7 +357,7 @@ class Semantic:
     def _tipo(self):
         # Determinando o tipo da variavel
         self.__tipo = self._token[1]
-        
+
         self._terminal(self._tipos, 'GURI ou GURIZAO ou FANDANGO')
 
     def _identificador(self):
@@ -372,9 +380,12 @@ class Semantic:
         self._tipo()
         self._identificador()
 
-        if not self.__symbolTable.exists(self.__varName):    
+        self.__num_parametros += 1
+
+        # Verifica se a variavel ja existe no escopo
+        if not self.__symbolTable.exists(self.__escopo, self.__varName):    
             # Adiciona na tabela
-            self.__symbolTable.add(self.__symbol)
+            self.__symbolTable.add(self.__escopo, self.__varName, self.__symbol)
         else:
             self._error = 'already_declared_variable'
             self._terminal()
@@ -476,11 +487,28 @@ class Semantic:
     def _funcao(self):
         # ('BARBARIDADE', 'TK_FUNC', 1, 1)
         if self._token[1] != Token.TK_MAIN:
+            self.__num_parametros = 0   # Reseta o numero de parametros
+
             self._id_funcao()
+            
+            # Inicializando o tipo da funcao
+            self.__retorno_func = self._token[1]
+
             self._tipo()
+            
+            # Inicializando o name_function
+            self.__escopo = self._token[0]
+            # Insere a chave da funcao no dicionario 
+            self.__symbolTable.setKeyDict(self.__escopo) 
+
+    
             self._identificador()
             self._open_p()
             self._parametros()
+
+            # {'uberfunction': [retorno_func, num_parametros]}
+            self.__functionSymbolTable.add(name_function=self.__escopo, info = [self.__retorno_func, self.__num_parametros])
+
             self._close_p()
             self._openKey()
             if self._token[1] != Token.TK_RETURN:
@@ -507,6 +535,13 @@ class Semantic:
         self._terminal([Token.TK_CK], '}')
 
     def _main(self):
+
+        if self._token[1] == Token.TK_MAIN: # verificar se o token atual e o TK_MAIN
+            # Inicializando o name_function
+            self.__escopo = self._token[0]
+            # Insere a chave da funcao no dicionario 
+            self.__symbolTable.setKeyDict(self.__escopo)
+
         self._terminal([Token.TK_MAIN], 'BAHTCHE')
 
     # ====================

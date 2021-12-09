@@ -5,6 +5,14 @@ BARBARIDADE GURI sum(GURI a, GURI b)
 	LARGUEIMAO sum;
 }
 
+BARBARIDADE GURI sum1(GURI a, GURI b)
+{
+    GURI sum;
+    sum = a + b;
+	LARGUEIMAO sum;
+}
+
+
 BAHTCHE{
     GURI a, GURI b, GURI result;
     INPUTCHE(a);
