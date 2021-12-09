@@ -1,0 +1,1 @@
+	 [Erro Semantico] | Mas BAH, variavel x1 ja foi declarada | line: 5 column: 15

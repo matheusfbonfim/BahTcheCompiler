@@ -4,8 +4,8 @@ from analisador_lexico.Automato import Automaton        # Importando a class aut
 from analisador_lexico.Scanner import Scanner           # Importando a class Scanner - Varredor Lexico
 from analisador_sintatico.Parser import Parser          # Importando a class Scanner - Varredor Lexico
 from analisador_sintatico.PlotTree import plot, State   # Importando a funcao para plot da Tree
-from tabela_simbolos.SymbolTable import Table           # Importando class TableSymbol - Tabela de simbolos
-
+from tabela_simbolos.Variable import Variable
+from analisador_semantico.Semantic import Semantic
 
 # FUNÇÃO PRINCIPAL
 def main():
@@ -65,14 +65,10 @@ def main():
     ########### TABELA DE SIMBOLOS ######################
     #####################################################
 
-    # Cria a instancia da tabela de simbolos
-    symbol_table = Table(fluxo_tokens)
+    semantico = Semantic(fluxo_tokens)       # Parametro sendo o fluxo_tokens
+    sem = semantico.analise_semantico()      # Realiza a análise sintatica (True: Sucesso/False: Falhou)
 
-    # Executa a criacao da tabela com base no fluxo de tokens
-    symbol_table.create()
-
-    # Armazenar a tabela de simbolos em arquivo
-    symbol_table.store_file_symbol_table()
+    print(semantico.getSymbolTable().getTable())
 
     #####################################################
     ############### SEMANTICO ###########################
