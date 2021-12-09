@@ -1,15 +1,16 @@
 BARBARIDADE GURI sum(GURI a, GURI b)
 {
     GURI sum;
-    sum = a + b + 1 + 9 * 7 * 5 / 1;
+    sum = a + b;
 	LARGUEIMAO sum;
 }
 
 BAHTCHE{
     GURI a, GURI b, GURI result;
-    INPUTCHE();
+    INPUTCHE(a);
     INPUTCHE(b);
-    
+
+    result = BARBARIDADE sum(a,b);
     PRINTCHE(result);
 
 }
