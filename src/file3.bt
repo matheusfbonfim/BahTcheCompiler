@@ -7,10 +7,8 @@ BARBARIDADE GURI sum(GURI a, GURI b)
 
 BAHTCHE{
     GURI a, GURI b, GURI result;
-    INPUTCHE(a);
+    INPUTCHE();
     INPUTCHE(b);
-
-    a = e != 3;
     
     PRINTCHE(result);
 

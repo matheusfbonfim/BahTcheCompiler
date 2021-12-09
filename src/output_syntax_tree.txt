@@ -153,31 +153,16 @@ Level: 6 | Name: (')', 'TK_CP', 11, 15)
 Level: 5 | Name: ponto_virgula
 Level: 6 | Name: (';', 'TK_END', 11, 16)
 Level: 4 | Name: content
-Level: 5 | Name: atribui_var
+Level: 5 | Name: declara_print
+Level: 6 | Name: print
+Level: 7 | Name: ('PRINTCHE', 'TK_PRINT', 13, 5)
+Level: 6 | Name: open_p
+Level: 7 | Name: ('(', 'TK_OP', 13, 13)
 Level: 6 | Name: identificador
-Level: 7 | Name: ('a', 'TK_IDENT', 13, 5)
-Level: 6 | Name: atribuicao
-Level: 7 | Name: ('=', 'TK_ASSIGNMENT', 13, 7)
-Level: 6 | Name: op_logic
-Level: 7 | Name: identificador
-Level: 8 | Name: ('e', 'TK_IDENT', 13, 9)
-Level: 7 | Name: operador_l
-Level: 8 | Name: ('!=', 'TK_LOGIC_DIF', 13, 11)
-Level: 7 | Name: number
-Level: 8 | Name: ('3', 'TK_NUMBER', 13, 14)
+Level: 7 | Name: ('sum', 'TK_IDENT', 13, 14)
+Level: 6 | Name: close_p
+Level: 7 | Name: (')', 'TK_CP', 13, 17)
 Level: 6 | Name: ponto_virgula
-Level: 7 | Name: (';', 'TK_END', 13, 15)
-Level: 5 | Name: content
-Level: 6 | Name: declara_print
-Level: 7 | Name: print
-Level: 8 | Name: ('PRINTCHE', 'TK_PRINT', 15, 5)
-Level: 7 | Name: open_p
-Level: 8 | Name: ('(', 'TK_OP', 15, 13)
-Level: 7 | Name: identificador
-Level: 8 | Name: ('result', 'TK_IDENT', 15, 14)
-Level: 7 | Name: close_p
-Level: 8 | Name: (')', 'TK_CP', 15, 20)
-Level: 7 | Name: ponto_virgula
-Level: 8 | Name: (';', 'TK_END', 15, 21)
+Level: 7 | Name: (';', 'TK_END', 13, 18)
 Level: 1 | Name: close_key
-Level: 2 | Name: ('}', 'TK_CK', 17, 1)
+Level: 2 | Name: ('}', 'TK_CK', 15, 1)

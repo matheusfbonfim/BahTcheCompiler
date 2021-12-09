@@ -1,1 +1,1 @@
-	 [Erro Semantico] | Mas BAH, variavel e nao foi declarada | line: 13 column: 9
+	 [Erro Semantico] | Mas BAH, variavel sum nao foi declarada | line: 13 column: 14

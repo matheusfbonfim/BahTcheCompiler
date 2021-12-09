@@ -469,6 +469,10 @@ class Semantic:
         if self._token[1] == Token.TK_TEXT:
             self._texto()
         elif self._token[1] == Token.TK_IDENT:
+            # Verifica se a variavel foi declarada
+            if not self.__symbolTable.exists(escopo=self.__escopo, symbolName=self._token[0]):
+                self._error = 'undeclared_variable'
+                self._terminal()
             self._identificador()
         else:
             self._error = 'print_invalido'
@@ -483,6 +487,10 @@ class Semantic:
     def _declara_scanf(self):
         self._scanf()
         self._open_p()
+        # Verifica se a variavel foi declarada
+        if not self.__symbolTable.exists(escopo=self.__escopo, symbolName=self._token[0]):
+            self._error = 'undeclared_variable'
+            self._terminal()
         self._identificador()
         self._close_p()
         self._ponto_virgula()
