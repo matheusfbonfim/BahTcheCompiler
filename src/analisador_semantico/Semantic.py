@@ -300,6 +300,11 @@ class Semantic:
             elif self._token[1] == Token.TK_REAL:
                 self._real()
             elif self._token[1] == Token.TK_IDENT:
+                # Verifica se a variavel depois da atribuicao foi declarada
+                if not self.__symbolTable.exists(escopo=self.__escopo, symbolName=self._token[0]):
+                    self._error = 'undeclared_variable'
+                    self._terminal()
+
                 self._identificador()
             else:
                 self._error = "atribuicao_invalida"
@@ -403,9 +408,6 @@ class Semantic:
         else:
             self._error = 'already_declared_variable'
             self._terminal()
-
-
-        print(f"Simbolo adicionado: {self.__symbol.toString()}")
 
     def _virgula(self):
         self._terminal([Token.TK_COMMA])

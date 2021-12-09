@@ -123,28 +123,13 @@ Level: 6 | Name: (';', 'TK_END', 11, 16)
 Level: 4 | Name: content
 Level: 5 | Name: atribui_var
 Level: 6 | Name: identificador
-Level: 7 | Name: ('tere', 'TK_IDENT', 13, 5)
+Level: 7 | Name: ('a', 'TK_IDENT', 13, 5)
 Level: 6 | Name: atribuicao
-Level: 7 | Name: ('=', 'TK_ASSIGNMENT', 13, 10)
-Level: 6 | Name: chama_funcao
-Level: 7 | Name: id_funcao
-Level: 8 | Name: ('BARBARIDADE', 'TK_FUNC', 13, 12)
-Level: 7 | Name: identificador
-Level: 8 | Name: ('sum', 'TK_IDENT', 13, 24)
-Level: 7 | Name: open_p
-Level: 8 | Name: ('(', 'TK_OP', 13, 27)
-Level: 7 | Name: parametros_chamada_f
-Level: 8 | Name: identificador
-Level: 9 | Name: ('a', 'TK_IDENT', 13, 28)
-Level: 8 | Name: chamada_seg
-Level: 9 | Name: virgula
-Level: 10 | Name: (',', 'TK_COMMA', 13, 29)
-Level: 9 | Name: identificador
-Level: 10 | Name: ('b', 'TK_IDENT', 13, 30)
-Level: 7 | Name: close_p
-Level: 8 | Name: (')', 'TK_CP', 13, 31)
+Level: 7 | Name: ('=', 'TK_ASSIGNMENT', 13, 7)
+Level: 6 | Name: identificador
+Level: 7 | Name: ('g', 'TK_IDENT', 13, 9)
 Level: 6 | Name: ponto_virgula
-Level: 7 | Name: (';', 'TK_END', 13, 32)
+Level: 7 | Name: (';', 'TK_END', 13, 10)
 Level: 5 | Name: content
 Level: 6 | Name: declara_print
 Level: 7 | Name: print
