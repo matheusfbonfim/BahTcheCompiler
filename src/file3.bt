@@ -10,6 +10,7 @@ BAHTCHE{
     INPUTCHE(a);
     INPUTCHE(b);
 
+    a = e != 3;
     
     PRINTCHE(result);
 

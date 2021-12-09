@@ -158,70 +158,26 @@ Level: 6 | Name: identificador
 Level: 7 | Name: ('a', 'TK_IDENT', 13, 5)
 Level: 6 | Name: atribuicao
 Level: 7 | Name: ('=', 'TK_ASSIGNMENT', 13, 7)
-Level: 6 | Name: op_math
-Level: 7 | Name: multiplication
-Level: 8 | Name: term
-Level: 9 | Name: identificador
-Level: 10 | Name: ('a', 'TK_IDENT', 13, 9)
-Level: 7 | Name: add_sub_seg
-Level: 8 | Name: add
-Level: 9 | Name: ('+', 'TK_MATH_ADD', 13, 11)
-Level: 8 | Name: multiplication
-Level: 9 | Name: term
-Level: 10 | Name: identificador
-Level: 11 | Name: ('b', 'TK_IDENT', 13, 13)
-Level: 8 | Name: add_sub_seg
-Level: 9 | Name: add
-Level: 10 | Name: ('+', 'TK_MATH_ADD', 13, 15)
-Level: 9 | Name: multiplication
-Level: 10 | Name: term
-Level: 11 | Name: number
-Level: 12 | Name: ('1', 'TK_NUMBER', 13, 17)
-Level: 9 | Name: add_sub_seg
-Level: 10 | Name: add
-Level: 11 | Name: ('+', 'TK_MATH_ADD', 13, 19)
-Level: 10 | Name: multiplication
-Level: 11 | Name: term
-Level: 12 | Name: number
-Level: 13 | Name: ('9', 'TK_NUMBER', 13, 21)
-Level: 11 | Name: multiplication_seg
-Level: 12 | Name: mult
-Level: 13 | Name: ('*', 'TK_MATH_MUL', 13, 23)
-Level: 12 | Name: term
-Level: 13 | Name: number
-Level: 14 | Name: ('7', 'TK_NUMBER', 13, 25)
-Level: 12 | Name: multiplication_seg
-Level: 13 | Name: mult
-Level: 14 | Name: ('*', 'TK_MATH_MUL', 13, 27)
-Level: 13 | Name: term
-Level: 14 | Name: number
-Level: 15 | Name: ('5', 'TK_NUMBER', 13, 29)
-Level: 13 | Name: multiplication_seg
-Level: 14 | Name: div
-Level: 15 | Name: ('/', 'TK_MATH_DIV', 13, 31)
-Level: 14 | Name: term
-Level: 15 | Name: number
-Level: 16 | Name: ('1', 'TK_NUMBER', 13, 33)
-Level: 10 | Name: add_sub_seg
-Level: 11 | Name: sub
-Level: 12 | Name: ('-', 'TK_MATH_SUB', 13, 35)
-Level: 11 | Name: multiplication
-Level: 12 | Name: term
-Level: 13 | Name: identificador
-Level: 14 | Name: ('matheus', 'TK_IDENT', 13, 37)
+Level: 6 | Name: op_logic
+Level: 7 | Name: identificador
+Level: 8 | Name: ('e', 'TK_IDENT', 13, 9)
+Level: 7 | Name: operador_l
+Level: 8 | Name: ('!=', 'TK_LOGIC_DIF', 13, 11)
+Level: 7 | Name: number
+Level: 8 | Name: ('3', 'TK_NUMBER', 13, 14)
 Level: 6 | Name: ponto_virgula
-Level: 7 | Name: (';', 'TK_END', 13, 44)
+Level: 7 | Name: (';', 'TK_END', 13, 15)
 Level: 5 | Name: content
 Level: 6 | Name: declara_print
 Level: 7 | Name: print
-Level: 8 | Name: ('PRINTCHE', 'TK_PRINT', 14, 5)
+Level: 8 | Name: ('PRINTCHE', 'TK_PRINT', 15, 5)
 Level: 7 | Name: open_p
-Level: 8 | Name: ('(', 'TK_OP', 14, 13)
+Level: 8 | Name: ('(', 'TK_OP', 15, 13)
 Level: 7 | Name: identificador
-Level: 8 | Name: ('result', 'TK_IDENT', 14, 14)
+Level: 8 | Name: ('result', 'TK_IDENT', 15, 14)
 Level: 7 | Name: close_p
-Level: 8 | Name: (')', 'TK_CP', 14, 20)
+Level: 8 | Name: (')', 'TK_CP', 15, 20)
 Level: 7 | Name: ponto_virgula
-Level: 8 | Name: (';', 'TK_END', 14, 21)
+Level: 8 | Name: (';', 'TK_END', 15, 21)
 Level: 1 | Name: close_key
-Level: 2 | Name: ('}', 'TK_CK', 16, 1)
+Level: 2 | Name: ('}', 'TK_CK', 17, 1)

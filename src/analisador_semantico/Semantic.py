@@ -153,7 +153,7 @@ class Semantic:
 
     def _term(self):
         if self._token[1] == Token.TK_IDENT:
-            # Verifica se a variavel de atribuicao foi declarada
+            # Verifica se a variavel foi declarada
             if not self.__symbolTable.exists(escopo=self.__escopo, symbolName=self._token[0]):
                 self._error = 'undeclared_variable'
                 self._terminal()
@@ -186,8 +186,6 @@ class Semantic:
             self._multiplication_seg()
 
     def _multiplication(self):
-        
-
         self._term()
         self._multiplication_seg()
 
@@ -250,6 +248,10 @@ class Semantic:
             self._not()
 
         if self._token[1] == Token.TK_IDENT:
+            # Verifica se a variavel foi declarada
+            if not self.__symbolTable.exists(escopo=self.__escopo, symbolName=self._token[0]):
+                self._error = 'undeclared_variable'
+                self._terminal()
             self._identificador()
         elif self._token[1] == Token.TK_NUMBER:
             self._number()
@@ -265,6 +267,10 @@ class Semantic:
             self._not()
 
         if self._token[1] == Token.TK_IDENT:
+            # Verifica se a variavel foi declarada
+            if not self.__symbolTable.exists(escopo=self.__escopo, symbolName=self._token[0]):
+                self._error = 'undeclared_variable'
+                self._terminal()
             self._identificador()
         elif self._token[1] == Token.TK_NUMBER:
             self._number()
