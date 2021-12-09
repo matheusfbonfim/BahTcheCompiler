@@ -7,7 +7,6 @@ class Variable():
         self.__value = value  # Valor da variavel
         self.__used = None    # Indica se a variavel ja foi utilizada
         
-
     def getName(self):
         return self.__name
     

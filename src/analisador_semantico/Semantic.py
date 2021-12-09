@@ -269,8 +269,12 @@ class Semantic:
             self._error = 'operacao_logica_invalida'
             self._terminal()
 
-    def _atribui_var(self):  # Exemplo -> a = b + 2  # self._token = b
-  
+    def _atribui_var(self):  # Exemplo -> a = b + 2  
+        # Verifica se a variavel de atribuicao foi declarada
+        if not self.__symbolTable.exists(escopo=self.__escopo, symbolName=self._token[0]):
+            self._error = 'undeclared_variable'
+            self._terminal()
+
         self._identificador()   # a
         self._atribuicao()      # =
 
