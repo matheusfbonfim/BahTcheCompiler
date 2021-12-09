@@ -12,6 +12,8 @@ class SymbolTable:
     def exists(self, escopo, symbolName):
         return symbolName in self.__table[escopo]
     
+    # ============================================
+    # SETA VALOR INICIAL PARA VARIAVEL
     def setKeyDict(self, name):
         self.__table[name] = {}
 

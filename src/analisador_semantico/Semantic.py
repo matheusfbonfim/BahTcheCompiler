@@ -67,13 +67,15 @@ class Semantic:
 
     # ====================
     # DEFINE A MENSAGEM DE ERRO
-    def _mensagem(self, expected_symbol=None, current_symbol=None, line=None, column=None):
+    def _mensagem(self, current_symbol=None, line=None, column=None):
         if self._error == 'already_declared_variable':
             return f'\t [Erro Semantico] | Mas BAH, variavel {self.__varName} ja foi declarada | line: {line} column: {column}'
+        elif self._error == 'undeclared_variable':
+            return f'\t [Erro Semantico] | Mas BAH, variavel {current_symbol} nao foi declarada | line: {line} column: {column}'
         
     # ====================
     # VERIFICA A CORRESPONDENCIA DO TOKEN LIDO COM O ESPERADO   
-    def _terminal(self, token=None, description=None):
+    def _terminal(self, token=None):
         # Token atual lido
         current_token = self._token     # ('BAHTCHE', 'TK_MAIN', 1, 1)
 
@@ -84,11 +86,11 @@ class Semantic:
 
         # Caso tenha sido lancado na flag self._error algum erro
         if self._error != 'no error':
-            raise Exception(self._mensagem(description, current_token[0], current_token[2], current_token[3]))
+            raise Exception(self._mensagem(current_token[0], current_token[2], current_token[3]))
 
         # Lanca erro - Verificando se o token atual não corresponde ao token lido
         if not (current_token[1] in token):
-            raise Exception(self._mensagem(description, current_token[0], current_token[2], current_token[3]))
+            raise Exception(self._mensagem(current_token[0], current_token[2], current_token[3]))
 
         # Caso não haja erro de terminal - Proximo token
         self._token = self._proximo_tk()
@@ -98,13 +100,13 @@ class Semantic:
     #####################################################
 
     def _if(self):
-        self._terminal([Token.TK_IF], 'TRIF')
+        self._terminal([Token.TK_IF])
 
     def _elif(self):
-        self._terminal([Token.TK_ELIF], 'BEM_CAPAZ')
+        self._terminal([Token.TK_ELIF])
 
     def _else(self):
-        self._terminal([Token.TK_ELSE], 'BAGUAL')
+        self._terminal([Token.TK_ELSE])
 
     def _declara_elif(self):
         if self._token[1] == Token.TK_ELIF:
@@ -163,13 +165,13 @@ class Semantic:
 
     def _mul_div_add_sub(self):
         if self._token[1] == Token.TK_MATH_MUL:
-            self._terminal([Token.TK_MATH_MUL], '*')
+            self._terminal([Token.TK_MATH_MUL])
         elif self._token[1] == Token.TK_MATH_DIV:
-            self._terminal([Token.TK_MATH_DIV], '/')
+            self._terminal([Token.TK_MATH_DIV])
         elif self._token[1] == Token.TK_MATH_ADD:
-            self._terminal([Token.TK_MATH_ADD], '+')
+            self._terminal([Token.TK_MATH_ADD])
         elif self._token[1] == Token.TK_MATH_SUB:
-            self._terminal([Token.TK_MATH_SUB], '-')
+            self._terminal([Token.TK_MATH_SUB])
         else:
             self._error = 'operacao_matematica_invalida'
             self._terminal()
@@ -201,7 +203,7 @@ class Semantic:
             self._chamada_seg()
         elif self._token[1] in [Token.TK_IDENT]:
             self._error = 'pontuacao'
-            self._terminal(token=[Token.TK_COMMA], description=',')
+            self._terminal(token=[Token.TK_COMMA])
 
     def _parametros_chamada_f(self):
         self._identificador()
@@ -216,24 +218,24 @@ class Semantic:
         self._close_p()
 
     def _atribuicao(self):
-        self._terminal([Token.TK_ASSIGNMENT], '=')
+        self._terminal([Token.TK_ASSIGNMENT])
 
     def _not(self):
-        self._terminal([Token.TK_LOGIC_NOT], '!')
+        self._terminal([Token.TK_LOGIC_NOT])
 
     def _operador_l(self):  # OR, AND, DIF, LG, LE_GE, EQ
         if self._token[1] == Token.TK_LOGIC_OR:
-            self._terminal([Token.TK_LOGIC_OR], '||')
+            self._terminal([Token.TK_LOGIC_OR])
         elif self._token[1] == Token.TK_LOGIC_AND:
-            self._terminal([Token.TK_LOGIC_AND], '&&')
+            self._terminal([Token.TK_LOGIC_AND])
         elif self._token[1] == Token.TK_LOGIC_DIF:
-            self._terminal([Token.TK_LOGIC_DIF], '!=')
+            self._terminal([Token.TK_LOGIC_DIF])
         elif self._token[1] == Token.TK_LOGIC_LG:
-            self._terminal([Token.TK_LOGIC_LG], '> ou <')
+            self._terminal([Token.TK_LOGIC_LG])
         elif self._token[1] == Token.TK_LOGIC_LE_GE:
-            self._terminal([Token.TK_LOGIC_LE_GE], '<= ou >=')
+            self._terminal([Token.TK_LOGIC_LE_GE])
         elif self._token[1] == Token.TK_LOGIC_EQ:
-            self._terminal([Token.TK_LOGIC_EQ], '==')
+            self._terminal([Token.TK_LOGIC_EQ])
         else:
             self._error = 'operacao_logica_invalida'
             self._terminal()
@@ -316,22 +318,22 @@ class Semantic:
         if self._token[1] != Token.TK_RETURN:
             self._error = 'no return'
 
-        self._terminal([Token.TK_RETURN], 'LARGUEIMAO')
+        self._terminal([Token.TK_RETURN])
 
     def _real(self):
-        self._terminal([Token.TK_REAL], 'REAL')
+        self._terminal([Token.TK_REAL])
 
     def _number(self):
-        self._terminal([Token.TK_NUMBER], 'NUMBER')
+        self._terminal([Token.TK_NUMBER])
 
     def _texto(self):
-        self._terminal([Token.TK_TEXT], 'TEXT')
+        self._terminal([Token.TK_TEXT])
 
     def _ponto_virgula(self):
         if self._token[1] != Token.TK_END:
             self._error = 'pontuacao'
 
-        self._terminal([Token.TK_END], ';')
+        self._terminal([Token.TK_END])
 
     def _tipos_retorno(self):
         if self._token[1] == Token.TK_IDENT:
@@ -348,17 +350,25 @@ class Semantic:
 
     def _retorno_f(self):
         self._retorno()
+
+        # Caso seja identificador, verificar se foi declarada no seu escopo
+        if self._token[1] == Token.TK_IDENT:
+            if not self.__symbolTable.exists(escopo=self.__escopo, symbolName=self._token[0]):
+                self._error = 'undeclared_variable'
+                self._terminal()
+
+
         self._tipos_retorno()
         self._ponto_virgula()
 
     def _id_funcao(self):
-        self._terminal([Token.TK_FUNC], 'BARBARIDADE')
+        self._terminal([Token.TK_FUNC])
 
     def _tipo(self):
         # Determinando o tipo da variavel
         self.__tipo = self._token[1]
 
-        self._terminal(self._tipos, 'GURI ou GURIZAO ou FANDANGO')
+        self._terminal(self._tipos)
 
     def _identificador(self):
         # Inicializa caracteristica do identificador
@@ -367,14 +377,14 @@ class Semantic:
         # Cria um simbolo/variavel
         self.__symbol = Variable(self.__varName, self.__tipo, self.__varValue)
         
-        self._terminal([Token.TK_IDENT], 'IDENTIFICADOR')
+        self._terminal([Token.TK_IDENT])
 
     def _open_p(self):
         # Token corrente é diferente de TK_OP
         if self._token[1] != Token.TK_OP:
             self._error = 'error_ok_op'
 
-        self._terminal([Token.TK_OP], '(')
+        self._terminal([Token.TK_OP])
 
     def _declara_par(self):
         self._tipo()
@@ -394,7 +404,7 @@ class Semantic:
         print(f"Simbolo adicionado: {self.__symbol.toString()}")
 
     def _virgula(self):
-        self._terminal([Token.TK_COMMA], ',')
+        self._terminal([Token.TK_COMMA])
 
     def _parametro_seg(self):
         if self._token[1] == Token.TK_COMMA:
@@ -413,10 +423,10 @@ class Semantic:
         if self._token[1] != Token.TK_CP:
             self._error = 'error_ok_op'
 
-        self._terminal([Token.TK_CP], ')')
+        self._terminal([Token.TK_CP])
 
     def _while(self):
-        self._terminal([Token.TK_WHILE], 'EMCIMADOLACO')
+        self._terminal([Token.TK_WHILE])
 
     def _laco(self):
         self._while()
@@ -433,7 +443,7 @@ class Semantic:
         self._closeKey()
 
     def _print(self):
-        self._terminal([Token.TK_PRINT], 'PRINTCHE')
+        self._terminal([Token.TK_PRINT])
 
     def _declara_print(self):
         self._print()
@@ -451,7 +461,7 @@ class Semantic:
         self._ponto_virgula()
 
     def _scanf(self):
-        self._terminal([Token.TK_SCANF], 'INPUTCHE')
+        self._terminal([Token.TK_SCANF])
 
     def _declara_scanf(self):
         self._scanf()
@@ -525,14 +535,14 @@ class Semantic:
         if self._token[1] != Token.TK_OK:
             self._error = 'error_ok_op'
 
-        self._terminal([Token.TK_OK], '{')
+        self._terminal([Token.TK_OK])
 
     def _closeKey(self):
         # Token corrente é diferente de TK_CK
         if self._token[1] != Token.TK_CK:
             self._error = 'error_ok_op'
 
-        self._terminal([Token.TK_CK], '}')
+        self._terminal([Token.TK_CK])
 
     def _main(self):
 
@@ -542,7 +552,7 @@ class Semantic:
             # Insere a chave da funcao no dicionario 
             self.__symbolTable.setKeyDict(self.__escopo)
 
-        self._terminal([Token.TK_MAIN], 'BAHTCHE')
+        self._terminal([Token.TK_MAIN])
 
     # ====================
     # MÉTODO PRINCIPAL - INICIO DA RECURSSÃO

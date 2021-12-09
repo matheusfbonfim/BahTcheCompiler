@@ -2,16 +2,8 @@ BARBARIDADE GURI sum(GURI a, GURI b)
 {
     GURI sum;
     sum = a + b;
-	LARGUEIMAO sum;
+	LARGUEIMAO matheus;
 }
-
-BARBARIDADE GURI sum1(GURI a, GURI b)
-{
-    GURI sum;
-    sum = a + b;
-	LARGUEIMAO sum;
-}
-
 
 BAHTCHE{
     GURI a, GURI b, GURI result;
