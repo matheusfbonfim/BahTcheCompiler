@@ -1,1 +1,1 @@
-	 [Erro Semantico] | Mas BAH, 2.569854 nao eh um tipo de retorno valido para a funcao sum | line: 5 column: 13
+	 [Erro Semantico] | Mas BAH, a funcao uberfuncao nao foi declarada | line: 13 column: 26

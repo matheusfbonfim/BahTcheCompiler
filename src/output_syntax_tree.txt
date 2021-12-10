@@ -3,27 +3,27 @@ Level: 1 | Name: function
 Level: 2 | Name: id_funcao
 Level: 3 | Name: ('BARBARIDADE', 'TK_FUNC', 1, 1)
 Level: 2 | Name: tipo
-Level: 3 | Name: ('FANDANGO', 'TK_STRING', 1, 13)
+Level: 3 | Name: ('GURI', 'TK_INT', 1, 13)
 Level: 2 | Name: identificador
-Level: 3 | Name: ('sum', 'TK_IDENT', 1, 22)
+Level: 3 | Name: ('sum', 'TK_IDENT', 1, 18)
 Level: 2 | Name: open_p
-Level: 3 | Name: ('(', 'TK_OP', 1, 25)
+Level: 3 | Name: ('(', 'TK_OP', 1, 21)
 Level: 2 | Name: parametros
 Level: 3 | Name: declara_par
 Level: 4 | Name: tipo
-Level: 5 | Name: ('GURI', 'TK_INT', 1, 26)
+Level: 5 | Name: ('GURI', 'TK_INT', 1, 22)
 Level: 4 | Name: identificador
-Level: 5 | Name: ('a', 'TK_IDENT', 1, 31)
+Level: 5 | Name: ('a', 'TK_IDENT', 1, 27)
 Level: 3 | Name: parametro_seg
 Level: 4 | Name: virgula
-Level: 5 | Name: (',', 'TK_COMMA', 1, 32)
+Level: 5 | Name: (',', 'TK_COMMA', 1, 28)
 Level: 4 | Name: declara_par
 Level: 5 | Name: tipo
-Level: 6 | Name: ('GURI', 'TK_INT', 1, 34)
+Level: 6 | Name: ('GURI', 'TK_INT', 1, 30)
 Level: 5 | Name: identificador
-Level: 6 | Name: ('b', 'TK_IDENT', 1, 39)
+Level: 6 | Name: ('b', 'TK_IDENT', 1, 35)
 Level: 2 | Name: close_p
-Level: 3 | Name: (')', 'TK_CP', 1, 40)
+Level: 3 | Name: (')', 'TK_CP', 1, 36)
 Level: 2 | Name: open_key
 Level: 3 | Name: ('{', 'TK_OK', 2, 1)
 Level: 2 | Name: content
@@ -31,11 +31,11 @@ Level: 3 | Name: declara_var
 Level: 4 | Name: parametros
 Level: 5 | Name: declara_par
 Level: 6 | Name: tipo
-Level: 7 | Name: ('GURIZAO', 'TK_FLOAT', 3, 5)
+Level: 7 | Name: ('GURI', 'TK_INT', 3, 5)
 Level: 6 | Name: identificador
-Level: 7 | Name: ('sum', 'TK_IDENT', 3, 13)
+Level: 7 | Name: ('sum', 'TK_IDENT', 3, 10)
 Level: 4 | Name: ponto_virgula
-Level: 5 | Name: (';', 'TK_END', 3, 16)
+Level: 5 | Name: (';', 'TK_END', 3, 13)
 Level: 3 | Name: content
 Level: 4 | Name: atribui_var
 Level: 5 | Name: identificador
@@ -60,10 +60,10 @@ Level: 2 | Name: retorno_f
 Level: 3 | Name: retorno
 Level: 4 | Name: ('LARGUEIMAO', 'TK_RETURN', 5, 2)
 Level: 3 | Name: tipos_retorno
-Level: 4 | Name: real
-Level: 5 | Name: ('2.569854', 'TK_REAL', 5, 13)
+Level: 4 | Name: identificador
+Level: 5 | Name: ('sum', 'TK_IDENT', 5, 13)
 Level: 3 | Name: ponto_virgula
-Level: 4 | Name: (';', 'TK_END', 5, 21)
+Level: 4 | Name: (';', 'TK_END', 5, 16)
 Level: 2 | Name: close_key
 Level: 3 | Name: ('}', 'TK_CK', 6, 1)
 Level: 1 | Name: main
@@ -130,21 +130,21 @@ Level: 6 | Name: chama_funcao
 Level: 7 | Name: id_funcao
 Level: 8 | Name: ('BARBARIDADE', 'TK_FUNC', 13, 14)
 Level: 7 | Name: identificador
-Level: 8 | Name: ('sum', 'TK_IDENT', 13, 26)
+Level: 8 | Name: ('uberfuncao', 'TK_IDENT', 13, 26)
 Level: 7 | Name: open_p
-Level: 8 | Name: ('(', 'TK_OP', 13, 29)
+Level: 8 | Name: ('(', 'TK_OP', 13, 36)
 Level: 7 | Name: parametros_chamada_f
 Level: 8 | Name: identificador
-Level: 9 | Name: ('a', 'TK_IDENT', 13, 30)
+Level: 9 | Name: ('a', 'TK_IDENT', 13, 37)
 Level: 8 | Name: chamada_seg
 Level: 9 | Name: virgula
-Level: 10 | Name: (',', 'TK_COMMA', 13, 31)
+Level: 10 | Name: (',', 'TK_COMMA', 13, 38)
 Level: 9 | Name: identificador
-Level: 10 | Name: ('b', 'TK_IDENT', 13, 32)
+Level: 10 | Name: ('b', 'TK_IDENT', 13, 39)
 Level: 7 | Name: close_p
-Level: 8 | Name: (')', 'TK_CP', 13, 33)
+Level: 8 | Name: (')', 'TK_CP', 13, 40)
 Level: 6 | Name: ponto_virgula
-Level: 7 | Name: (';', 'TK_END', 13, 34)
+Level: 7 | Name: (';', 'TK_END', 13, 41)
 Level: 5 | Name: content
 Level: 6 | Name: declara_print
 Level: 7 | Name: print

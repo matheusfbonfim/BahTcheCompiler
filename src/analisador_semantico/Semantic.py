@@ -76,6 +76,8 @@ class Semantic:
             return f'\t [Erro Semantico] | Mas BAH, a funcao {self.__escopo} ja foi declarada | line: {line} column: {column}'
         elif self._error == 'tipo_retorno_invalido':
             return f'\t [Erro Semantico] | Mas BAH, {current_symbol} nao eh um tipo de retorno valido para a funcao {self.__escopo} | line: {line} column: {column}'
+        elif self._error == 'undeclared_function':
+            return f'\t [Erro Semantico] | Mas BAH, a funcao {current_symbol} nao foi declarada | line: {line} column: {column}'
             
     # ====================
     # VERIFICA A CORRESPONDENCIA DO TOKEN LIDO COM O ESPERADO   
@@ -218,6 +220,12 @@ class Semantic:
 
     def _chama_funcao(self):
         self._id_funcao()
+
+        # Verificação da existencia da funcao na atribuicao
+        if not self.__functionSymbolTable.exists(name_function=self._token[0]):
+            self._error = 'undeclared_function'
+            self._terminal()
+
         self._identificador()
         self._open_p()
         if self._token[1] != Token.TK_CP:

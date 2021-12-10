@@ -10,7 +10,7 @@ BAHTCHE{
     INPUTCHE(a);
     INPUTCHE(b);
 
-    result = BARBARIDADE sum(a,b);
+    result = BARBARIDADE uberfuncao(a,b);
     PRINTCHE(result);
 
 }

@@ -22,7 +22,6 @@ class SymbolTable:
     # ============================================
     # RETORNA O TIPO DA VARIAVEL
     def returnsTypeVariable(self, escopo, identificador):
-        print(self.__table[escopo][identificador].getType())
         return self.__table[escopo][identificador].getType()
 
     # ============================================
@@ -48,9 +47,6 @@ class SymbolTable:
             return True
         else:
             return False 
-
-        
-
 
     def get(self, symbolName):
         return self.__table[symbolName]
