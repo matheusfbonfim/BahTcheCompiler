@@ -1,1 +1,1 @@
-	 [Erro Semantico] | Mas BAH, a funcao uberfuncao nao foi declarada | line: 13 column: 26
+	 [Erro Semantico] | Mas BAH, variavel uber nao foi declarada | line: 13 column: 34

@@ -207,7 +207,14 @@ class Semantic:
 
     def _chamada_seg(self):
         if self._token[1] == Token.TK_COMMA:
+            self.__num_parametros += 1      # Contador o numero de parametros
             self._virgula()
+
+            # Verifica se a variavel foi declarada
+            if not self.__symbolTable.exists(escopo=self.__escopo, symbolName=self._token[0]):
+                self._error = 'undeclared_variable'
+                self._terminal()
+
             self._identificador()
             self._chamada_seg()
         elif self._token[1] in [Token.TK_IDENT]:
@@ -215,10 +222,20 @@ class Semantic:
             self._terminal(token=[Token.TK_COMMA])
 
     def _parametros_chamada_f(self):
+        # Contador o numero de parametros
+        self.__num_parametros += 1  
+
+        # Verifica se a variavel foi declarada
+        if not self.__symbolTable.exists(escopo=self.__escopo, symbolName=self._token[0]):
+            self._error = 'undeclared_variable'
+            self._terminal()
+
         self._identificador()
         self._chamada_seg()
 
     def _chama_funcao(self):
+        self.__num_parametros = 0     # Contador de numeros de parametros
+
         self._id_funcao()
 
         # Verificação da existencia da funcao na atribuicao
@@ -620,6 +637,7 @@ class Semantic:
         self._openKey()
         self._content()
         self._closeKey()
+        print(f"NUMEROS DE PARAMETROS: {self.__num_parametros}")
 
     #####################################################
     ############### METODOS DA CLASSE ###################
