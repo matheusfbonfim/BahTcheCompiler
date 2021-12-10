@@ -1,1 +1,1 @@
-	 [Erro Semantico] | Mas BAH, quantidade de parametros incorreta na chamada da funcao sum | line: 13 column: 36
+	 [Erro Semantico] | Mas BAH, divisao por 0 | line: 4 column: 19

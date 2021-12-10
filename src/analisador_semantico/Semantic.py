@@ -81,7 +81,8 @@ class Semantic:
             return f'\t [Erro Semantico] | Mas BAH, a funcao {current_symbol} nao foi declarada | line: {line} column: {column}'
         elif self._error == 'error_num_param':
             return f'\t [Erro Semantico] | Mas BAH, quantidade de parametros incorreta na chamada da funcao {self.__name_scope} | line: {line} column: {column}'
-
+        elif self._error == 'division_by_zero':
+            return f'\t [Erro Semantico] | Mas BAH, divisao por 0 | line: {line} column: {column}'
             
     # ====================
     # VERIFICA A CORRESPONDENCIA DO TOKEN LIDO COM O ESPERADO   
@@ -106,7 +107,7 @@ class Semantic:
         self._token = self._proximo_tk()
 
     #####################################################
-    ############### REGRAS SINTATICAS ###################
+    ############### REGRAS SEMANTICAS ###################
     #####################################################
 
     def _if(self):
@@ -191,7 +192,14 @@ class Semantic:
 
     def _multiplication_seg(self):
         if self._token[1] in [Token.TK_MATH_MUL, Token.TK_MATH_DIV]:
+            operador = self._token[1]
             self._mul_div_add_sub()
+
+            if operador == Token.TK_MATH_DIV and self._token[0] == '0':
+                self._error = 'division_by_zero'
+                self._terminal()
+           
+
             self._term()
             self._multiplication_seg()
 

@@ -54,8 +54,14 @@ Level: 7 | Name: multiplication
 Level: 8 | Name: term
 Level: 9 | Name: identificador
 Level: 10 | Name: ('b', 'TK_IDENT', 4, 15)
+Level: 8 | Name: multiplication_seg
+Level: 9 | Name: div
+Level: 10 | Name: ('/', 'TK_MATH_DIV', 4, 17)
+Level: 9 | Name: term
+Level: 10 | Name: number
+Level: 11 | Name: ('0', 'TK_NUMBER', 4, 19)
 Level: 5 | Name: ponto_virgula
-Level: 6 | Name: (';', 'TK_END', 4, 16)
+Level: 6 | Name: (';', 'TK_END', 4, 20)
 Level: 2 | Name: retorno_f
 Level: 3 | Name: retorno
 Level: 4 | Name: ('LARGUEIMAO', 'TK_RETURN', 5, 2)
