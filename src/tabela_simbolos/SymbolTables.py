@@ -66,6 +66,11 @@ class FunctionSymbolTable:
     def exists(self, name_function):
         return name_function in self.__table
     
+    # ============================================
+    # COMPARA O TIPO DA FUNCAO COM SEU RETORNO  
+    def checkNumberParameters(self, escopo, quant):
+        return self.__table[escopo][1] == quant
+
     def get(self, symbolName):
         return self.__table[symbolName]
 

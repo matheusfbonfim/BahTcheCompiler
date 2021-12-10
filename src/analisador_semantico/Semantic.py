@@ -19,6 +19,7 @@ class Semantic:
         self.__retorno_func = None              # Retorno da funcao
         self.__num_parametros = 0               # Numero de parametros da funcao
         self.__functionSymbolTable = FunctionSymbolTable()  # Classe Tabela de simbolos - Funcao
+        self.__name_scope = None                # Nome do escopo na atribuicao de funcao
         
         # ======================================       
         self._table_tokens = tokens       # Lista com todos os tokens [('BAHTCHE', 'TK_MAIN', 1, 1), ...]
@@ -78,6 +79,9 @@ class Semantic:
             return f'\t [Erro Semantico] | Mas BAH, {current_symbol} nao eh um tipo de retorno valido para a funcao {self.__escopo} | line: {line} column: {column}'
         elif self._error == 'undeclared_function':
             return f'\t [Erro Semantico] | Mas BAH, a funcao {current_symbol} nao foi declarada | line: {line} column: {column}'
+        elif self._error == 'error_num_param':
+            return f'\t [Erro Semantico] | Mas BAH, quantidade de parametros incorreta na chamada da funcao {self.__name_scope} | line: {line} column: {column}'
+
             
     # ====================
     # VERIFICA A CORRESPONDENCIA DO TOKEN LIDO COM O ESPERADO   
@@ -243,10 +247,19 @@ class Semantic:
             self._error = 'undeclared_function'
             self._terminal()
 
+        # Nome da funcao - escopo
+        self.__name_scope = self._token[0]
+
         self._identificador()
         self._open_p()
         if self._token[1] != Token.TK_CP:
             self._parametros_chamada_f()
+        
+        # Verificação de quantidade  de parâmetros na chamada da função
+        if not self.__functionSymbolTable.checkNumberParameters(escopo=self.__name_scope, quant=self.__num_parametros):
+            self._error = 'error_num_param'
+            self._terminal()
+
         self._close_p()
 
     def _atribuicao(self):

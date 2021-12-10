@@ -145,11 +145,11 @@ Level: 9 | Name: chamada_seg
 Level: 10 | Name: virgula
 Level: 11 | Name: (',', 'TK_COMMA', 13, 33)
 Level: 10 | Name: identificador
-Level: 11 | Name: ('uber', 'TK_IDENT', 13, 34)
+Level: 11 | Name: ('b', 'TK_IDENT', 13, 35)
 Level: 7 | Name: close_p
-Level: 8 | Name: (')', 'TK_CP', 13, 38)
+Level: 8 | Name: (')', 'TK_CP', 13, 36)
 Level: 6 | Name: ponto_virgula
-Level: 7 | Name: (';', 'TK_END', 13, 39)
+Level: 7 | Name: (';', 'TK_END', 13, 37)
 Level: 5 | Name: content
 Level: 6 | Name: declara_print
 Level: 7 | Name: print

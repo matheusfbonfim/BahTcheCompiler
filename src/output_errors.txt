@@ -1,1 +1,1 @@
-	 [Erro Semantico] | Mas BAH, variavel uber nao foi declarada | line: 13 column: 34
+	 [Erro Semantico] | Mas BAH, quantidade de parametros incorreta na chamada da funcao sum | line: 13 column: 36
