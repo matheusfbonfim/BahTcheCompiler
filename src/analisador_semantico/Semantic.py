@@ -10,15 +10,15 @@ class Semantic:
         self.__tipo = None                      # Tipo da variavel a ser armazenada
         self.__varName = None                   # Nome da variavel a ser armazenada
         self.__varValue = None                  # Valor da variavel a ser armazenada
-        self.__symbolTable = SymbolTable()
-        self.__symbol = None
+        self.__symbolTable = SymbolTable()      # Classe Tabela de simbolos - Variaveis
+        self.__symbol = None                    # Classe Variable
         
         # ====================
         # TABELA DE SIMBOLOS - FUNÇÃO
-        self.__escopo = None
-        self.__retorno_func = None
-        self.__num_parametros = 0
-        self.__functionSymbolTable = FunctionSymbolTable()
+        self.__escopo = None                    # Indicação de escopo para inserção na tabela
+        self.__retorno_func = None              # Retorno da funcao
+        self.__num_parametros = 0               # Numero de parametros da funcao
+        self.__functionSymbolTable = FunctionSymbolTable()  # Classe Tabela de simbolos - Funcao
         
         # ======================================       
         self._table_tokens = tokens       # Lista com todos os tokens [('BAHTCHE', 'TK_MAIN', 1, 1), ...]
@@ -69,10 +69,12 @@ class Semantic:
     # DEFINE A MENSAGEM DE ERRO
     def _mensagem(self, current_symbol=None, line=None, column=None):
         if self._error == 'already_declared_variable':
-            return f'\t [Erro Semantico] | Mas BAH, variavel {self.__varName} ja foi declarada | line: {line} column: {column}'
+            return f'\t [Erro Semantico] | Mas BAH, a variavel {self.__varName} ja foi declarada | line: {line} column: {column}'
         elif self._error == 'undeclared_variable':
             return f'\t [Erro Semantico] | Mas BAH, variavel {current_symbol} nao foi declarada | line: {line} column: {column}'
-        
+        elif self._error == 'already_declared_function':
+            return f'\t [Erro Semantico] | Mas BAH, a funcao {self.__escopo} ja foi declarada | line: {line} column: {column}'
+    
     # ====================
     # VERIFICA A CORRESPONDENCIA DO TOKEN LIDO COM O ESPERADO   
     def _terminal(self, token=None):
@@ -533,15 +535,23 @@ class Semantic:
             
             # Inicializando o name_function
             self.__escopo = self._token[0]
-            # Insere a chave da funcao no dicionario 
+            
+            # Verifica se a funcao já foi declarada
+            if self.__functionSymbolTable.exists(name_function=self.__escopo):
+                self._error = 'already_declared_function'
+                self._terminal()
+
+            
+            # Insere a chave da funcao no dicionario da tabela de simbolos - variaveis
             self.__symbolTable.setKeyDict(self.__escopo) 
 
-    
             self._identificador()
             self._open_p()
             self._parametros()
-
-            # {'uberfunction': [retorno_func, num_parametros]}
+            
+            # =====================================
+            # ADICIONA NA TABELA DE SIMBOLOS FUNCAO
+            #   {'uberfunction': [retorno_func, num_parametros]}
             self.__functionSymbolTable.add(name_function=self.__escopo, info = [self.__retorno_func, self.__num_parametros])
 
             self._close_p()
@@ -594,7 +604,7 @@ class Semantic:
 
     # ====================
     # INICIALIZACAO DA ANALISE SEMANTICA
-    def analise_semantico(self):
+    def analise_semantica(self):
         # Tente começar a analise, mas caso haja erro, lance uma exceção
         try:
             self._code()        # Inicia-se pelo code (raiz)
@@ -625,9 +635,14 @@ class Semantic:
         return temp
 
     # ====================
-    # GET DA TABELA DE SIMBOLOS
-    def getSymbolTable(self):
+    # GET DA TABELA DE SIMBOLOS - VARIAVEIS
+    def getSymbolTableVariables(self):
         return self.__symbolTable
+    
+    # ====================
+    # GET DA TABELA DE SIMBOLOS - FUNCAO
+    def getSymbolTableFunction(self):
+        return self.__functionSymbolTable
 
     #####################################################
     ############### METODOS DA ARVORE ###################

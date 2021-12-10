@@ -66,9 +66,14 @@ def main():
     #####################################################
 
     semantico = Semantic(fluxo_tokens)       # Parametro sendo o fluxo_tokens
-    sem = semantico.analise_semantico()      # Realiza a análise sintatica (True: Sucesso/False: Falhou)
+    sem = semantico.analise_semantica()      # Realiza a análise sintatica (True: Sucesso/False: Falhou)
 
-    print(semantico.getSymbolTable().getTable())
+    print(f"\n\n======= TABELA DE SIMBOLOS VARIAVEIS ============")
+    print(semantico.getSymbolTableVariables().getTable())
+    print("\n")
+
+    print(f"======= TABELA DE SIMBOLOS FUNCAO ============")
+    print(semantico.getSymbolTableFunction().getTable())
 
     #####################################################
     ############### SEMANTICO ###########################

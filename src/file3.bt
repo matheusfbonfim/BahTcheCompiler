@@ -5,6 +5,20 @@ BARBARIDADE GURI sum(GURI a, GURI b)
 	LARGUEIMAO sum;
 }
 
+BARBARIDADE GURI x(FANDANGO a, GURI b, FANDANGO c, FANDANGO e, GURIZAO f)
+{
+    GURI sum;
+    sum = a + b;
+	LARGUEIMAO sum;
+}
+
+BARBARIDADE GURI sum(GURI a, GURIZAO b, GURI c)
+{
+    GURI sum;
+    sum = a + b;
+	LARGUEIMAO sum;
+}
+
 BAHTCHE{
     GURI a, GURI b, GURI result;
     INPUTCHE(a);
