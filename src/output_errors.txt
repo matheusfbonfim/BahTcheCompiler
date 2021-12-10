@@ -1,1 +1,1 @@
-	 [Erro Semantico] | Mas BAH, a funcao sum ja foi declarada | line: 15 column: 18
+	 [Erro Semantico] | Mas BAH, 2.569854 nao eh um tipo de retorno valido para a funcao sum | line: 5 column: 13

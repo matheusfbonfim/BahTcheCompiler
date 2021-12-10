@@ -74,7 +74,9 @@ class Semantic:
             return f'\t [Erro Semantico] | Mas BAH, variavel {current_symbol} nao foi declarada | line: {line} column: {column}'
         elif self._error == 'already_declared_function':
             return f'\t [Erro Semantico] | Mas BAH, a funcao {self.__escopo} ja foi declarada | line: {line} column: {column}'
-    
+        elif self._error == 'tipo_retorno_invalido':
+            return f'\t [Erro Semantico] | Mas BAH, {current_symbol} nao eh um tipo de retorno valido para a funcao {self.__escopo} | line: {line} column: {column}'
+            
     # ====================
     # VERIFICA A CORRESPONDENCIA DO TOKEN LIDO COM O ESPERADO   
     def _terminal(self, token=None):
@@ -378,6 +380,19 @@ class Semantic:
             if not self.__symbolTable.exists(escopo=self.__escopo, symbolName=self._token[0]):
                 self._error = 'undeclared_variable'
                 self._terminal()
+
+        # Tipo da funcao
+        tipo = self._token[1]
+
+        # CASO SEJA UM IDENTIFICADOR, RECUPERA DA TABELA DE SIMBOLOS O SEU TIPO
+        if self._token[1] == Token.TK_IDENT:
+            tipo = self.__symbolTable.returnsTypeVariable(escopo=self.__escopo, identificador=self._token[0])
+
+       
+        # Verifica se o retorno da funcao condiz com seu tipo de retorno
+        if not self.__symbolTable.typeComparison(tipo_func=self.__retorno_func, tipo_var=tipo):
+            self._error = 'tipo_retorno_invalido'
+            self._terminal()
 
 
         self._tipos_retorno()
