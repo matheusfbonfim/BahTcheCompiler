@@ -1,4 +1,6 @@
+from os import name
 from Token import Token
+import sys
 
 # ====================
 # TABELA DE SIMBOLOS - VARIAVEIS   
@@ -12,6 +14,10 @@ class SymbolTable:
     # ============================================
     # VERIFICA SE A VARIAVEL JA EXISTE NO ESCOPO
     def exists(self, escopo, symbolName):
+        if symbolName in self.__table[escopo]:
+            # Caso esteja tentanto utilizar, marcar variavel como usada
+            self.setVariableUsed(escopo, symbolName)
+
         return symbolName in self.__table[escopo]
     
     # ============================================
@@ -47,6 +53,34 @@ class SymbolTable:
             return True
         else:
             return False 
+
+    # ============================================
+    # DEFINI UMA VARIAVEL ESP. COMO USADA 
+    def setVariableUsed(self, escopo, name_var):
+        self.__table[escopo][name_var].setUsed(True)
+
+
+    # ============================================
+    # VERIFICA SE EXISTE ALGUMA VARIAVEL NAO UTILIZADA
+    def checkUsedVariables(self):
+        dicionario = self.getTable()
+        variable_not_used = []
+        
+        for i in dicionario.values():
+            for j in i.values():
+                if j.getUsed() == False:
+                    variable_not_used.append(j.getName())
+
+        # Caso tenha variaveis nao utilizadas, notifica o Warning
+        if len(variable_not_used) != 0:
+            # Criando arquivo para os warnings
+            path_file_warning = f"{sys.path[0]}/output_warning.txt"   # Diretorio para os arquivos de erros
+            output_warnings = open(path_file_warning, 'w')
+
+            # Gravando no arquivo de warning
+            for atribute in variable_not_used:
+                output_warnings.write(f'\t [Warning] - variavel {atribute} declarada mas nao utilizada\n')
+                print(f'\t [Warning] - variavel {atribute} declarada mas não utilizada')
 
     def get(self, symbolName):
         return self.__table[symbolName]

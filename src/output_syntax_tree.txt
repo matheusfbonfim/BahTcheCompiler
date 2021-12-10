@@ -54,14 +54,8 @@ Level: 7 | Name: multiplication
 Level: 8 | Name: term
 Level: 9 | Name: identificador
 Level: 10 | Name: ('b', 'TK_IDENT', 4, 15)
-Level: 8 | Name: multiplication_seg
-Level: 9 | Name: div
-Level: 10 | Name: ('/', 'TK_MATH_DIV', 4, 17)
-Level: 9 | Name: term
-Level: 10 | Name: number
-Level: 11 | Name: ('0', 'TK_NUMBER', 4, 19)
 Level: 5 | Name: ponto_virgula
-Level: 6 | Name: (';', 'TK_END', 4, 20)
+Level: 6 | Name: (';', 'TK_END', 4, 16)
 Level: 2 | Name: retorno_f
 Level: 3 | Name: retorno
 Level: 4 | Name: ('LARGUEIMAO', 'TK_RETURN', 5, 2)
@@ -100,8 +94,32 @@ Level: 7 | Name: tipo
 Level: 8 | Name: ('GURI', 'TK_INT', 9, 21)
 Level: 7 | Name: identificador
 Level: 8 | Name: ('result', 'TK_IDENT', 9, 26)
+Level: 6 | Name: parametro_seg
+Level: 7 | Name: virgula
+Level: 8 | Name: (',', 'TK_COMMA', 9, 32)
+Level: 7 | Name: declara_par
+Level: 8 | Name: tipo
+Level: 9 | Name: ('FANDANGO', 'TK_STRING', 9, 34)
+Level: 8 | Name: identificador
+Level: 9 | Name: ('e4', 'TK_IDENT', 9, 43)
+Level: 7 | Name: parametro_seg
+Level: 8 | Name: virgula
+Level: 9 | Name: (',', 'TK_COMMA', 9, 45)
+Level: 8 | Name: declara_par
+Level: 9 | Name: tipo
+Level: 10 | Name: ('FANDANGO', 'TK_STRING', 9, 47)
+Level: 9 | Name: identificador
+Level: 10 | Name: ('e5', 'TK_IDENT', 9, 56)
+Level: 8 | Name: parametro_seg
+Level: 9 | Name: virgula
+Level: 10 | Name: (',', 'TK_COMMA', 9, 58)
+Level: 9 | Name: declara_par
+Level: 10 | Name: tipo
+Level: 11 | Name: ('FANDANGO', 'TK_STRING', 9, 60)
+Level: 10 | Name: identificador
+Level: 11 | Name: ('e6', 'TK_IDENT', 9, 69)
 Level: 3 | Name: ponto_virgula
-Level: 4 | Name: (';', 'TK_END', 9, 32)
+Level: 4 | Name: (';', 'TK_END', 9, 71)
 Level: 2 | Name: content
 Level: 3 | Name: declara_scanf
 Level: 4 | Name: scanf
@@ -147,15 +165,10 @@ Level: 9 | Name: virgula
 Level: 10 | Name: (',', 'TK_COMMA', 13, 31)
 Level: 9 | Name: identificador
 Level: 10 | Name: ('b', 'TK_IDENT', 13, 32)
-Level: 9 | Name: chamada_seg
-Level: 10 | Name: virgula
-Level: 11 | Name: (',', 'TK_COMMA', 13, 33)
-Level: 10 | Name: identificador
-Level: 11 | Name: ('b', 'TK_IDENT', 13, 35)
 Level: 7 | Name: close_p
-Level: 8 | Name: (')', 'TK_CP', 13, 36)
+Level: 8 | Name: (')', 'TK_CP', 13, 33)
 Level: 6 | Name: ponto_virgula
-Level: 7 | Name: (';', 'TK_END', 13, 37)
+Level: 7 | Name: (';', 'TK_END', 13, 34)
 Level: 5 | Name: content
 Level: 6 | Name: declara_print
 Level: 7 | Name: print

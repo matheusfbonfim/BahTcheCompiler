@@ -658,8 +658,7 @@ class Semantic:
         self._openKey()
         self._content()
         self._closeKey()
-        print(f"NUMEROS DE PARAMETROS: {self.__num_parametros}")
-
+        
     #####################################################
     ############### METODOS DA CLASSE ###################
     #####################################################
@@ -671,6 +670,10 @@ class Semantic:
         try:
             self._code()        # Inicia-se pelo code (raiz)
             print("Análise Semantica: [Concluido]")
+            
+            # Verifica se houve alguma variavel nao utilizada e notifica - Warning 
+            self.__symbolTable.checkUsedVariables()
+
             return True         # Retorna True - Analise sintatica sucesso
         except Exception as error:
             print("Análise Semantica: [Gerando Erro]\n", end='')
