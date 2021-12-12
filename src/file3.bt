@@ -6,11 +6,8 @@ BARBARIDADE GURI sum(GURI a, GURI b)
 }
 
 BAHTCHE{
-    GURI a, GURI b, GURI result, FANDANGO e4, FANDANGO e5, FANDANGO e6;
-    INPUTCHE(a);
-    INPUTCHE(b);
+    GURI result, GURI a, GURI b;
 
     result = BARBARIDADE sum(a,b);
     PRINTCHE(result);
-
 }

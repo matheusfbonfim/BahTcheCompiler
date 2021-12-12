@@ -298,6 +298,14 @@ class Semantic:
         # Nome da funcao - escopo
         self.__name_scope = self._token[0]
 
+        # Verificando o tipo da funçao - Compatibilidad3e
+        tipo =  self.__symbolTable.returnsTypeVariable(escopo = self.__escopo, identificador= self._token[0])
+
+        if not self.__symbolTable.typeComparison(tipo, self.__varTypeAssign):
+                self.__assignmentTypeError = tipo
+                self._error = 'type_incompatible'
+                self._terminal()
+
         self._identificador()
         self._open_p()
         if self._token[1] != Token.TK_CP:
@@ -391,7 +399,6 @@ class Semantic:
             
             if not self.__symbolTable.typeComparison(tipo, self.__varTypeAssign):
                 self.__assignmentTypeError = tipo
-                print(self.__assignmentTypeError)
                 self._error = 'type_incompatible'
                 self._terminal()
             

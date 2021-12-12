@@ -2,8 +2,7 @@ BAHTCHE{
     PRINTCHE("Hello World");    $ Print
     GURI x1;                    $ Declaracao de variavel x1
     GURIZAO x2, FANDANGO x3;
-    x1 = 1;
-    x2 = 9.56456465456464646546465746465456464;
-    x3 = 1.78786756;
-
+    x1 = x1;
+    x2 = x1;
+    x3 = x1;
 }
