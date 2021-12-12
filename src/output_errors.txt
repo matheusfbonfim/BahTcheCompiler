@@ -1,0 +1,1 @@
+	 [Erro Semantico] | Mas BAH, esperado tipo GURIZAO em vez de GURI | line: 6 column: 10

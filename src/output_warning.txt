@@ -1,3 +1,1 @@
-	 [Warning] - variavel e4 declarada mas nao utilizada
-	 [Warning] - variavel e5 declarada mas nao utilizada
-	 [Warning] - variavel e6 declarada mas nao utilizada
+	 [Warning] - variavel x1 declarada mas nao utilizada

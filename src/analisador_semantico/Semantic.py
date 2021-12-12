@@ -24,6 +24,7 @@ class Semantic:
         # ====================
         # VARIAVEIS AUXILIARES - COMPATIBILIDADE DE TIPOS
         self.__varTypeAssign = None
+        self.__assignmentTypeError = None
 
         # ====================================== 
         # VARIAVEIS - SINTATICA      
@@ -89,8 +90,19 @@ class Semantic:
         elif self._error == 'division_by_zero':
             return f'\t [Erro Semantico] | Mas BAH, divisao por 0 | line: {line} column: {column}'
         elif self._error == 'type_incompatible':
-            return f'\t [Erro Semantico] | Mas BAH, esperado tipo {self.__varTypeAssign} em vez de {self._token[1]} | line: {line} column: {column}'
-            
+            return f'\t [Erro Semantico] | Mas BAH, esperado tipo {self._typeAsTheToken(self.__varTypeAssign)} em vez de {self._typeAsTheToken(self.__assignmentTypeError)} | line: {line} column: {column}'
+
+    # ====================
+    # RETORNA O TIPO CONFORME O TOKEN
+    def _typeAsTheToken(self, text):
+        if text == 'TK_NUMBER' or (text == 'TK_INT'):
+            return 'GURI'
+        elif (text == 'TK_FLOAT') or (text == 'TK_REAL'):
+            return 'GURIZAO'
+        elif (text == 'TK_STRING') or (text == 'TK_TEXT'):
+            return 'FANDANGO'    
+
+
     # ====================
     # VERIFICA A CORRESPONDENCIA DO TOKEN LIDO COM O ESPERADO   
     def _terminal(self, token=None):
@@ -180,6 +192,7 @@ class Semantic:
             tipo = self.__symbolTable.returnsTypeVariable(escopo = self.__escopo, identificador= self._token[0])
 
             if not self.__symbolTable.typeComparison(tipo, self.__varTypeAssign):
+                self.__assignmentTypeError = tipo
                 self._error = 'type_incompatible'
                 self._terminal()
             
@@ -187,6 +200,7 @@ class Semantic:
         elif self._token[1] == Token.TK_NUMBER:
             # Verifica compatibilidade de tipos
             if not self.__symbolTable.typeComparison(Token.TK_INT, self.__varTypeAssign):
+                self.__assignmentTypeError = self._token[1]
                 self._error = 'type_incompatible'
                 self._terminal()
 
@@ -194,6 +208,7 @@ class Semantic:
         elif self._token[1] == Token.TK_REAL: 
             # Verifica compatibilidade de tipos
             if not self.__symbolTable.typeComparison(Token.TK_FLOAT, self.__varTypeAssign):
+                self.__assignmentTypeError = self._token[1]
                 self._error = 'type_incompatible'
                 self._terminal()
 
@@ -229,8 +244,6 @@ class Semantic:
             self._multiplication_seg()
 
     def _multiplication(self):
-        # Verificando 
-
         self._term()
         self._multiplication_seg()
 
@@ -323,16 +336,40 @@ class Semantic:
     def _op_logic(self):
         if self._token[1] == Token.TK_LOGIC_NOT:
             self._not()
-
+        
+        
         if self._token[1] == Token.TK_IDENT:
             # Verifica se a variavel foi declarada
             if not self.__symbolTable.exists(escopo=self.__escopo, symbolName=self._token[0]):
                 self._error = 'undeclared_variable'
                 self._terminal()
+            
+            # Verifica compatibilidade de tipos
+            tipo = self.__symbolTable.returnsTypeVariable(escopo = self.__escopo, identificador= self._token[0])
+            
+            if not self.__symbolTable.typeComparison(tipo, self.__varTypeAssign):
+                self.__assignmentTypeError = tipo
+                self._error = 'type_incompatible'
+                self._terminal()
+            
             self._identificador()
         elif self._token[1] == Token.TK_NUMBER:
+            
+            # Verifica compatibilidade de tipos
+            if not self.__symbolTable.typeComparison(Token.TK_INT, self.__varTypeAssign):
+                self.__assignmentTypeError = self._token[1]
+                self._error = 'type_incompatible'
+                self._terminal()
+
             self._number()
         elif self._token[1] == Token.TK_REAL:
+            
+            # Verifica compatibilidade de tipos
+            if not self.__symbolTable.typeComparison(Token.TK_FLOAT, self.__varTypeAssign):
+                self.__assignmentTypeError = self._token[1]
+                self._error = 'type_incompatible'
+                self._terminal()
+
             self._real()
         else:
             self._error = 'operacao_logica_invalida'
@@ -348,10 +385,33 @@ class Semantic:
             if not self.__symbolTable.exists(escopo=self.__escopo, symbolName=self._token[0]):
                 self._error = 'undeclared_variable'
                 self._terminal()
+            
+           # Verifica compatibilidade de tipos
+            tipo = self.__symbolTable.returnsTypeVariable(escopo = self.__escopo, identificador= self._token[0])
+            
+            if not self.__symbolTable.typeComparison(tipo, self.__varTypeAssign):
+                self.__assignmentTypeError = tipo
+                print(self.__assignmentTypeError)
+                self._error = 'type_incompatible'
+                self._terminal()
+            
+
             self._identificador()
         elif self._token[1] == Token.TK_NUMBER:
+            # Verifica compatibilidade de tipos
+            if not self.__symbolTable.typeComparison(Token.TK_NUMBER, self.__varTypeAssign):
+                self.__assignmentTypeError = self._token[1]
+                self._error = 'type_incompatible'
+                self._terminal()
+
             self._number()
         elif self._token[1] == Token.TK_REAL:
+            # Verifica compatibilidade de tipos
+            if not self.__symbolTable.typeComparison(Token.TK_FLOAT, self.__varTypeAssign):
+                self.__assignmentTypeError = self._token[1]
+                self._error = 'type_incompatible'
+                self._terminal()
+            
             self._real()
         else:
             self._error = 'operacao_logica_invalida'

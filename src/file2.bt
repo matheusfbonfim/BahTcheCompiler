@@ -6,7 +6,7 @@ BARBARIDADE GURI multipli2Numbers(GURI a, GURI b)
 }
 
 BAHTCHE{
-    GURI i, GURI j, GURI result, GURIZAO a;
+    GURIZAO i, GURI j, GURI result;
     j = 0;
 
     EMCIMADOLACO(i <= 10){
