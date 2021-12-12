@@ -1,5 +1,6 @@
 BAHTCHE{
     PRINTCHE("Hello World");    $ Print
     GURI x1;                    $ Declaracao de variavel x1
-    x1 = 2.0;
+    $ GURI x2;
+    x1 = x1*1;
 }
