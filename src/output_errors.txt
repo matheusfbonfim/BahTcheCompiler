@@ -1,1 +1,1 @@
-	 [Erro Semantico] | Mas BAH, operacao logica entre tipos incompativeis | line: 13 column: 28
+	 [Erro Semantico] | Mas BAH, esperado tipo GURI em vez de GURIZAO | line: 5 column: 10

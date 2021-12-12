@@ -1,1 +1,1 @@
-	 [Warning] - variavel x1 declarada mas nao utilizada
+	 [Warning] - variavel a declarada mas nao utilizada

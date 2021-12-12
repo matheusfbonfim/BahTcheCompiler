@@ -1,0 +1,3 @@
+[ESCOPO]: BAHTCHE
+	 Name: x1 | Tipo: GURI | Used: True
+	 Name: x2 | Tipo: GURI | Used: False

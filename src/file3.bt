@@ -1,20 +1,23 @@
 BARBARIDADE GURI sum(GURI a, GURI b)
 {
+    GURI sum1;
+    sum1 = a + b;
+	LARGUEIMAO sum1;
+}
+
+BARBARIDADE GURI sum2(GURI a, GURI b)
+{
     GURI sum;
     sum = a + b;
 	LARGUEIMAO sum;
 }
 
 BAHTCHE{
-    GURI result, GURIZAO a, GURI b;
+    GURI a, GURI b, GURI result, GURI f, GURI fa, GURI fw;
+    INPUTCHE(a);
+    INPUTCHE(b);
 
     result = BARBARIDADE sum(a,b);
     PRINTCHE(result);
-
-    TRIF(1.0<=a){
-
-    }BEM_CAPAZ(a==a){
-
-    }
 
 }

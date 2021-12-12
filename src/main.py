@@ -62,22 +62,30 @@ def main():
     parser.store_file_dfs_tree()
 
     #####################################################
+    ############### SEMANTICO ###########################
+    #####################################################
+    semantico = Semantic(fluxo_tokens)  # Parametro sendo o fluxo_tokens
+    sem = semantico.analise_semantica()  # Realiza a análise sintatica (True: Sucesso/False: Falhou)
+
+    #####################################################
     ########### TABELA DE SIMBOLOS ######################
     #####################################################
 
-    semantico = Semantic(fluxo_tokens)       # Parametro sendo o fluxo_tokens
-    sem = semantico.analise_semantica()      # Realiza a análise sintatica (True: Sucesso/False: Falhou)
+    # Armaneza tabela de simbolos - variaveis
+    symbol_table_variables = semantico.getSymbolTableVariables()
+    symbol_table_variables.store_file_symbol_table_variables()
 
-    print(f"\n\n======= TABELA DE SIMBOLOS VARIAVEIS ============")
-    print(semantico.getSymbolTableVariables().getTable())
-    print("\n")
+    # Armaneza tabela de simbolos - funcoes
+    symbol_table_function = semantico.getSymbolTableFunction()
+    symbol_table_function.store_file_symbol_table_function()
 
-    print(f"======= TABELA DE SIMBOLOS FUNCAO ============")
-    print(semantico.getSymbolTableFunction().getTable())
 
-    #####################################################
-    ############### SEMANTICO ###########################
-    #####################################################
+    # print(f"\n\n======= TABELA DE SIMBOLOS VARIAVEIS ============")
+    # print(semantico.getSymbolTableVariables().getTable())
+    # print("\n")
+
+    # print(f"======= TABELA DE SIMBOLOS FUNCAO ============")
+    # print(semantico.getSymbolTableFunction().getTable())
 
 
 # Executando a função principal

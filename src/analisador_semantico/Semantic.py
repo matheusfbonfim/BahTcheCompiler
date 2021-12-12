@@ -10,17 +10,16 @@ class Semantic:
         # TABELA DE SIMBOLOS - VARIAVEIS
         self.__tipo = None                     # Tipo da variavel a ser armazenada
         self.__varName = None                  # Nome da variavel a ser armazenada
-        self.__varValue = None                 # Valor da variavel a ser armazenada
         self.__symbolTable = SymbolTable()     # Classe Tabela de simbolos - Variaveis
         self.__symbol = None                   # Classe Variable
 
         # ====================
         # TABELA DE SIMBOLOS - FUNÇÃO
-        self.__escopo = None  # Indicação de escopo para inserção na tabela
-        self.__retorno_func = None  # Retorno da funcao
-        self.__num_parametros = 0  # Numero de parametros da funcao
+        self.__escopo = None                    # Indicação de escopo para inserção na tabela
+        self.__retorno_func = None              # Retorno da funcao
+        self.__num_parametros = 0               # Numero de parametros da funcao
         self.__functionSymbolTable = FunctionSymbolTable()  # Classe Tabela de simbolos - Funcao
-        self.__name_scope = None  # Nome do escopo na atribuicao de funcao
+        self.__name_scope = None    # Nome do escopo na atribuicao de funcao
 
         # ====================
         # VARIAVEIS AUXILIARES - COMPATIBILIDADE DE TIPOS
@@ -33,7 +32,6 @@ class Semantic:
         # ====================================== 
         # VARIAVEIS - SINTATICA      
         self._table_tokens = tokens  # Lista com todos os tokens [('BAHTCHE', 'TK_MAIN', 1, 1), ...]
-        self._tree = None  # Armazena Node raiz da arvore armazenada
         self._error = 'no error'  # Flag de erro
         self._count = 0  # Indica qual o token da lista está sendo lido
         self._token = self._proximo_tk()  # Variavel que indica o token atual que está sendo lido
@@ -67,17 +65,17 @@ class Semantic:
         ]
 
         self._conjunto_tokens_content = [
-                                            Token.TK_IDENT,
-                                            Token.TK_WHILE,
-                                            Token.TK_IF,
-                                            Token.TK_SCANF,
-                                            Token.TK_PRINT,
-                                            Token.TK_CK,
-                                            Token.TK_RETURN
-                                        ] + self._tipos
+            Token.TK_IDENT,
+            Token.TK_WHILE,
+            Token.TK_IF,
+            Token.TK_SCANF,
+            Token.TK_PRINT,
+            Token.TK_CK,
+            Token.TK_RETURN
+        ] + self._tipos
 
     # ====================
-    # DEFINE A MENSAGEM DE ERRO
+    # DEFINE A MENSAGEM DE ERRO SEMANTICO
     def _mensagem(self, current_symbol=None, line=None, column=None):
         if self._error == 'already_declared_variable':
             return f'\t [Erro Semantico] | Mas BAH, a variavel {self.__varName} ja foi declarada | line: {line} column: {column}'
@@ -108,8 +106,7 @@ class Semantic:
         elif (text == 'TK_STRING') or (text == 'TK_TEXT'):
             return 'FANDANGO'
 
-            # ====================
-
+    # ====================
     # VERIFICA A CORRESPONDENCIA DO TOKEN LIDO COM O ESPERADO
     def _terminal(self, token=None):
         # Token atual lido
@@ -624,9 +621,8 @@ class Semantic:
     def _identificador(self):
         # Inicializa caracteristica do identificador
         self.__varName = self._token[0]
-        self.__varValue = None
         # Cria um simbolo/variavel
-        self.__symbol = Variable(self.__varName, self.__tipo, self.__varValue)
+        self.__symbol = Variable(self.__varName, self.__tipo)
 
         self._terminal([Token.TK_IDENT])
 
@@ -888,23 +884,3 @@ class Semantic:
     # GET DA TABELA DE SIMBOLOS - FUNCAO
     def getSymbolTableFunction(self):
         return self.__functionSymbolTable
-
-    #####################################################
-    ############### METODOS DA ARVORE ###################
-    #####################################################
-
-    # ====================
-    # Retorna a tree
-    def tree(self):
-        return self._tree
-
-    # ====================
-    # Mostra a arvore em profundidade DFS
-    @staticmethod
-    def dfs_tree(root):
-        stack = [root]
-        while stack:
-            node = stack.pop(0)
-            print(f'{node.name}')
-            # print(f'Level: {node.level} Name: {node.name}')
-            stack = node.children + stack
