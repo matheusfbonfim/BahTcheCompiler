@@ -33,54 +33,45 @@ Level: 7 | Name: tipo
 Level: 8 | Name: ('GURIZAO', 'TK_FLOAT', 4, 5)
 Level: 7 | Name: identificador
 Level: 8 | Name: ('x2', 'TK_IDENT', 4, 13)
+Level: 6 | Name: parametro_seg
+Level: 7 | Name: virgula
+Level: 8 | Name: (',', 'TK_COMMA', 4, 15)
+Level: 7 | Name: declara_par
+Level: 8 | Name: tipo
+Level: 9 | Name: ('FANDANGO', 'TK_STRING', 4, 17)
+Level: 8 | Name: identificador
+Level: 9 | Name: ('x3', 'TK_IDENT', 4, 26)
 Level: 5 | Name: ponto_virgula
-Level: 6 | Name: (';', 'TK_END', 4, 15)
+Level: 6 | Name: (';', 'TK_END', 4, 28)
 Level: 4 | Name: content
 Level: 5 | Name: atribui_var
 Level: 6 | Name: identificador
-Level: 7 | Name: ('x2', 'TK_IDENT', 5, 5)
+Level: 7 | Name: ('x1', 'TK_IDENT', 5, 5)
 Level: 6 | Name: atribuicao
 Level: 7 | Name: ('=', 'TK_ASSIGNMENT', 5, 8)
-Level: 6 | Name: op_math
-Level: 7 | Name: multiplication
-Level: 8 | Name: term
-Level: 9 | Name: real
-Level: 10 | Name: ('1.0', 'TK_REAL', 5, 10)
-Level: 7 | Name: add_sub_seg
-Level: 8 | Name: add
-Level: 9 | Name: ('+', 'TK_MATH_ADD', 5, 14)
-Level: 8 | Name: multiplication
-Level: 9 | Name: term
-Level: 10 | Name: real
-Level: 11 | Name: ('2.5', 'TK_REAL', 5, 16)
-Level: 9 | Name: multiplication_seg
-Level: 10 | Name: mult
-Level: 11 | Name: ('*', 'TK_MATH_MUL', 5, 20)
-Level: 10 | Name: term
-Level: 11 | Name: real
-Level: 12 | Name: ('9.4', 'TK_REAL', 5, 22)
-Level: 10 | Name: multiplication_seg
-Level: 11 | Name: div
-Level: 12 | Name: ('/', 'TK_MATH_DIV', 5, 26)
-Level: 11 | Name: term
-Level: 12 | Name: real
-Level: 13 | Name: ('1.9', 'TK_REAL', 5, 28)
+Level: 6 | Name: number
+Level: 7 | Name: ('1', 'TK_NUMBER', 5, 10)
 Level: 6 | Name: ponto_virgula
-Level: 7 | Name: (';', 'TK_END', 5, 31)
+Level: 7 | Name: (';', 'TK_END', 5, 11)
 Level: 5 | Name: content
 Level: 6 | Name: atribui_var
 Level: 7 | Name: identificador
 Level: 8 | Name: ('x2', 'TK_IDENT', 6, 5)
 Level: 7 | Name: atribuicao
 Level: 8 | Name: ('=', 'TK_ASSIGNMENT', 6, 8)
-Level: 7 | Name: op_logic
-Level: 8 | Name: number
-Level: 9 | Name: ('1', 'TK_NUMBER', 6, 10)
-Level: 8 | Name: operador_l
-Level: 9 | Name: ('<=', 'TK_LOGIC_LE_GE', 6, 12)
-Level: 8 | Name: real
-Level: 9 | Name: ('2.5', 'TK_REAL', 6, 15)
+Level: 7 | Name: real
+Level: 8 | Name: ('9.56456465456464646546465746465456464', 'TK_REAL', 6, 10)
 Level: 7 | Name: ponto_virgula
-Level: 8 | Name: (';', 'TK_END', 6, 18)
+Level: 8 | Name: (';', 'TK_END', 6, 47)
+Level: 6 | Name: content
+Level: 7 | Name: atribui_var
+Level: 8 | Name: identificador
+Level: 9 | Name: ('x3', 'TK_IDENT', 7, 5)
+Level: 8 | Name: atribuicao
+Level: 9 | Name: ('=', 'TK_ASSIGNMENT', 7, 8)
+Level: 8 | Name: real
+Level: 9 | Name: ('1.78786756', 'TK_REAL', 7, 10)
+Level: 8 | Name: ponto_virgula
+Level: 9 | Name: (';', 'TK_END', 7, 20)
 Level: 1 | Name: close_key
-Level: 2 | Name: ('}', 'TK_CK', 8, 1)
+Level: 2 | Name: ('}', 'TK_CK', 9, 1)

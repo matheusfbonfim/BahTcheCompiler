@@ -445,15 +445,41 @@ class Semantic:
         # Valida se é identificador/number/text/ident
         elif token_aux[1] == Token.TK_END:
             if self._token[1] == Token.TK_TEXT:
+                # Verifica compatibilidade de tipos
+                if not self.__symbolTable.typeComparison(Token.TK_STRING, self.__varTypeAssign):
+                    self.__assignmentTypeError = self._token[1]
+                    self._error = 'type_incompatible'
+                    self._terminal()
+
                 self._texto()
             elif self._token[1] == Token.TK_NUMBER:
+                # Verifica compatibilidade de tipos
+                if not self.__symbolTable.typeComparison(Token.TK_INT, self.__varTypeAssign):
+                    self.__assignmentTypeError = self._token[1]
+                    self._error = 'type_incompatible'
+                    self._terminal()
+
                 self._number()
             elif self._token[1] == Token.TK_REAL:
+                # Verifica compatibilidade de tipos
+                if not self.__symbolTable.typeComparison(Token.TK_FLOAT, self.__varTypeAssign):
+                    self.__assignmentTypeError = self._token[1]
+                    self._error = 'type_incompatible'
+                    self._terminal()
+
                 self._real()
             elif self._token[1] == Token.TK_IDENT:
                 # Verifica se a variavel depois da atribuicao foi declarada
                 if not self.__symbolTable.exists(escopo=self.__escopo, symbolName=self._token[0]):
                     self._error = 'undeclared_variable'
+                    self._terminal()
+                
+                # Verifica compatibilidade de tipos
+                tipo = self.__symbolTable.returnsTypeVariable(escopo = self.__escopo, identificador= self._token[0])
+
+                if not self.__symbolTable.typeComparison(tipo, self.__varTypeAssign):
+                    self.__assignmentTypeError = tipo
+                    self._error = 'type_incompatible'
                     self._terminal()
 
                 self._identificador()
