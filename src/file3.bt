@@ -6,8 +6,15 @@ BARBARIDADE GURI sum(GURI a, GURI b)
 }
 
 BAHTCHE{
-    GURI result, GURI a, GURI b;
+    GURI result, GURIZAO a, GURI b;
 
     result = BARBARIDADE sum(a,b);
     PRINTCHE(result);
+
+    TRIF(1.0<=a){
+
+    }BEM_CAPAZ(a==a){
+
+    }
+
 }

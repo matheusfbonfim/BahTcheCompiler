@@ -99,7 +99,12 @@ class FunctionSymbolTable:
     
     def exists(self, name_function):
         return name_function in self.__table
-    
+
+    # ============================================
+    # RETORNA O TIPO DA FUNCAO
+    def returnsTypeFunction(self, escopo):
+        return self.__table[escopo][0]
+
     # ============================================
     # COMPARA O TIPO DA FUNCAO COM SEU RETORNO  
     def checkNumberParameters(self, escopo, quant):

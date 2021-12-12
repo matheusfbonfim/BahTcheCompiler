@@ -1,0 +1,1 @@
+	 [Erro Semantico] | Mas BAH, operacao logica entre tipos incompativeis | line: 13 column: 28
