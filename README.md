@@ -41,9 +41,6 @@
   <a href="#memo-license">License</a>
 </p>
 
-<h1 align="center">
-  <img alt="Estrutura" src=".github/Estrutura.png" width="70%">
-</h1>
 
 <!-- Tópicos -->
 
