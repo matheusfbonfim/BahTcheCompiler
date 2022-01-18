@@ -33,7 +33,6 @@
 <!--INDEX-->
 <p align="center">
   <a href="#-sobre-o-projeto">Sobre o projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-estrutura">Detecção</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-modelo">Modelo</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#rocket-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-tools">Tools</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -87,8 +86,6 @@ This project was developed with the following technologies:
    - Execute application:
    $ python3 face-detection-real-time.py
    ```
-
-💡 Após o clone do repositório, adicionar o modelo keras baixado na pasta .model, assim sendo possível a detecção em tempo real com o OpenCV.
 
 ## :memo: License
 
